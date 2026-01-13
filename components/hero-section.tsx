@@ -102,7 +102,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Carousel Section */}
-      <div className="relative w-full h-[500px] md:h-[560px] rounded-lg overflow-hidden group">
+      <div className="relative  w-full h-[500px] md:h-[560px] rounded-lg overflow-hidden group">
         {/* Sliding Image Track */}
         <div
           className="flex h-full"
@@ -180,22 +180,13 @@ export const HeroSection = () => {
           ))}
         </div>
       </div>
+      <div className="flex  items-center justify-center gap-6 bg-black text-gray-400 font-medium  p-5 rounded-lg ">
+           <span>Free Shipping over 500€</span> 
+           <span>Worldwide Shipping</span> 
+           <span>Free Returns</span> 
+           <span>5-Year Warranty</span> 
+      </div>
     </div>
   );
 };
 
-/* Hotspot Component */
-function Hotspot({ className }: { className: string }) {
-  return (
-    <button
-      className={`absolute z-20 ${className} 
-      w-8 h-8 rounded-full bg-white/90 hover:bg-white flex items-center justify-center 
-      shadow-lg hover:scale-110 transition-all duration-300 group/hotspot`}
-    >
-      <Plus
-        size={16}
-        className="text-black group-hover/hotspot:rotate-90 transition-transform duration-300"
-      />
-    </button>
-  );
-}
