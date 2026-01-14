@@ -95,8 +95,8 @@ export default function Footer() {
         {/* Brand Section */}
         <div className="mt-12">
           <div className="flex  gap-2 mb-4">
-            <div className="flex  w-6 h-6 border-2 border-white rounded-full">
-              <div className="w-2 h-2 bg-white rounded-full" />
+            <div className="flex  w-6 h-6 border-2 border-white rounded-full items-center justify-center">
+              <div className="w-2 h-2 bg-white rounded-full " />
             </div>
             <span className="text-xl font-bold tracking-tight">Fjord</span>
           </div>
