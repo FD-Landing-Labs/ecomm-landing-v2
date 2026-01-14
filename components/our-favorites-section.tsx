@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const OurFavoritesSectionData = [
@@ -56,7 +56,25 @@ const OurFavoritesSectionData = [
 
 export const OurFavoritesSection = () => {
   const [startIndex, setStartIndex] = useState(0);
-  const itemsToShow = 4;
+  const [itemsToShow, setItemsToShow] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setItemsToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsToShow(2);
+      } else {
+        setItemsToShow(4);
+      }
+    };
+
+    // Set initial value
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const nextSlide = () => {
     setStartIndex((prev) =>
@@ -79,7 +97,7 @@ export const OurFavoritesSection = () => {
         <button
           onClick={prevSlide}
           disabled={startIndex === 0}
-          className="absolute left-14 top-1/2 -translate-y-1/2 -translate-x-4 text-white z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+          className="absolute left-6 md:left-14 top-1/2 -translate-y-1/2 -translate-x-4 text-white z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
         >
           <ChevronLeft size={24} />
         </button>
@@ -93,7 +111,10 @@ export const OurFavoritesSection = () => {
             }}
           >
             {OurFavoritesSectionData.map((item) => (
-              <div key={item.name} className="min-w-[25%] mb-4 px-2 ">
+              <div
+                key={item.name}
+                className="min-w-full md:min-w-[50%] lg:min-w-[25%] mb-4 px-2 "
+              >
                 <div className="flex flex-col gap-4 group/card cursor-pointer">
                   <div className=" relative overflow-hidden rounded-lg">
                     <Image
@@ -101,7 +122,7 @@ export const OurFavoritesSection = () => {
                       alt={item.name}
                       width={320}
                       height={400}
-                      className="object-cover  h-[400px] transition-all duration-500 group-hover/card:blur-sm group-hover/card:scale-105"
+                      className="object-cover w-full h-[400px] transition-all duration-500 group-hover/card:blur-sm group-hover/card:scale-105"
                     />
                     {item.offars && (
                       <span className="absolute top-4 right-4 bg-black px-3 py-1 text-xs font-medium text-white rounded-full z-10 transition-opacity duration-300 group-hover/card:opacity-0">
@@ -147,7 +168,7 @@ export const OurFavoritesSection = () => {
         <button
           onClick={nextSlide}
           disabled={startIndex >= OurFavoritesSectionData.length - itemsToShow}
-          className="absolute right-14 text-white top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+          className="absolute right-6 md:right-14 text-white top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
         >
           <ChevronRight size={24} />
         </button>

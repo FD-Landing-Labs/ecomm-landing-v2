@@ -47,7 +47,7 @@ export default function FaqSection() {
               <span className="inline-block px-3 py-1 text-sm font-medium bg-black text-white rounded-full">
                 Support
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-black">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium tracking-tight text-black">
                 Frequently asked questions
               </h2>
             </div>
@@ -59,10 +59,10 @@ export default function FaqSection() {
                   <Mail className="w-6 h-6 text-black" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-medium text-gray-900">
+                  <h3 className="text-lg md:text-2xl font-medium text-gray-900">
                     Still have questions?
                   </h3>
-                  <p className="mt-2 text-gray-600">
+                  <p className="mt-2 text-sm md:text-lg text-gray-600">
                     Can&apos;t find the answer you&apos;re looking for? Please
                     chat to our friendly team.
                   </p>
@@ -91,7 +91,7 @@ export default function FaqSection() {
                     className="flex items-center justify-between w-full p-6 text-left focus:outline-none cursor-pointer  "
                   >
                     <span
-                      className={`text-lg font-medium  ${
+                      className={`text-sm md:text-lg font-medium  ${
                         openIndex === index ? "text-gray-900" : "text-gray-600"
                       }`}
                     >
@@ -124,7 +124,7 @@ export default function FaqSection() {
                         : "max-h-0 opacity-0"
                     }`}
                   >
-                    <div className="px-6 pb-6 text-gray-600 leading-relaxed">
+                    <div className="px-6 pb-6 text-sm md:text-lg text-gray-600 leading-relaxed">
                       {faq.answer}
                     </div>
                   </div>
