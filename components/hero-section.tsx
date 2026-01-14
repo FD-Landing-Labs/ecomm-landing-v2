@@ -181,10 +181,43 @@ export const HeroSection = () => {
         </div>
       </div>
       <div className="flex  items-center justify-center gap-6 bg-black text-gray-400 font-medium  p-5 rounded-lg ">
+           <div className="flex items-center gap-2">
+            <Image 
+            src="/assets/images/van.png"
+            alt="Free Shipping"
+            width={20}
+            height={20}
+           />
            <span>Free Shipping over 500€</span> 
+</div>
+
+           <div className="flex items-center gap-2">
+           <Image 
+            src="/assets/images/world.png"
+            alt="Free Shipping"
+            width={20}
+            height={20}
+           />
            <span>Worldwide Shipping</span> 
+</div>
+           <div className="flex items-center gap-2">
+           <Image 
+            src="/assets/images/box.png"
+            alt="Free Shipping"
+            width={20}
+            height={20}
+           />
            <span>Free Returns</span> 
+</div>
+           <div className="flex items-center gap-2">
+           <Image 
+            src="/assets/images/warranty.png"
+            alt="Free Shipping"
+            width={20}
+            height={20}
+           />
            <span>5-Year Warranty</span> 
+</div>
       </div>
     </div>
   );
