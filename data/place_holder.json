@@ -1,7 +1,375 @@
 {
   "brand": {
     "name": "RR Auto Parts",
+    "logo": "/assets/images/rrlogo.png",
     "description": "Your trusted source for premium automotive parts and accessories. Quality components for every vehicle, backed by expert support and fast delivery."
+  },
+  "shop": {
+    "title": "Shop",
+    "description": "Explore our extensive collection of premium auto parts. From engine components to brake systems, find everything your vehicle needs.",
+    "categories": [
+      {
+        "id": "all",
+        "name": "All Parts"
+      },
+      {
+        "id": "engine",
+        "name": "Engine Parts"
+      },
+      {
+        "id": "brakes",
+        "name": "Brake Systems"
+      },
+      {
+        "id": "transmission",
+        "name": "Transmission"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension"
+      },
+      {
+        "id": "electrical",
+        "name": "Electrical"
+      },
+      {
+        "id": "lighting",
+        "name": "Lighting"
+      },
+      {
+        "id": "interior",
+        "name": "Interior"
+      },
+      {
+        "id": "wheels",
+        "name": "Wheels & Tires"
+      },
+      {
+        "id": "exhaust",
+        "name": "Exhaust Systems"
+      },
+      {
+        "id": "cooling",
+        "name": "Cooling & AC"
+      }
+    ],
+    "allProducts": [
+      {
+        "id": 1,
+        "name": "Turbo Charger",
+        "image": "/assets/images/parts/turbo-charger.png",
+        "price": "45,000 Rs",
+        "originalPrice": "65,000 Rs",
+        "offers": "30% OFF",
+        "category": "engine"
+      },
+      {
+        "id": 2,
+        "name": "Twin Turbo Kit",
+        "image": "/assets/images/parts/turbo.png",
+        "price": "85,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "engine"
+      },
+      {
+        "id": 3,
+        "name": "Engine Block",
+        "image": "/assets/images/parts/engine-block.png",
+        "price": "125,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "engine"
+      },
+      {
+        "id": 4,
+        "name": "Cylinder Head Assembly",
+        "image": "/assets/images/parts/cylinder-head.png",
+        "price": "60,000 Rs",
+        "originalPrice": "75,000 Rs",
+        "offers": "20% OFF",
+        "category": "engine"
+      },
+      {
+        "id": 5,
+        "name": "Performance Crankshaft",
+        "image": "/assets/images/parts/crankshaft.png",
+        "price": "47,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "engine"
+      },
+      {
+        "id": 6,
+        "name": "EGR Valve",
+        "image": "/assets/images/parts/egr-valve.png",
+        "price": "12,500 Rs",
+        "originalPrice": "16,000 Rs",
+        "offers": "22% OFF",
+        "category": "engine"
+      },
+      {
+        "id": 7,
+        "name": "Radiator Fan Assembly",
+        "image": "/assets/images/parts/radiator-fan.png",
+        "price": "4,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "cooling"
+      },
+      {
+        "id": 8,
+        "name": "AC Compressor",
+        "image": "/assets/images/parts/ac-compressor.png",
+        "price": "34,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "cooling"
+      },
+      {
+        "id": 9,
+        "name": "Manual Transmission",
+        "image": "/assets/images/parts/manual-transmission.png",
+        "price": "95,000 Rs",
+        "originalPrice": "125,000 Rs",
+        "offers": "25% OFF",
+        "category": "transmission"
+      },
+      {
+        "id": 10,
+        "name": "Clutch Plate Kit",
+        "image": "/assets/images/parts/clutch-plate.png",
+        "price": "8,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "transmission"
+      },
+      {
+        "id": 11,
+        "name": "Torque Converter",
+        "image": "/assets/images/parts/torque-converter.png",
+        "price": "28,000 Rs",
+        "originalPrice": "35,000 Rs",
+        "offers": "20% OFF",
+        "category": "transmission"
+      },
+      {
+        "id": 12,
+        "name": "Brake Disc & Pad Kit",
+        "image": "/assets/images/parts/pad-disc.png",
+        "price": "8,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "brakes"
+      },
+      {
+        "id": 13,
+        "name": "Brake Master Cylinder",
+        "image": "/assets/images/parts/brake-master-cylinder.png",
+        "price": "15,000 Rs",
+        "originalPrice": "18,500 Rs",
+        "offers": "19% OFF",
+        "category": "brakes"
+      },
+      {
+        "id": 14,
+        "name": "ABS Sensor",
+        "image": "/assets/images/parts/abs-sensor.png",
+        "price": "4,200 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "brakes"
+      },
+      {
+        "id": 15,
+        "name": "Shock Absorber Set",
+        "image": "/assets/images/parts/shock-absorber.png",
+        "price": "12,000 Rs",
+        "originalPrice": "20,000 Rs",
+        "offers": "40% OFF",
+        "category": "suspension"
+      },
+      {
+        "id": 16,
+        "name": "Control Arms",
+        "image": "/assets/images/parts/control-arms.png",
+        "price": "9,800 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "suspension"
+      },
+      {
+        "id": 17,
+        "name": "Power Steering Pump",
+        "image": "/assets/images/parts/power-steering-pump.png",
+        "price": "18,500 Rs",
+        "originalPrice": "22,000 Rs",
+        "offers": "16% OFF",
+        "category": "suspension"
+      },
+      {
+        "id": 18,
+        "name": "Starter Motor",
+        "image": "/assets/images/parts/starter-motor.png",
+        "price": "11,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "electrical"
+      },
+      {
+        "id": 19,
+        "name": "AGM Car Battery 75Ah",
+        "image": "/assets/images/parts/car-battery.png",
+        "price": "18,000 Rs",
+        "originalPrice": "24,000 Rs",
+        "offers": "25% OFF",
+        "category": "electrical"
+      },
+      {
+        "id": 20,
+        "name": "ECU Control Module",
+        "image": "/assets/images/parts/ecu.png",
+        "price": "42,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "electrical"
+      },
+      {
+        "id": 21,
+        "name": "Ignition Coil Set",
+        "image": "/assets/images/parts/ignition-coils.png",
+        "price": "6,800 Rs",
+        "originalPrice": "8,500 Rs",
+        "offers": "20% OFF",
+        "category": "electrical"
+      },
+      {
+        "id": 22,
+        "name": "LED Headlight Assembly",
+        "image": "/assets/images/parts/headlight.png",
+        "price": "14,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "lighting"
+      },
+      {
+        "id": 23,
+        "name": "Tail Light Assembly",
+        "image": "/assets/images/parts/tail-light.png",
+        "price": "8,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "lighting"
+      },
+      {
+        "id": 24,
+        "name": "Fog Lamp Kit",
+        "image": "/assets/images/parts/fog-lamps.png",
+        "price": "5,500 Rs",
+        "originalPrice": "7,000 Rs",
+        "offers": "21% OFF",
+        "category": "lighting"
+      },
+      {
+        "id": 25,
+        "name": "Sport Steering Wheel",
+        "image": "/assets/images/parts/steering-wheel.png",
+        "price": "16,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "interior"
+      },
+      {
+        "id": 26,
+        "name": "Airbag Module",
+        "image": "/assets/images/parts/airbag.png",
+        "price": "35,000 Rs",
+        "originalPrice": "42,000 Rs",
+        "offers": "17% OFF",
+        "category": "interior"
+      },
+      {
+        "id": 27,
+        "name": "Infotainment System",
+        "image": "/assets/images/parts/infotainment-system.png",
+        "price": "45,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "interior"
+      },
+      {
+        "id": 28,
+        "name": "Instrument Cluster",
+        "image": "/assets/images/parts/instrument-cluster.png",
+        "price": "22,000 Rs",
+        "originalPrice": "28,000 Rs",
+        "offers": "21% OFF",
+        "category": "interior"
+      },
+      {
+        "id": 29,
+        "name": "Wiper Blade Set",
+        "image": "/assets/images/parts/wiper.png",
+        "price": "2,800 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "interior"
+      },
+      {
+        "id": 30,
+        "name": "Alloy Wheel 17\"",
+        "image": "/assets/images/parts/alloy-wheel.png",
+        "price": "18,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "wheels"
+      },
+      {
+        "id": 31,
+        "name": "Performance Tires",
+        "image": "/assets/images/parts/tires.png",
+        "price": "12,500 Rs",
+        "originalPrice": "15,000 Rs",
+        "offers": "17% OFF",
+        "category": "wheels"
+      },
+      {
+        "id": 32,
+        "name": "Wheel Hub Assembly",
+        "image": "/assets/images/parts/wheel-hub.png",
+        "price": "7,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "wheels"
+      },
+      {
+        "id": 33,
+        "name": "Exhaust Manifold",
+        "image": "/assets/images/parts/exhaust-manifold.png",
+        "price": "22,500 Rs",
+        "originalPrice": "30,000 Rs",
+        "offers": "25% OFF",
+        "category": "exhaust"
+      },
+      {
+        "id": 34,
+        "name": "Performance Muffler",
+        "image": "/assets/images/parts/muffler.png",
+        "price": "8,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "exhaust"
+      },
+      {
+        "id": 35,
+        "name": "Fuel Filter",
+        "image": "/assets/images/parts/fuel-filter.png",
+        "price": "1,800 Rs",
+        "originalPrice": "2,200 Rs",
+        "offers": "18% OFF",
+        "category": "engine"
+      }
+    ]
   },
   "hero": {
     "images": [
@@ -255,6 +623,10 @@
       {
         "question": "Do you provide island-wide delivery?",
         "answer": "Yes, we deliver across Sri Lanka. Colombo metro area orders are delivered within 24-48 hours. Other areas typically receive orders within 3-5 business days. Free shipping on orders over Rs 15,000."
+      },
+      {
+        "question": "Can I get assistance with installation?",
+        "answer": "While we don't offer installation services, our support team can provide guidance and resources for installing parts. We also recommend consulting a professional mechanic for complex installations."
       }
     ]
   },
@@ -286,17 +658,48 @@
   },
   "navbar": {
     "categories": [
-      { "name": "Engine Parts", "image": "/assets/images/parts/engine-block.png" },
-      { "name": "Transmission", "image": "/assets/images/parts/manual-transmission.png" },
-      { "name": "Suspension", "image": "/assets/images/parts/shock-absorber.png" },
-      { "name": "Brake Systems", "image": "/assets/images/parts/pad-disc.png" },
-      { "name": "Electrical", "image": "/assets/images/parts/starter-motor.png" },
-      { "name": "Lighting", "image": "/assets/images/parts/headlight.png" },
-      { "name": "Interior", "image": "/assets/images/parts/steering-wheel.png" },
-      { "name": "Wheels & Tires", "image": "/assets/images/parts/alloy-wheel.png" },
-      { "name": "Exhaust Systems", "image": "/assets/images/parts/exhaust-manifold.png" }
+      {
+        "name": "Engine Parts",
+        "image": "/assets/images/parts/engine-block.png"
+      },
+      {
+        "name": "Transmission",
+        "image": "/assets/images/parts/manual-transmission.png"
+      },
+      {
+        "name": "Suspension",
+        "image": "/assets/images/parts/shock-absorber.png"
+      },
+      {
+        "name": "Brake Systems",
+        "image": "/assets/images/parts/pad-disc.png"
+      },
+      {
+        "name": "Electrical",
+        "image": "/assets/images/parts/starter-motor.png"
+      },
+      {
+        "name": "Lighting",
+        "image": "/assets/images/parts/headlight.png"
+      },
+      {
+        "name": "Interior",
+        "image": "/assets/images/parts/steering-wheel.png"
+      },
+      {
+        "name": "Wheels & Tires",
+        "image": "/assets/images/parts/alloy-wheel.png"
+      },
+      {
+        "name": "Exhaust Systems",
+        "image": "/assets/images/parts/exhaust-manifold.png"
+      }
     ],
-    "aboutDropdown": ["About Us", "Contact", "FAQ"],
+    "aboutDropdown": [
+      "About Us",
+      "Contact",
+      "FAQ"
+    ],
     "defaultCartItem": {
       "id": 1,
       "name": "Brake Pad Set",
@@ -316,29 +719,68 @@
       "pages": {
         "title": "Company",
         "links": [
-          { "label": "Home", "href": "#" },
-          { "label": "About Us", "href": "#" },
-          { "label": "Our Brands", "href": "#" },
-          { "label": "Careers", "href": "#" }
+          {
+            "label": "Home",
+            "href": "#"
+          },
+          {
+            "label": "About Us",
+            "href": "#"
+          },
+          {
+            "label": "Our Brands",
+            "href": "#"
+          },
+          {
+            "label": "Careers",
+            "href": "#"
+          }
         ]
       },
       "help": {
         "title": "Support",
         "links": [
-          { "label": "FAQ", "href": "#" },
-          { "label": "Shipping Info", "href": "#" },
-          { "label": "Returns", "href": "#" },
-          { "label": "Warranty", "href": "#" }
+          {
+            "label": "FAQ",
+            "href": "#"
+          },
+          {
+            "label": "Shipping Info",
+            "href": "#"
+          },
+          {
+            "label": "Returns",
+            "href": "#"
+          },
+          {
+            "label": "Warranty",
+            "href": "#"
+          }
         ]
       },
       "cms": {
         "title": "Shop",
         "links": [
-          { "label": "All Parts", "href": "#" },
-          { "label": "New Arrivals", "href": "#" },
-          { "label": "Best Sellers", "href": "#" },
-          { "label": "Deals & Offers", "href": "#" },
-          { "label": "Find My Part", "href": "#" }
+          {
+            "label": "All Parts",
+            "href": "#"
+          },
+          {
+            "label": "New Arrivals",
+            "href": "#"
+          },
+          {
+            "label": "Best Sellers",
+            "href": "#"
+          },
+          {
+            "label": "Deals & Offers",
+            "href": "#"
+          },
+          {
+            "label": "Find My Part",
+            "href": "#"
+          }
         ]
       }
     }
@@ -346,28 +788,88 @@
   "brands": {
     "sectionTitle": "Trusted by Top Brands",
     "row1": [
-      { "name": "Toyota", "src": "/assets/images/brands/toyota.png" },
-      { "name": "BMW", "src": "/assets/images/brands/bmw.png" },
-      { "name": "Honda", "src": "/assets/images/brands/honda.png" },
-      { "name": "Ford", "src": "/assets/images/brands/ford.png" },
-      { "name": "Tesla", "src": "/assets/images/brands/tesla.png" },
-      { "name": "Nissan", "src": "/assets/images/brands/nissan.png" },
-      { "name": "Hyundai", "src": "/assets/images/brands/hyundai.png" },
-      { "name": "Mazda", "src": "/assets/images/brands/mazda.png" },
-      { "name": "Subaru", "src": "/assets/images/brands/subaru.png" },
-      { "name": "Mitsubishi", "src": "/assets/images/brands/mitsubishi.png" }
+      {
+        "name": "Toyota",
+        "src": "/assets/images/brands/toyota.png"
+      },
+      {
+        "name": "BMW",
+        "src": "/assets/images/brands/bmw.png"
+      },
+      {
+        "name": "Honda",
+        "src": "/assets/images/brands/honda.png"
+      },
+      {
+        "name": "Ford",
+        "src": "/assets/images/brands/ford.png"
+      },
+      {
+        "name": "Tesla",
+        "src": "/assets/images/brands/tesla.png"
+      },
+      {
+        "name": "Nissan",
+        "src": "/assets/images/brands/nissan.png"
+      },
+      {
+        "name": "Hyundai",
+        "src": "/assets/images/brands/hyundai.png"
+      },
+      {
+        "name": "Mazda",
+        "src": "/assets/images/brands/mazda.png"
+      },
+      {
+        "name": "Subaru",
+        "src": "/assets/images/brands/subaru.png"
+      },
+      {
+        "name": "Mitsubishi",
+        "src": "/assets/images/brands/mitsubishi.png"
+      }
     ],
     "row2": [
-      { "name": "Bosch", "src": "/assets/images/brands/bosch.png" },
-      { "name": "Continental", "src": "/assets/images/brands/continental.png" },
-      { "name": "Denso", "src": "/assets/images/brands/denso.png" },
-      { "name": "Magna", "src": "/assets/images/brands/magna.png" },
-      { "name": "Valeo", "src": "/assets/images/brands/valeo.png" },
-      { "name": "ZF", "src": "/assets/images/brands/zf.png" },
-      { "name": "Aisin", "src": "/assets/images/brands/aisin.png" },
-      { "name": "Hella", "src": "/assets/images/brands/hella.png" },
-      { "name": "Yazaki", "src": "/assets/images/brands/yazaki.png" },
-      { "name": "Brembo", "src": "/assets/images/brands/nemak.png" }
+      {
+        "name": "Bosch",
+        "src": "/assets/images/brands/bosch.png"
+      },
+      {
+        "name": "Continental",
+        "src": "/assets/images/brands/continental.png"
+      },
+      {
+        "name": "Denso",
+        "src": "/assets/images/brands/denso.png"
+      },
+      {
+        "name": "Magna",
+        "src": "/assets/images/brands/magna.png"
+      },
+      {
+        "name": "Valeo",
+        "src": "/assets/images/brands/valeo.png"
+      },
+      {
+        "name": "ZF",
+        "src": "/assets/images/brands/zf.png"
+      },
+      {
+        "name": "Aisin",
+        "src": "/assets/images/brands/aisin.png"
+      },
+      {
+        "name": "Hella",
+        "src": "/assets/images/brands/hella.png"
+      },
+      {
+        "name": "Yazaki",
+        "src": "/assets/images/brands/yazaki.png"
+      },
+      {
+        "name": "Brembo",
+        "src": "/assets/images/brands/nemak.png"
+      }
     ]
   }
 }

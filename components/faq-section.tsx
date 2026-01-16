@@ -21,7 +21,7 @@ export default function FaqSection() {
   };
   return (
     <section className="px-4 pb-4 md:px-8 md:pb-4 lg:px-4 lg:pb-4">
-      <div className=" mx-auto p-4 md:p-10 lg:p-12 rounded-3xl bg-gray-100 mb-4">
+      <div className=" mx-auto p-4 md:p rounded-3xl bg-gray-100 mb-4">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
           {/* Left Column: Title & Contact */}
           <div className="flex flex-col space-y-8">

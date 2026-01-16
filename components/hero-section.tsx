@@ -127,7 +127,7 @@ export const HeroSection = () => {
       {/* Carousel Section */}
       <div
         ref={carouselRef}
-        className="relative w-full h-[500px] md:h-[560px] rounded-3xl overflow-hidden group touch-pan-y"
+        className="relative w-full h-[500px] md:h-[560px] rounded-xl overflow-hidden group touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={onTouchStart}
@@ -222,7 +222,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Features Section */}
-      <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 bg-black text-gray-100 font-medium p-4 md:p-5 rounded-lg text-sm md:text-base">
+      <div className="flex flex-wrap items-center justify-center gap-4 md:gap-16 bg-black text-gray-100 font-medium p-4 md:p-5 rounded-lg text-sm md:text-base">
         {features.map((feature, index) => (
           <div key={index} className="flex items-center gap-2">
             <Image

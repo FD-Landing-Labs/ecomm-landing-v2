@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="flex flex-col lg:flex-row px-4 justify-between gap-4 pb-4">
       {/* Left Layout (Navigation & Brand) */}
-      <div className="bg-blue-950 order-2 lg:order-1 text-white p-6 lg:p-12 rounded-lg w-full lg:w-3/4 flex flex-col md:flex-row justify-between ">
+      <div className="bg-blue-950 order-2 lg:order-1 text-white p-6 md:p-8 rounded-lg w-full lg:w-3/4 flex flex-col md:flex-row justify-between ">
         {/* Brand Section */}
         <div className="flex flex-col justify-between  ">
           <div>

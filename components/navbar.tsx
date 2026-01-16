@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from "next/image";
+import Link from "next/link";
 import { Plus, Search, ShoppingCart, ArrowRight, Menu, X, Minus, MenuIcon } from "lucide-react";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import placeholderData from "@/data/place_holder.json";
 
 const navbarData = placeholderData.navbar;
@@ -26,9 +28,21 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isNavbarVisible, setIsNavbarVisible] = useState(true);
     const [cartItems, setCartItems] = useState<CartItem[]>([
         navbarData.defaultCartItem
     ]);
+
+    const { scrollY } = useScroll();
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious() ?? 0;
+        if (latest > previous && latest > 100) {
+            setIsNavbarVisible(false);
+        } else {
+            setIsNavbarVisible(true);
+        }
+    });
 
     const updateQuantity = (id: number, delta: number) => {
         setCartItems(items =>
@@ -48,27 +62,32 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
 
     return (
         <>
-            <nav className="flex items-center justify-between mt-4 mx-4 px-6 py-4 rounded-2xl bg-gray-100">
+            <motion.nav
+                initial={{ y: 0 }}
+                animate={{ y: isNavbarVisible ? 0 : -100 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between mt- mx-4 px-6 py-4 rounded-b-xl bg-gray-100 max-w-2xl mx-auto"
+            >
                 {/* Left Section - Logo, Nav Links, Theme Toggle */}
                 <div className="flex items-center gap-4">
                     {/* Logo */}
-                    <div className="flex items-center gap-1.5 cursor-pointer group/brand">
+                    <Link href="/" className="flex items-center gap-1.5 cursor-pointer group/brand">
                         {/* Brand Name */}
-                        <span className="font-semibold text-xl text-black tracking-tighter">{brandData.name}</span>
-                    </div>
+                        <span className="font-semibold text-xl text-blue-950 tracking-tighter">{brandData.name}</span>
+                    </Link>
                 </div>
 
                 {/* Desktop Navigation Links */}
                 <div className="hidden md:flex items-center gap-5 text-base tracking-tighter font-medium text-black">
                     {/* Shop */}
-                    <div className="relative overflow-hidden h-6 flex items-center justify-center group/shop cursor-pointer">
+                    <Link href="/shop" className="relative overflow-hidden h-6 flex items-center justify-center group/shop cursor-pointer">
                         <span className="transition-all duration-300 group-hover/shop:-translate-y-full group-hover/shop:opacity-0">
                             Shop
                         </span>
                         <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/shop:translate-y-0 group-hover/shop:opacity-100">
                             Shop
                         </span>
-                    </div>
+                    </Link>
 
                     {/* Collections with Dropdown */}
                     <div className="relative flex items-center gap-0.5 group/collection cursor-pointer">
@@ -88,7 +107,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                         </div>
 
                         {/* Dropdown Menu */}
-                        <div className="absolute top-10 left-1/2 -translate-x-1/2 pt-4 w-[90vw] max-w-[700px] opacity-0 invisible group-hover/collection:opacity-100 group-hover/collection:visible transition-all duration-300 z-50">
+                        <div className="fixed top-14 left-1/2 -translate-x-1/2 pt-4 w-[90vw] max-w-[700px] opacity-0 invisible group-hover/collection:opacity-100 group-hover/collection:visible transition-all duration-300 z-50">
                             <div className="bg-gray-100 rounded-xl shadow-xl p-3 grid grid-cols-2 lg:grid-cols-3 gap-2 text-black text-left">
                                 {navbarData.categories.map((item) => (
                                     <div
@@ -177,10 +196,14 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                     </button>
                     <button
                         onClick={() => setIsCartOpen(true)}
-                        className="flex items-center gap-1 cursor-pointer hover:opacity-70 transition-opacity"
+                        className="relative cursor-pointer hover:opacity-70 transition-opacity"
                     >
                         <ShoppingCart size={18} />
-                        <span>({cartItems.length})</span>
+                        {cartItems.length > 0 && (
+                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold min-w-[18px] h-[18px] flex items-center justify-center rounded-full">
+                                {cartItems.length}
+                            </span>
+                        )}
                     </button>
                     {/* Mobile Menu Trigger */}
                     <button
@@ -190,7 +213,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                         <MenuIcon size={20} />
                     </button>
                 </div>
-            </nav>
+            </motion.nav>
 
             {/* Search Modal Overlay */}
             <div
@@ -315,7 +338,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                 <div className="flex flex-col h-full">
                     {/* Cart Header */}
                     <div className="flex items-center justify-between p-6 border-b">
-                        <h2 className="text-lg font-semibold text-black">Cart ({cartItems.length})</h2>
+                        <h2 className="text-lg tracking-tighter font-semibold text-black">Cart ({cartItems.length})</h2>
                         <button
                             onClick={() => setIsCartOpen(false)}
                             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -349,7 +372,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                                         <div className="flex-1 flex flex-col">
                                             <div className="flex justify-between items-start">
                                                 <div>
-                                                    <h3 className="font-medium text-black">{item.name}</h3>
+                                                    <h3 className="font-medium text-black tracking-tighter">{item.name}</h3>
                                                     <p className="text-sm text-gray-500">Material: {item.material}</p>
                                                 </div>
                                                 <span className="font-medium text-black">
@@ -376,7 +399,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                                                 </div>
                                                 <button
                                                     onClick={() => removeItem(item.id)}
-                                                    className="p-2 border rounded-lg hover:bg-gray-100 transition-colors"
+                                                    className="p-2 border rounded-lg hover:bg-gray-100 transition-colors tracking-tighter"
                                                 >
                                                     <X size={14} className="text-gray-500" />
                                                 </button>
