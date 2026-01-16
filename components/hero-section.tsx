@@ -298,7 +298,7 @@ export const HeroSection = () => {
           key={realIndex} // Key ensures animation restarts on slide change
           className="absolute bottom-12 left-4 right-4 md:right-auto md:bottom-14 h-auto md:h-[250px] md:left-10 z-20 max-w-full md:max-w-[400px] bg-white rounded-lg p-6 md:p-10 shadow-xl block animate-in fade-in slide-in-from-bottom-10 duration-1000"
         >
-          <h2 className="text-2xl md:text-3xl font-medium text-black">
+          <h2 className="text-xl md:text-3xl font-medium text-black">
             {cardData[realIndex].title}
           </h2>
           <p className="mt-2 md:mt-4 text-gray-500 text-sm">

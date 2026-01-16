@@ -4,12 +4,12 @@ import { Twitter, Instagram, ArrowUpRight } from "lucide-react";
 export const AboutUs = () => {
   return (
     <div className="flex flex-col gap-4 p-4 ">
-      <div className="bg-[#f6f6f6] rounded-lg p-4 text-black/80  font-medium flex justify-center">
+      <div className="bg-[#f6f6f6] text-sm md:text-lg rounded-lg p-4 text-black/80  font-medium flex justify-center">
         About Us
       </div>
       <div className="flex flex-col lg:flex-row justify-between gap-4 lg:gap-0">
         <div className="bg-[#f6f6f6] rounded-lg p-6 lg:p-14 text-black/80 font-medium w-full lg:w-[450px] ">
-          <h2 className="text-3xl font-normal text-black">
+          <h2 className="text-xl md:text-3xl font-normal text-black">
             Designing Spaces, Inspiring Connection
           </h2>
           <p className="mt-8 lg:mt-74 text-gray-500 text-sm text-justify leading-tight">

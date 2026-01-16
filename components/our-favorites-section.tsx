@@ -88,7 +88,7 @@ export const OurFavoritesSection = () => {
 
   return (
     <div className="flex flex-col gap-4 px-4 ">
-      <div className="bg-[#f6f6f6] rounded-lg p-4 text-black/70  font-medium flex justify-center">
+      <div className="bg-[#f6f6f6] text-sm md:text-lg rounded-lg p-4 text-black/70  font-medium flex justify-center">
         Our Favorites
       </div>
 
