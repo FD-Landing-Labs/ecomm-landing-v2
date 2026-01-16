@@ -5,51 +5,51 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const OurFavoritesSectionData = [
   {
-    name: "Skala",
-    image: "/assets/images/f-chair-2.avif",
-    price: "210,00 €420,00 €",
-    offars: "50% OFF",
+    name: "Turbo Charger",
+    image: "/assets/images/parts/turbo-charger.png",
+    price: "850,00 € 1200,00 €",
+    offars: "30% OFF",
   },
   {
-    name: "Nest",
-    image: "/assets/images/f.avif",
-    price: "450,00 €",
+    name: "Engine Block",
+    image: "/assets/images/parts/engine-block.png",
+    price: "2500,00 Rs",
     offars: "",
   },
   {
-    name: "Runa",
-    image: "/assets/images/f-chair-3.avif",
-    price: "300,00 €",
+    name: "Brake Disc & Pad",
+    image: "/assets/images/parts/pad-disc.png",
+    price: "180,00 Rs",
     offars: "",
   },
   {
-    name: "Lykke",
-    image: "/assets/images/f-chair-4.avif",
-    price: "250,00 € 400,00 €",
-    offars: "54% OFF",
+    name: "Shock Absorber",
+    image: "/assets/images/parts/shock-absorber.png",
+    price: "120,00 Rs 200,00 Rs",
+    offars: "40% OFF",
   },
   {
-    name: "Holt",
-    image: "/assets/images/f-chair-5.avif",
-    price: "320,00 €",
+    name: "Alloy Wheel",
+    image: "/assets/images/parts/alloy-wheel.png",
+    price: "350,00 Rs",
     offars: "",
   },
   {
-    name: "Kappa",
-    image: "/assets/images/f-chair-6.avif",
-    price: "280,00 €",
+    name: "Headlight Assembly",
+    image: "/assets/images/parts/headlight.png",
+    price: "280,00 Rs",
     offars: "",
   },
   {
-    name: "Sol",
-    image: "/assets/images/f-chair-7.avif",
-    price: "300,00 €",
-    offars: "65% OFF",
+    name: "Manual Transmission",
+    image: "/assets/images/parts/manual-transmission.png",
+    price: "1800,00 Rs 2400,00 Rs",
+    offars: "25% OFF",
   },
   {
-    name: "ELM",
-    image: "/assets/images/f-chair-8.avif",
-    price: "280,00 €",
+    name: "Radiator Fan",
+    image: "/assets/images/parts/radiator-fan.png",
+    price: "95,00 Rs",
     offars: "",
   },
 ];
@@ -88,8 +88,8 @@ export const OurFavoritesSection = () => {
 
   return (
     <div className="flex flex-col gap-4 px-4 ">
-      <div className="bg-[#f6f6f6] text-sm md:text-lg rounded-lg p-4 text-black/70  font-medium flex justify-center">
-        Our Favorites
+      <div className="bg-[#f6f6f6] text-sm md:text-xl rounded-lg p-4 text-black/70  font-medium flex justify-center tracking-tighter">
+        Our Featured Products
       </div>
 
       <div className="relative group">
@@ -97,7 +97,7 @@ export const OurFavoritesSection = () => {
         <button
           onClick={prevSlide}
           disabled={startIndex === 0}
-          className="absolute left-6 md:left-14 top-1/2 -translate-y-1/2 -translate-x-4 text-white z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+          className="absolute left-6 md:left-14 top-1/2 -translate-y-1/2 -translate-x-4 text-white z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-black transition-colors cursor-pointer"
         >
           <ChevronLeft size={24} />
         </button>
@@ -129,7 +129,7 @@ export const OurFavoritesSection = () => {
                         {item.offars}
                       </span>
                     )}
-                    <span className="flex items-center absolute -top-1 -left-1 bg-white px-4 py-2 text-xs font-medium text-black rounded-md z-10 shadow-sm">
+                    <span className="flex items-center absolute -top-1 -left-1 bg-white px-4 py-2 text-base tracking-tighter font-medium text-black rounded-md z-10">
                       {item.name}
                       <ArrowRight
                         size={14}
@@ -140,13 +140,13 @@ export const OurFavoritesSection = () => {
                     {/* Bottom Overlay Bar */}
                     <div className="absolute bottom-4 left-4 right-4 bg-white p-3 rounded-lg shadow-lg flex justify-between items-center opacity-0 translate-y-4 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-300 z-10">
                       <span className="text-sm font-medium text-black">
-                        {item.price.includes("€") &&
-                        item.price.split("€").filter((p) => p.trim()).length >
+                        {item.price.includes("Rs") &&
+                          item.price.split("Rs").filter((p) => p.trim()).length >
                           1 ? (
                           <div className="flex gap-2 items-center">
-                            <span>{item.price.split("€")[0].trim()} €</span>
+                            <span>{item.price.split("Rs")[0].trim()} Rs</span>
                             <span className="text-gray-400 line-through text-xs">
-                              {item.price.split("€")[1].trim()} €
+                              Rs{item.price.split("Rs")[1].trim()} Rs
                             </span>
                           </div>
                         ) : (
@@ -168,7 +168,7 @@ export const OurFavoritesSection = () => {
         <button
           onClick={nextSlide}
           disabled={startIndex >= OurFavoritesSectionData.length - itemsToShow}
-          className="absolute right-6 md:right-14 text-white top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+          className="absolute right-6 md:right-14 text-white top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-black transition-colors cursor-pointer"
         >
           <ChevronRight size={24} />
         </button>

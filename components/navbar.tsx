@@ -51,143 +51,131 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
 
     return (
         <>
-            <nav className="flex items-center justify-between mt-4 mx-4 px-6 py-4 rounded-2xl bg-gray-200">
+            <nav className="flex items-center justify-between mt-4 mx-4 px-6 py-4 rounded-2xl bg-gray-100">
                 {/* Left Section - Logo, Nav Links, Theme Toggle */}
                 <div className="flex items-center gap-4">
                     {/* Logo */}
                     <div className="flex items-center gap-1.5 cursor-pointer group/brand">
-                        {/* Orange Circle Icon */}
-                        <div className="w-4 h-4 bg-orange-500 rounded-full" />
-
                         {/* Brand Name */}
-                        <span className="font-semibold text-sm text-black">Fjord</span>
+                        <span className="font-semibold text-xl text-black tracking-tighter">RR Auto Parts</span>
+                    </div>
+                </div>
+
+                {/* Desktop Navigation Links */}
+                <div className="hidden md:flex items-center gap-5 text-base tracking-tighter font-medium text-black">
+                    {/* Shop */}
+                    <div className="relative overflow-hidden h-6 flex items-center justify-center group/shop cursor-pointer">
+                        <span className="transition-all duration-300 group-hover/shop:-translate-y-full group-hover/shop:opacity-0">
+                            Shop
+                        </span>
+                        <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/shop:translate-y-0 group-hover/shop:opacity-100">
+                            Shop
+                        </span>
                     </div>
 
-                    {/* Dark Mode Toggle - visible on mobile */}
-                    <div className="md:hidden flex items-center gap-2">
-                        <div className="w-4 h-4 bg-black rounded-full" />
+                    {/* Collections with Dropdown */}
+                    <div className="relative flex items-center gap-0.5 group/collection cursor-pointer">
+                        <div className="flex items-center gap-0.5">
+                            <div className="relative overflow-hidden h-6 flex items-center justify-center">
+                                <span className="transition-all duration-300 group-hover/collection:-translate-y-full group-hover/collection:opacity-0">
+                                    Categories
+                                </span>
+                                <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/collection:translate-y-0 group-hover/collection:opacity-100">
+                                    Categories
+                                </span>
+                            </div>
+                            <Plus
+                                size={13}
+                                className="transition-transform duration-300 group-hover/collection:rotate-45"
+                            />
+                        </div>
+
+                        {/* Dropdown Menu */}
+                        <div className="absolute top-10 left-1/2 -translate-x-1/2 pt-4 w-[90vw] max-w-[700px] opacity-0 invisible group-hover/collection:opacity-100 group-hover/collection:visible transition-all duration-300 z-50">
+                            <div className="bg-gray-100 rounded-xl shadow-xl p-3 grid grid-cols-2 lg:grid-cols-3 gap-2 text-black text-left">
+                                {[
+                                    { name: "Engine", image: "/assets/images/parts/engine-block.png" },
+                                    { name: "Transmission", image: "/assets/images/parts/manual-transmission.png" },
+                                    { name: "Suspension", image: "/assets/images/parts/shock-absorber.png" },
+                                    { name: "Brakes", image: "/assets/images/parts/pad-disc.png" },
+                                    { name: "Electrical", image: "/assets/images/parts/starter-motor.png" },
+                                    { name: "Exterior", image: "/assets/images/parts/headlight.png" },
+                                    { name: "Interior", image: "/assets/images/parts/steering-wheel.png" },
+                                    { name: "Wheels", image: "/assets/images/parts/alloy-wheel.png" },
+                                    { name: "Exhaust", image: "/assets/images/parts/exhaust-manifold.png" },
+                                ].map((item) => (
+                                    <div
+                                        key={item.name}
+                                        className="flex items-center bg-white justify-between p-2 hover:bg-gray-200 rounded-lg transition-colors group/item"
+                                    >
+                                        <div className="flex items-center gap-2 lg:gap-3">
+                                            <div className="relative w-10 h-10 lg:w-14 lg:h-14 rounded-md overflow-hidden bg-gray-100 shrink-0">
+                                                <Image
+                                                    src={item.image}
+                                                    alt={item.name}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                            </div>
+                                            <span className="text-sm lg:text-base font-medium">
+                                                {item.name}
+                                            </span>
+                                        </div>
+                                        <div className="relative overflow-hidden w-4 h-4 flex items-center justify-center shrink-0">
+                                            <ArrowRight
+                                                size={14}
+                                                className="absolute text-gray-400 transition-all duration-300 group-hover/item:-translate-y-full group-hover/item:opacity-0"
+                                            />
+                                            <ArrowRight
+                                                size={14}
+                                                className="absolute text-black transition-all duration-300 translate-y-full opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Desktop Navigation Links */}
-                    <div className="hidden md:flex items-center gap-5 text-sm font-medium text-black">
-                        {/* Shop */}
-                        <div className="relative overflow-hidden h-6 flex items-center justify-center group/shop cursor-pointer">
-                            <span className="transition-all duration-300 group-hover/shop:-translate-y-full group-hover/shop:opacity-0">
-                                Shop
-                            </span>
-                            <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/shop:translate-y-0 group-hover/shop:opacity-100">
-                                Shop
-                            </span>
+                    {/* About with Dropdown */}
+                    <div className="relative flex items-center gap-0.5 group/about cursor-pointer">
+                        <div className="flex items-center gap-0.5">
+                            <div className="relative overflow-hidden h-6 flex items-center justify-center">
+                                <span className="transition-all duration-300 group-hover/about:-translate-y-full group-hover/about:opacity-0">
+                                    About
+                                </span>
+                                <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/about:translate-y-0 group-hover/about:opacity-100">
+                                    About
+                                </span>
+                            </div>
+                            <Plus
+                                size={13}
+                                className="transition-transform duration-300 group-hover/about:rotate-45"
+                            />
                         </div>
 
-                        {/* Collections with Dropdown */}
-                        <div className="relative flex items-center gap-0.5 group/collection cursor-pointer">
-                            <div className="flex items-center gap-0.5">
-                                <div className="relative overflow-hidden h-6 flex items-center justify-center">
-                                    <span className="transition-all duration-300 group-hover/collection:-translate-y-full group-hover/collection:opacity-0">
-                                        Collections
-                                    </span>
-                                    <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/collection:translate-y-0 group-hover/collection:opacity-100">
-                                        Collections
-                                    </span>
-                                </div>
-                                <Plus
-                                    size={13}
-                                    className="transition-transform duration-300 group-hover/collection:rotate-45"
-                                />
-                            </div>
-
-                            {/* Dropdown Menu */}
-                            <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-60 opacity-0 invisible group-hover/collection:opacity-100 group-hover/collection:visible transition-all duration-300 z-50">
-                                <div className="bg-white rounded-xl shadow-xl p-2 flex flex-col gap-1 text-black text-left">
-                                    {[
-                                        { name: "Dark", image: "/assets/images/chair-1.webp" },
-                                        { name: "Modern", image: "/assets/images/f.avif" },
-                                        { name: "Wood", image: "/assets/images/c-chair2.avif" },
-                                    ].map((item) => (
-                                        <div
-                                            key={item.name}
-                                            className="flex items-center bg-gray-100 justify-between p-2 hover:bg-gray-200 rounded-lg transition-colors group/item"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <div className="relative w-10 h-10 rounded-md overflow-hidden bg-gray-100">
-                                                    <Image
-                                                        src={item.image}
-                                                        alt={item.name}
-                                                        fill
-                                                        className="object-cover"
-                                                    />
-                                                </div>
-                                                <span className="text-sm font-medium">
-                                                    {item.name}
-                                                </span>
-                                            </div>
-                                            <div className="relative overflow-hidden w-4 h-4 flex items-center justify-center">
-                                                <ArrowRight
-                                                    size={14}
-                                                    className="absolute text-gray-400 transition-all duration-300 group-hover/item:-translate-y-full group-hover/item:opacity-0"
-                                                />
-                                                <ArrowRight
-                                                    size={14}
-                                                    className="absolute text-black transition-all duration-300 translate-y-full opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100"
-                                                />
-                                            </div>
+                        {/* Dropdown Menu */}
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-48 opacity-0 invisible group-hover/about:opacity-100 group-hover/about:visible transition-all duration-300 z-50">
+                            <div className="bg-white rounded-xl shadow-xl p-2 flex flex-col gap-1 text-black text-left">
+                                {["About", "Contact", "FAQ"].map((item) => (
+                                    <div
+                                        key={item}
+                                        className="flex bg-gray-100 items-center justify-between p-3 hover:bg-gray-200 rounded-lg transition-colors group/item"
+                                    >
+                                        <span className="text-sm font-medium">{item}</span>
+                                        <div className="relative overflow-hidden w-4 h-4 flex items-center justify-center">
+                                            <ArrowRight
+                                                size={14}
+                                                className="absolute text-gray-400 transition-all duration-300 group-hover/item:-translate-y-full group-hover/item:opacity-0"
+                                            />
+                                            <ArrowRight
+                                                size={14}
+                                                className="absolute text-black transition-all duration-300 translate-y-full opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100"
+                                            />
                                         </div>
-                                    ))}
-                                </div>
+                                    </div>
+                                ))}
                             </div>
-                        </div>
-
-                        {/* About with Dropdown */}
-                        <div className="relative flex items-center gap-0.5 group/about cursor-pointer">
-                            <div className="flex items-center gap-0.5">
-                                <div className="relative overflow-hidden h-6 flex items-center justify-center">
-                                    <span className="transition-all duration-300 group-hover/about:-translate-y-full group-hover/about:opacity-0">
-                                        About
-                                    </span>
-                                    <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/about:translate-y-0 group-hover/about:opacity-100">
-                                        About
-                                    </span>
-                                </div>
-                                <Plus
-                                    size={13}
-                                    className="transition-transform duration-300 group-hover/about:rotate-45"
-                                />
-                            </div>
-
-                            {/* Dropdown Menu */}
-                            <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-48 opacity-0 invisible group-hover/about:opacity-100 group-hover/about:visible transition-all duration-300 z-50">
-                                <div className="bg-white rounded-xl shadow-xl p-2 flex flex-col gap-1 text-black text-left">
-                                    {["About", "Contact", "FAQ"].map((item) => (
-                                        <div
-                                            key={item}
-                                            className="flex bg-gray-100 items-center justify-between p-3 hover:bg-gray-200 rounded-lg transition-colors group/item"
-                                        >
-                                            <span className="text-sm font-medium">{item}</span>
-                                            <div className="relative overflow-hidden w-4 h-4 flex items-center justify-center">
-                                                <ArrowRight
-                                                    size={14}
-                                                    className="absolute text-gray-400 transition-all duration-300 group-hover/item:-translate-y-full group-hover/item:opacity-0"
-                                                />
-                                                <ArrowRight
-                                                    size={14}
-                                                    className="absolute text-black transition-all duration-300 translate-y-full opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100"
-                                                />
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Blog */}
-                        <div className="relative overflow-hidden h-6 flex items-center justify-center group/blog cursor-pointer">
-                            <span className="transition-all duration-300 group-hover/blog:-translate-y-full group-hover/blog:opacity-0">
-                                Blog
-                            </span>
-                            <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/blog:translate-y-0 group-hover/blog:opacity-100">
-                                Blog
-                            </span>
                         </div>
                     </div>
                 </div>

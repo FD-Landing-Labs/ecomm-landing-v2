@@ -1,5 +1,5 @@
 import { HeroSection } from "./hero-section";
-import { CollactionSection } from "./collaction-section";
+import { CollectionSection } from "./collaction-section";
 import { AboutUs } from "./about-us";
 import Footer from "./footer";
 import { OurFavoritesSection } from "./our-favorites-section";
@@ -13,7 +13,7 @@ export const LandingPage = () => {
       <Navbar />
       <HeroSection />
       <OurFavoritesSection />
-      <CollactionSection />
+      <CollectionSection />
       <AboutUs />
       <TestimonialSection />
       <FaqSection />
