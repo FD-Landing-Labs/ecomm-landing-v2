@@ -3,14 +3,45 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col lg:flex-row px-4 justify-between gap-3 pb-4">
+    <footer className="flex flex-col lg:flex-row px-4 justify-between gap-4 pb-4">
       {/* Left Layout (Navigation & Brand) */}
-      <div className="bg-black order-2 lg:order-1 text-white p-6 lg:p-12 rounded-lg w-full lg:w-1/2 flex flex-col justify-between">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Pages Section */}
+      <div className="bg-black order-2 lg:order-1 text-white p-6 lg:p-12 rounded-lg w-full lg:w-3/4 flex flex-col md:flex-row justify-between ">
+        {/* Brand Section */}
+        <div className="flex flex-col justify-between  ">
           <div>
-            <span className="text-sm font-medium mb-6 ">Pages</span>
-            <ul className="space-y-4 py-4 text-gray-400 text-sm font-medium">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-5 h-5 border-2 border-white rounded-full flex items-center justify-center">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+              </div>
+              <h3 className="text-xl font-medium tracking-tight">Fjord</h3>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs leading-relaxed">
+              Scandinavian furniture, meticulously handcrafted to bring warmth
+              and elegance into your home.
+            </p>
+          </div>
+
+          <div className="mt-12 md:mt-0">
+            <button className="inline-flex items-center gap-1 bg-white text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+              More Templates <span className="ml-1">↗</span>
+            </button>
+            <div className="mt-6 text-sm text-gray-500 font-medium">
+              © Made by{" "}
+              <a href="#" className="underline text-white">
+                Gola Templates
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Pages Section - 3 Columns */}
+        <div className="grid grid-cols-3 gap-8 md:gap-4">
+          {/* Column 1: Pages */}
+          <div>
+            <span className="text-sm font-medium block mb-6 text-white">
+              Pages
+            </span>
+            <ul className="space-y-4 text-gray-400 text-sm font-medium">
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
                   Home
@@ -33,11 +64,35 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* CMS Section */}
+          {/* Column 2: Help */}
           <div>
-            <span className="text-sm font-medium mb-6">CMS</span>
-            <ul className="space-y-4  py-4 text-gray-400 text-sm font-medium">
+            <span className="text-sm font-medium block mb-6 text-white">
+              Help
+            </span>
+            <ul className="space-y-4 text-gray-400 text-sm font-medium">
+              <li>
+                <Link href="#" className="hover:text-white transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-white transition-colors">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="hover:text-white transition-colors">
+                  Terms
+                </Link>
+              </li>
+            </ul>
+          </div>
+          {/* Column 3: CMS */}
+          <div>
+            <span className="text-sm font-medium block mb-6 text-white">
+              CMS
+            </span>
+            <ul className="space-y-4 text-gray-400 text-sm font-medium">
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
                   Shop
@@ -65,63 +120,21 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Help Section */}
-          <div>
-            <span className="text-sm font-medium ">Help</span>
-            <ul className="space-y-4 py-4 text-gray-400 text-sm font-medium">
-              <li>
-                <Link href="#" className="hover:text-white transition-colors">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="hover:text-white transition-colors">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="hover:text-white transition-colors">
-                  Terms
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
-
-        {/* Brand Section */}
-        <div className="mt-12">
-          <div className="flex  gap-2 mb-4">
-            <div className="flex  w-4 h-4 md:w-6 md:h-6 border-2 border-white rounded-full items-center justify-center">
-              <div className="w-2 h-2 bg-white rounded-full " />
-            </div>
-            <span className="text-md md:text-xl  font-medium tracking-tight">Fjord</span>
-          </div>
-          <p className="text-gray-400 text-sm max-w-sm leading-relaxed">
-            Scandinavian furniture, meticulously handcrafted to bring warmth and
-            elegance into your home.
-          </p>
-        </div>
-        <button className="mt-8 w-full md:w-40 text-sm font-medium text-black bg-white p-2 rounded-lg underline hover:text-gray-700 transition-colors">
-          More Templates
-        </button>
-        <span className="mt-4 text-center text-sm md:text-lg font-medium md:text-start ">
-          © Made by <span className="underline">Gola Templates</span>
-        </span>
       </div>
 
       {/* Right Layout (Newsletter) */}
-      <div className="flex order-1 lg:order-2 flex-col gap-14 bg-black text-white p-6 lg:p-14 rounded-lg w-full lg:w-1/2">
-        <span className="text-xl lg:text-2xl font-medium">
+      <div className="flex order-1 lg:order-2 flex-col justify-between bg-black text-white p-6 lg:p-14 rounded-lg w-full lg:w-2/5">
+        <span className="text-2xl lg:text-2xl font-medium leading-tight">
           Join our newsletter <br /> and get 20% off your <br /> first purchase
         </span>
-        <div className="flex flex-col w-full gap-2 mt-10 lg:mt-44">
+        <div className="flex flex-col w-full gap-2 mt-10 lg:mt-24">
           <input
             type="email"
-            placeholder="Enter your email "
-            className=" bg-gray-900 p-2 rounded-lg"
+            placeholder="name@email.com"
+            className="bg-[#1f1f1f] p-3 rounded-xl text-sm outline-none focus:ring-1 focus:ring-white/20 transition-all placeholder:text-gray-500"
           />
-          <button className="bg-white mt-2 text-black p-2 rounded-lg">
+          <button className="bg-white mt-2 text-black p-3 rounded-xl font-medium hover:bg-gray-200 transition-colors">
             Subscribe
           </button>
         </div>
