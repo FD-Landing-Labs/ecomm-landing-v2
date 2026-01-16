@@ -28,7 +28,7 @@ const TestimonialCard = ({
     return (
       <div
         className={cn(
-          "bg-gray-200 p-6 rounded-3xl flex flex-col justify-between h-full min-h-[300px] ",
+          "bg-gray-200 p-6 rounded-3xl flex flex-col justify-between h-full min-h-[400px] ",
           className
         )}
       >
@@ -37,14 +37,14 @@ const TestimonialCard = ({
             <span className="md:text-5xl text-3xl font-bold tracking-tighter">4.9</span>
             <span className="text-gray-400 text-xl font-medium">/5</span>
           </div>
-          <p className="text-gray-500 mt-4 text-sm leading-relaxed">
+          <p className="text-gray-500 mt-4 text-lg tracking-tight leading-snug">
             We&apos;ve delivered{" "}
             <span className="font-semibold text-black">56+ projects</span> that
             help companies generate real results.
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div className="flex items-center gap-4">
             <span className="font-bold md:text-xl text-lg tracking-tight">
               fabrica&reg;
@@ -86,7 +86,7 @@ const TestimonialCard = ({
             Trusted by clients worldwide
           </p>
 
-          <button className="w-40 md:w-full bg-black text-white md:py-3 py-2 rounded-full font-medium text-sm hover:bg-gray-800 transition-colors">
+          <button className="w-40 md:w-full bg-black text-white md:py-3 py-2 rounded-lg cursor-pointer font-medium text-sm hover:bg-gray-800 transition-colors">
             Leave a review
           </button>
         </div>
@@ -96,8 +96,8 @@ const TestimonialCard = ({
 
   // Common blocks for Standard Testimonials
   const ProfileBlock = () => (
-    <div className="bg-gray-200 p-4 rounded-3xl flex items-center gap-3">
-      <div className="w-10 h-10 rounded-sm bg-gray-200 overflow-hidden relative flex-shrink-0">
+    <div className="bg-gray-100 p-4 rounded-3xl flex items-center gap-3">
+      <div className="w-10 h-10 rounded-sm bg-gray-100 overflow-hidden relative flex-shrink-0">
         {imageSrc ? (
           <Image
             src={imageSrc}
@@ -106,12 +106,12 @@ const TestimonialCard = ({
             className="object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-gray-300" />
+          <div className="w-full h-full bg-gray-100" />
         )}
       </div>
       <div>
-        <h4 className="font-bold text-sm text-gray-900">{name}</h4>
-        <p className="text-xs text-gray-500">{role || company}</p>
+        <h4 className="font-semibold tracking-tighter text-lg text-gray-900">{name}</h4>
+        <p className="text-xs text-gray-500 uppercase tracking-widest">{role || company}</p>
       </div>
     </div>
   );
@@ -135,7 +135,7 @@ const TestimonialCard = ({
     return (
       <div
         className={cn(
-          "bg-gray-200 p-6 rounded-3xl flex flex-col justify-between flex-grow h-full min-h-[200px]",
+          "bg-gray-100 p-6 rounded-3xl flex flex-col justify-between flex-grow h-full min-h-[200px]",
           className
         )}
       >
@@ -145,7 +145,7 @@ const TestimonialCard = ({
           </div>
         )}
 
-        <p className=" md:text-lg text-sm font-medium leading-snug text-gray-900">
+        <p className=" md:text-xl text-sm tracking-tighter font-medium leading-snug text-gray-900">
           {content}
         </p>
 
@@ -177,27 +177,12 @@ const TestimonialCard = ({
 
 const TestimonialSection = () => {
   return (
-    <section className=" px-4 md:px-4 lg:px-4 pb-4  ">
-      <div className="p-6 mx-auto bg-gray-100 rounded-lg  ">
-        <div className="mb-16 relative">
-          <div className="flex items-center gap-2 mb-8 md:mb-0 md:absolute md:left-0 md:top-2">
-            <div className="w-4 h-4 rounded-full bg-black border-4 border-gray-200 flex items-center justify-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-white" />
-            </div>
-            <span className="font-semibold text-sm">Testimonials</span>
-          </div>
-
-          <div className="text-center">
-            <h2 className="text-2xl md:text-4xl font-bold tracking-tighter mb-2">
-              Experiences.
-            </h2>
-            <p className="font-bold text-lg md:text-xl text-gray-900">
-              &copy;2025
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <section className="px-4 pb-4">
+      <div className="bg-[#f6f6f6] text-sm md:text-xl tracking-tighter rounded-lg p-4 text-black/80  font-medium flex justify-center">
+        Hear From Our Clients
+      </div>
+      <div className="pt-4 mx-auto rounded-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Column 1: Summary Card */}
           <TestimonialCard variant="summary" />
 

@@ -255,43 +255,69 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                     </div>
 
                     {/* Mobile Menu Items */}
-                    <div className="flex-1 flex flex-col justify-center">
+                    <div className="flex-1 overflow-y-auto">
                         <div className="space-y-3">
-                            {/* Collections with Images */}
-                            {[
-                                { name: "Dark", image: "/assets/images/c-chair.avif" },
-                                { name: "Modern", image: "/assets/images/f.avif" },
-                                { name: "Wood", image: "/assets/images/c-chair2.avif" },
-                            ].map((item) => (
-                                <div
-                                    key={item.name}
-                                    className="flex items-center justify-between bg-gray-200 p-3 rounded-xl cursor-pointer hover:bg-gray-300 transition-colors group/item"
-                                >
-                                    <div className="flex items-center gap-4">
-                                        <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-300">
-                                            <Image
-                                                src={item.image}
-                                                alt={item.name}
-                                                fill
-                                                className="object-cover"
-                                            />
-                                        </div>
-                                        <span className="text-sm font-medium text-black">{item.name}</span>
-                                    </div>
-                                    <ArrowRight size={18} className="text-gray-500 group-hover/item:translate-x-1 transition-transform" />
-                                </div>
-                            ))}
+                            {/* Shop Link */}
+                            <div className="flex items-center justify-between bg-gray-200 p-4 rounded-xl cursor-pointer hover:bg-gray-300 transition-colors group/item">
+                                <span className="text-sm font-medium text-black">Shop</span>
+                                <ArrowRight size={18} className="text-gray-500 group-hover/item:translate-x-1 transition-transform" />
+                            </div>
 
-                            {/* Simple Links */}
-                            {["Shop", "About", "Blog"].map((item) => (
-                                <div
-                                    key={item}
-                                    className="flex items-center justify-between bg-gray-200 p-4 rounded-xl cursor-pointer hover:bg-gray-300 transition-colors group/item"
-                                >
-                                    <span className="text-sm font-medium text-black">{item}</span>
-                                    <ArrowRight size={18} className="text-gray-500 group-hover/item:translate-x-1 transition-transform" />
+                            {/* Categories Section */}
+                            <div className="bg-gray-200 rounded-xl overflow-hidden">
+                                <div className="p-4 border-b border-gray-300">
+                                    <span className="text-sm font-medium text-black">Categories</span>
                                 </div>
-                            ))}
+                                <div className="p-2 space-y-1">
+                                    {[
+                                        { name: "Engine", image: "/assets/images/parts/engine-block.png" },
+                                        { name: "Transmission", image: "/assets/images/parts/manual-transmission.png" },
+                                        { name: "Suspension", image: "/assets/images/parts/shock-absorber.png" },
+                                        { name: "Brakes", image: "/assets/images/parts/pad-disc.png" },
+                                        { name: "Electrical", image: "/assets/images/parts/starter-motor.png" },
+                                        { name: "Exterior", image: "/assets/images/parts/headlight.png" },
+                                        { name: "Interior", image: "/assets/images/parts/steering-wheel.png" },
+                                        { name: "Wheels", image: "/assets/images/parts/alloy-wheel.png" },
+                                        { name: "Exhaust", image: "/assets/images/parts/exhaust-manifold.png" },
+                                    ].map((item) => (
+                                        <div
+                                            key={item.name}
+                                            className="flex items-center justify-between bg-white p-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors group/item"
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                <div className="relative w-10 h-10 rounded-md overflow-hidden bg-gray-100 shrink-0">
+                                                    <Image
+                                                        src={item.image}
+                                                        alt={item.name}
+                                                        fill
+                                                        className="object-cover"
+                                                    />
+                                                </div>
+                                                <span className="text-sm font-medium text-black">{item.name}</span>
+                                            </div>
+                                            <ArrowRight size={16} className="text-gray-400 group-hover/item:text-black group-hover/item:translate-x-1 transition-all" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* About Section */}
+                            <div className="bg-gray-200 rounded-xl overflow-hidden">
+                                <div className="p-4 border-b border-gray-300">
+                                    <span className="text-sm font-medium text-black">About</span>
+                                </div>
+                                <div className="p-2 space-y-1">
+                                    {["About", "Contact", "FAQ"].map((item) => (
+                                        <div
+                                            key={item}
+                                            className="flex items-center justify-between bg-white p-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors group/item"
+                                        >
+                                            <span className="text-sm font-medium text-black">{item}</span>
+                                            <ArrowRight size={16} className="text-gray-400 group-hover/item:text-black group-hover/item:translate-x-1 transition-all" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
