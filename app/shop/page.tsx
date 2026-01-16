@@ -4,6 +4,7 @@ import { useState } from "react";
 import placeholderData from "@/data/place_holder.json";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import CartSheet from "@/components/cart-sheet";
 import { ShopHeader, ShopCategories, ShopProducts } from "@/components/shop";
 
 const shopData = placeholderData.shop;
@@ -19,8 +20,9 @@ export default function ShopPage() {
       );
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
+      <CartSheet />
 
       <div className="pt-10">
         <ShopHeader title={shopData.title} description={shopData.description} />

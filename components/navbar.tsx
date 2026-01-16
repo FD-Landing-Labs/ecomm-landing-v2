@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Image from "next/image";
 import Link from "next/link";
-import { Plus, Search, ShoppingCart, ArrowRight, Menu, X, Minus, MenuIcon } from "lucide-react";
+import { Plus, Search, ShoppingCart, ArrowRight, X, MenuIcon } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import placeholderData from "@/data/place_holder.json";
+import { useCart } from "@/context/cart-context";
 
 const navbarData = placeholderData.navbar;
 const brandData = placeholderData.brand;
@@ -14,24 +15,14 @@ interface NavbarProps {
     onMobileMenuOpen?: () => void;
 }
 
-interface CartItem {
-    id: number;
-    name: string;
-    material: string;
-    price: number;
-    quantity: number;
-    image: string;
-}
-
 export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
-    const [isCartOpen, setIsCartOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [isNavbarVisible, setIsNavbarVisible] = useState(true);
-    const [cartItems, setCartItems] = useState<CartItem[]>([
-        navbarData.defaultCartItem
-    ]);
+
+    const { openCart, getCartCount } = useCart();
+    const cartCount = getCartCount();
 
     const { scrollY } = useScroll();
 
@@ -44,29 +35,13 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
         }
     });
 
-    const updateQuantity = (id: number, delta: number) => {
-        setCartItems(items =>
-            items.map(item =>
-                item.id === id
-                    ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-                    : item
-            )
-        );
-    };
-
-    const removeItem = (id: number) => {
-        setCartItems(items => items.filter(item => item.id !== id));
-    };
-
-    const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
     return (
         <>
             <motion.nav
                 initial={{ y: 0 }}
                 animate={{ y: isNavbarVisible ? 0 : -100 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between mt- mx-4 px-6 py-4 rounded-b-xl bg-gray-100 max-w-2xl mx-auto"
+                className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between mx-4 px-6 py-4 rounded-b-xl bg-gray-50 "
             >
                 {/* Left Section - Logo, Nav Links, Theme Toggle */}
                 <div className="flex items-center gap-4">
@@ -195,14 +170,18 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                         <Search size={18} />
                     </button>
                     <button
-                        onClick={() => setIsCartOpen(true)}
+                        onClick={openCart}
                         className="relative cursor-pointer hover:opacity-70 transition-opacity"
                     >
                         <ShoppingCart size={18} />
-                        {cartItems.length > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold min-w-[18px] h-[18px] flex items-center justify-center rounded-full">
-                                {cartItems.length}
-                            </span>
+                        {cartCount > 0 && (
+                            <motion.span
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold min-w-[18px] h-[18px] flex items-center justify-center rounded-full"
+                            >
+                                {cartCount}
+                            </motion.span>
                         )}
                     </button>
                     {/* Mobile Menu Trigger */}
@@ -268,10 +247,14 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                     <div className="flex-1 overflow-y-auto">
                         <div className="space-y-3">
                             {/* Shop Link */}
-                            <div className="flex items-center justify-between bg-gray-200 p-4 rounded-xl cursor-pointer hover:bg-gray-300 transition-colors group/item">
+                            <Link
+                                href="/shop"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="flex items-center justify-between bg-gray-200 p-4 rounded-xl cursor-pointer hover:bg-gray-300 transition-colors group/item"
+                            >
                                 <span className="text-sm font-medium text-black">Shop</span>
                                 <ArrowRight size={18} className="text-gray-500 group-hover/item:translate-x-1 transition-transform" />
-                            </div>
+                            </Link>
 
                             {/* Categories Section */}
                             <div className="bg-gray-200 rounded-xl overflow-hidden">
@@ -320,111 +303,6 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            {/* Cart Overlay */}
-            <div
-                className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${isCartOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                    }`}
-                onClick={() => setIsCartOpen(false)}
-            />
-
-            {/* Cart Sheet */}
-            <div
-                className={`fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-out ${isCartOpen ? 'translate-x-0' : 'translate-x-full'
-                    }`}
-            >
-                <div className="flex flex-col h-full">
-                    {/* Cart Header */}
-                    <div className="flex items-center justify-between p-6 border-b">
-                        <h2 className="text-lg tracking-tighter font-semibold text-black">Cart ({cartItems.length})</h2>
-                        <button
-                            onClick={() => setIsCartOpen(false)}
-                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                        >
-                            <X size={20} className="text-gray-600" />
-                        </button>
-                    </div>
-
-                    {/* Cart Items */}
-                    <div className="flex-1 overflow-y-auto p-6">
-                        {cartItems.length === 0 ? (
-                            <div className="flex flex-col items-center justify-center h-full text-gray-500">
-                                <ShoppingCart size={48} className="mb-4 opacity-50" />
-                                <p>Your cart is empty</p>
-                            </div>
-                        ) : (
-                            <div className="space-y-6">
-                                {cartItems.map((item) => (
-                                    <div key={item.id} className="flex gap-4">
-                                        {/* Product Image */}
-                                        <div className="relative w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                                            <Image
-                                                src={item.image}
-                                                alt={item.name}
-                                                fill
-                                                className="object-cover"
-                                            />
-                                        </div>
-
-                                        {/* Product Details */}
-                                        <div className="flex-1 flex flex-col">
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <h3 className="font-medium text-black tracking-tighter">{item.name}</h3>
-                                                    <p className="text-sm text-gray-500">Material: {item.material}</p>
-                                                </div>
-                                                <span className="font-medium text-black">
-                                                    {(item.price * item.quantity).toFixed(2).replace('.', ',')} €
-                                                </span>
-                                            </div>
-
-                                            {/* Quantity Controls */}
-                                            <div className="flex items-center justify-between mt-auto pt-3">
-                                                <div className="flex items-center border rounded-lg">
-                                                    <button
-                                                        onClick={() => updateQuantity(item.id, -1)}
-                                                        className="p-2 hover:bg-gray-100 transition-colors"
-                                                    >
-                                                        <Minus size={14} />
-                                                    </button>
-                                                    <span className="px-3 text-sm font-medium">{item.quantity}</span>
-                                                    <button
-                                                        onClick={() => updateQuantity(item.id, 1)}
-                                                        className="p-2 hover:bg-gray-100 transition-colors"
-                                                    >
-                                                        <Plus size={14} />
-                                                    </button>
-                                                </div>
-                                                <button
-                                                    onClick={() => removeItem(item.id)}
-                                                    className="p-2 border rounded-lg hover:bg-gray-100 transition-colors tracking-tighter"
-                                                >
-                                                    <X size={14} className="text-gray-500" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Cart Footer */}
-                    {cartItems.length > 0 && (
-                        <div className="border-t p-6 bg-gray-50">
-                            <div className="flex items-center justify-between mb-4">
-                                <span className="text-gray-600">Subtotal</span>
-                                <span className="text-lg font-semibold text-black">
-                                    {subtotal.toFixed(2).replace('.', ',')} €
-                                </span>
-                            </div>
-                            <button className="w-full bg-black text-white py-4 rounded-xl font-medium hover:bg-gray-800 transition-colors">
-                                Checkout
-                            </button>
-                        </div>
-                    )}
                 </div>
             </div>
         </>

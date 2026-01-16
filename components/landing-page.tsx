@@ -9,11 +9,13 @@ import TestimonialSection from "./testimonial-section";
 import Navbar from "./navbar";
 import SocialMedia from "./social-media";
 import { Marquee } from "./brand-marquee";
+import CartSheet from "./cart-sheet";
 
 export const LandingPage = () => {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Navbar />
+      <CartSheet />
       <HeroSection />
       <OurFavoritesSection />
       <NewArrival />

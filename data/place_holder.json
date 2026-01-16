@@ -53,51 +53,124 @@
         "name": "Cooling & AC"
       }
     ],
+    "productFeatures": [
+      { "icon": "truck", "text": "Free Shipping over Rs 15,000" },
+      { "icon": "globe", "text": "Islandwide Delivery" },
+      { "icon": "refresh", "text": "30-Day Returns" }
+    ],
+    "shippingInfo": {
+      "title": "Shipping",
+      "content": "We ship your auto parts securely within 3-5 business days. Delivery times vary by location. You will receive tracking details upon dispatch. International orders may incur customs fees."
+    },
+    "returnPolicy": {
+      "title": "Return Policy",
+      "content": "Not satisfied? Return items in their original condition within 30 days. For damaged or defective items, return shipping is free. Refunds are issued after inspection. Contact us for assistance!"
+    },
     "allProducts": [
       {
         "id": 1,
         "name": "Turbo Charger",
+        "slug": "turbo-charger",
         "image": "/assets/images/parts/turbo-charger.png",
+        "images": ["/assets/images/parts/turbo-charger.png", "/assets/images/parts/turbo.png", "/assets/images/parts/engine-block.png"],
         "price": "45,000 Rs",
         "originalPrice": "65,000 Rs",
         "offers": "30% OFF",
-        "category": "engine"
+        "category": "engine",
+        "shortDescription": "High-performance turbocharger designed for maximum boost and efficiency. Compatible with most 4-cylinder engines.",
+        "fullDescription": "Elevate your engine's performance with this premium Turbo Charger, a perfect blend of power and precision engineering. Made from high-grade materials, this turbocharger delivers exceptional boost pressure while maintaining reliability. The advanced bearing system ensures smooth operation and extended lifespan.",
+        "materials": ["Steel", "Aluminum"],
+        "dimensions": {
+          "materials": "Steel housing, Aluminum compressor wheel",
+          "boost": "Up to 15 PSI",
+          "inlet": "2.5 inch",
+          "outlet": "2.0 inch",
+          "weight": "8 kg"
+        }
       },
       {
         "id": 2,
         "name": "Twin Turbo Kit",
+        "slug": "twin-turbo-kit",
         "image": "/assets/images/parts/turbo.png",
+        "images": ["/assets/images/parts/turbo.png", "/assets/images/parts/turbo-charger.png", "/assets/images/parts/engine-block.png"],
         "price": "85,000 Rs",
         "originalPrice": "",
         "offers": "",
-        "category": "engine"
+        "category": "engine",
+        "shortDescription": "Complete twin turbo setup for V6 and V8 engines. Includes all mounting hardware and gaskets.",
+        "fullDescription": "Transform your vehicle's performance with this comprehensive Twin Turbo Kit. Engineered for serious power gains, this kit includes matched turbos, intercooler piping, blow-off valves, and all necessary hardware for a complete installation.",
+        "materials": ["Steel", "Aluminum"],
+        "dimensions": {
+          "materials": "Stainless steel manifolds, Aluminum intercooler",
+          "boost": "Up to 18 PSI",
+          "compatibility": "V6/V8 engines",
+          "kit_contents": "2x Turbos, Manifolds, Piping, BOV",
+          "weight": "25 kg"
+        }
       },
       {
         "id": 3,
         "name": "Engine Block",
+        "slug": "engine-block",
         "image": "/assets/images/parts/engine-block.png",
+        "images": ["/assets/images/parts/engine-block.png", "/assets/images/parts/cylinder-head.png", "/assets/images/parts/crankshaft.png"],
         "price": "125,000 Rs",
         "originalPrice": "",
         "offers": "",
-        "category": "engine"
+        "category": "engine",
+        "shortDescription": "Cast iron engine block with precision machined cylinder bores. Suitable for rebuilds and performance builds.",
+        "fullDescription": "This premium Engine Block is manufactured to OEM specifications with enhanced durability for high-performance applications. Features precision-machined cylinder bores, main bearing journals, and cam bearing bores. Ideal for both restoration projects and performance builds.",
+        "materials": ["Cast Iron", "Aluminum"],
+        "dimensions": {
+          "materials": "High-strength cast iron",
+          "cylinders": "4-cylinder inline",
+          "bore": "86mm",
+          "deck_height": "220mm",
+          "weight": "45 kg"
+        }
       },
       {
         "id": 4,
         "name": "Cylinder Head Assembly",
+        "slug": "cylinder-head-assembly",
         "image": "/assets/images/parts/cylinder-head.png",
+        "images": ["/assets/images/parts/cylinder-head.png", "/assets/images/parts/engine-block.png", "/assets/images/parts/crankshaft.png"],
         "price": "60,000 Rs",
         "originalPrice": "75,000 Rs",
         "offers": "20% OFF",
-        "category": "engine"
+        "category": "engine",
+        "shortDescription": "Complete cylinder head with valves, springs, and camshaft. Ready for installation.",
+        "fullDescription": "This fully assembled Cylinder Head comes complete with valves, valve springs, retainers, and camshaft. Professionally rebuilt to exceed OEM specifications with upgraded valve seals for improved oil control and longevity.",
+        "materials": ["Aluminum", "Steel Valves"],
+        "dimensions": {
+          "materials": "Aluminum alloy head, Steel valves",
+          "valves": "16-valve DOHC",
+          "intake_port": "32mm",
+          "exhaust_port": "28mm",
+          "weight": "18 kg"
+        }
       },
       {
         "id": 5,
         "name": "Performance Crankshaft",
+        "slug": "performance-crankshaft",
         "image": "/assets/images/parts/crankshaft.png",
+        "images": ["/assets/images/parts/crankshaft.png", "/assets/images/parts/engine-block.png", "/assets/images/parts/cylinder-head.png"],
         "price": "47,500 Rs",
         "originalPrice": "",
         "offers": "",
-        "category": "engine"
+        "category": "engine",
+        "shortDescription": "Forged steel crankshaft with improved balance and strength for high-RPM applications.",
+        "fullDescription": "Engineered for performance enthusiasts, this forged steel Performance Crankshaft features superior strength and precise balance for smooth high-RPM operation. Fully counterweighted and shot-peened for maximum durability under extreme conditions.",
+        "materials": ["Forged Steel"],
+        "dimensions": {
+          "materials": "4340 Forged steel",
+          "stroke": "88mm",
+          "main_journal": "52mm",
+          "rod_journal": "45mm",
+          "weight": "15 kg"
+        }
       },
       {
         "id": 6,

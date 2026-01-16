@@ -1,8 +1,35 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 import placeholderData from "@/data/place_holder.json";
+
+// Generate slug from product name
+function generateSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+// Animation variants
+const easeOut: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.6, ease: easeOut }
+};
+
+const scaleUp = {
+  initial: { opacity: 0, scale: 0.95 },
+  whileInView: { opacity: 1, scale: 1 },
+  viewport: { once: true },
+  transition: { duration: 0.5, ease: easeOut }
+};
 
 const OurFavoritesSectionData = placeholderData.ourFavorites.products.map(product => ({
   name: product.name,
@@ -98,12 +125,21 @@ export const OurFavoritesSection = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 px-4 ">
-      <div className="bg-[#f6f6f6] text-lg md:text-xl rounded-lg p-4 text-black/70  font-medium flex justify-center tracking-tighter">
+    <motion.div
+      className="flex flex-col gap-4 px-4"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="bg-[#f6f6f6] text-lg md:text-xl rounded-lg p-4 text-black/70 font-medium flex justify-center tracking-tighter"
+        {...fadeUp}
+      >
         {placeholderData.ourFavorites.sectionTitle}
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
         ref={carouselRef}
         className="relative group touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
@@ -111,15 +147,22 @@ export const OurFavoritesSection = () => {
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         {/* Left Navigation Button */}
-        <button
+        <motion.button
           onClick={prevSlide}
           disabled={startIndex === 0}
           className="absolute left-6 md:left-14 top-1/2 -translate-y-1/2 -translate-x-4 text-white z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-black transition-colors cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           <ChevronLeft size={24} />
-        </button>
+        </motion.button>
 
         {/* Carousel Window */}
         <div className="overflow-hidden -mx-2">
@@ -134,6 +177,7 @@ export const OurFavoritesSection = () => {
                 key={item.name}
                 className="min-w-full md:min-w-[50%] lg:min-w-[25%] mb-4 px-2 "
               >
+                <Link href={`/shop/${generateSlug(item.name)}`}>
                 <div className="flex flex-col gap-4 group/card cursor-pointer">
                   <div className=" relative overflow-hidden rounded-lg">
                     <Image
@@ -178,20 +222,24 @@ export const OurFavoritesSection = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right Navigation Button */}
-        <button
+        <motion.button
           onClick={nextSlide}
           disabled={startIndex >= OurFavoritesSectionData.length - itemsToShow}
           className="absolute right-6 md:right-14 text-white top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-black transition-colors cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           <ChevronRight size={24} />
-        </button>
-      </div>
-    </div>
+        </motion.button>
+      </motion.div>
+    </motion.div>
   );
 };

@@ -1,9 +1,43 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Star, Plus } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import placeholderData from "@/data/place_holder.json";
 
 const testimonialData = placeholderData.testimonials;
+
+// Animation variants
+const easeOut: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.6, ease: easeOut }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const cardItem = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: easeOut }
+  }
+};
 
 interface TestimonialCardProps {
   variant?: "default" | "inverted" | "summary";
@@ -181,27 +215,44 @@ const TestimonialCard = ({
 const TestimonialSection = () => {
   const testimonials = testimonialData.items;
   return (
-    <section className="px-4 pb-4">
-      <div className="bg-[#f6f6f6] text-lg md:text-xl tracking-tighter rounded-lg p-4 text-black/80  font-medium flex justify-center">
+    <motion.section
+      className="px-4 pb-4"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="bg-[#f6f6f6] text-lg md:text-xl tracking-tighter rounded-lg p-4 text-black/80 font-medium flex justify-center"
+        {...fadeUp}
+      >
         {testimonialData.sectionTitle}
-      </div>
+      </motion.div>
       <div className="pt-4 mx-auto rounded-lg">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {/* Column 1: Summary Card */}
-          <TestimonialCard variant="summary" />
+          <motion.div variants={cardItem}>
+            <TestimonialCard variant="summary" />
+          </motion.div>
 
           {/* Column 2 */}
-          <div className="flex flex-col gap-6">
+          <motion.div className="flex flex-col gap-6" variants={cardItem}>
             <TestimonialCard
               name={testimonials[0].name}
               company={testimonials[0].company}
               content={testimonials[0].content}
               imageSrc={testimonials[0].image}
             />
-          </div>
+          </motion.div>
 
           {/* Column 3 */}
-          <div className="flex flex-col gap-6">
+          <motion.div className="flex flex-col gap-6" variants={cardItem}>
             <TestimonialCard
               variant="inverted"
               content={testimonials[1].content}
@@ -210,20 +261,20 @@ const TestimonialSection = () => {
               role={testimonials[1].role}
               imageSrc={testimonials[1].image}
             />
-          </div>
+          </motion.div>
 
           {/* Column 4 */}
-          <div className="flex flex-col gap-6">
+          <motion.div className="flex flex-col gap-6" variants={cardItem}>
             <TestimonialCard
               name={testimonials[2].name}
               role={testimonials[2].role}
               content={testimonials[2].content}
               imageSrc={testimonials[2].image}
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
