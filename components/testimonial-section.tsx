@@ -86,7 +86,7 @@ const TestimonialCard = ({
             Trusted by clients worldwide
           </p>
 
-          <button className="w-full bg-black text-white py-3 rounded-full font-medium text-sm hover:bg-gray-800 transition-colors">
+          <button className="w-40 md:w-full bg-black text-white md:py-3 py-2 rounded-full font-medium text-sm hover:bg-gray-800 transition-colors">
             Leave a review
           </button>
         </div>

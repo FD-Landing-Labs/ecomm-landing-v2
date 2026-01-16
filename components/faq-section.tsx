@@ -67,7 +67,7 @@ export default function FaqSection() {
                     chat to our friendly team.
                   </p>
                 </div>
-                <button className="inline-flex cursor-pointer items-center px-6 py-3 text-sm font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors">
+                <button className="inline-flex cursor-pointer items-center px-4 py-2 md:px-6 md:py-3 text-sm font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors">
                   Get in touch
                 </button>
               </div>
