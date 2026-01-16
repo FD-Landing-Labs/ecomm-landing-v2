@@ -1,0 +1,373 @@
+{
+  "brand": {
+    "name": "RR Auto Parts",
+    "description": "Your trusted source for premium automotive parts and accessories. Quality components for every vehicle, backed by expert support and fast delivery."
+  },
+  "hero": {
+    "images": [
+      "/assets/images/hero-1.png",
+      "/assets/images/hero-2.jpg",
+      "/assets/images/hero-5.png",
+      "/assets/images/hero-4.jpg"
+    ],
+    "slides": [
+      {
+        "title": "Premium Auto Parts, Built to Perform.",
+        "description": "High-quality OEM and aftermarket parts for all major vehicle brands."
+      },
+      {
+        "title": "Drive with Confidence, Every Mile.",
+        "description": "Genuine parts tested for durability, safety, and peak performance."
+      },
+      {
+        "title": "Your Vehicle Deserves the Best.",
+        "description": "From engine components to brake systems, we've got you covered."
+      },
+      {
+        "title": "Expert Parts for Expert Drivers.",
+        "description": "Professional-grade auto parts trusted by mechanics nationwide."
+      }
+    ],
+    "features": [
+      {
+        "icon": "/assets/images/van.png",
+        "alt": "Free Shipping",
+        "text": "Free Shipping over Rs 15,000"
+      },
+      {
+        "icon": "/assets/images/world.png",
+        "alt": "Islandwide Delivery",
+        "text": "Islandwide Delivery"
+      },
+      {
+        "icon": "/assets/images/box.png",
+        "alt": "Easy Returns",
+        "text": "30-Day Easy Returns"
+      },
+      {
+        "icon": "/assets/images/warranty.png",
+        "alt": "Warranty",
+        "text": "Manufacturer Warranty"
+      }
+    ]
+  },
+  "ourFavorites": {
+    "sectionTitle": "Best Selling Parts",
+    "products": [
+      {
+        "name": "Turbo Charger",
+        "image": "/assets/images/parts/turbo-charger.png",
+        "price": "45,000 Rs 65,000 Rs",
+        "offers": "30% OFF"
+      },
+      {
+        "name": "Engine Block",
+        "image": "/assets/images/parts/engine-block.png",
+        "price": "125,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Brake Disc & Pad Kit",
+        "image": "/assets/images/parts/pad-disc.png",
+        "price": "8,500 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Shock Absorber Set",
+        "image": "/assets/images/parts/shock-absorber.png",
+        "price": "12,000 Rs 20,000 Rs",
+        "offers": "40% OFF"
+      },
+      {
+        "name": "Alloy Wheel 17\"",
+        "image": "/assets/images/parts/alloy-wheel.png",
+        "price": "18,500 Rs",
+        "offers": ""
+      },
+      {
+        "name": "LED Headlight Assembly",
+        "image": "/assets/images/parts/headlight.png",
+        "price": "14,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Manual Transmission",
+        "image": "/assets/images/parts/manual-transmission.png",
+        "price": "95,000 Rs 125,000 Rs",
+        "offers": "25% OFF"
+      },
+      {
+        "name": "Radiator Fan Assembly",
+        "image": "/assets/images/parts/radiator-fan.png",
+        "price": "4,500 Rs",
+        "offers": ""
+      }
+    ]
+  },
+  "newArrivals": {
+    "sectionTitle": "New Arrivals",
+    "products": [
+      {
+        "name": "Starter Motor",
+        "image": "/assets/images/parts/starter-motor.png",
+        "price": "11,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Exhaust Manifold",
+        "image": "/assets/images/parts/exhaust-manifold.png",
+        "price": "22,500 Rs 30,000 Rs",
+        "offers": "25% OFF"
+      },
+      {
+        "name": "Sport Steering Wheel",
+        "image": "/assets/images/parts/steering-wheel.png",
+        "price": "16,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "AGM Car Battery 75Ah",
+        "image": "/assets/images/parts/car-battery.png",
+        "price": "18,000 Rs 24,000 Rs",
+        "offers": "25% OFF"
+      },
+      {
+        "name": "AC Compressor",
+        "image": "/assets/images/parts/ac-compressor.png",
+        "price": "34,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Performance Crankshaft",
+        "image": "/assets/images/parts/crankshaft.png",
+        "price": "47,500 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Cylinder Head Assembly",
+        "image": "/assets/images/parts/cylinder-head.png",
+        "price": "60,000 Rs 75,000 Rs",
+        "offers": "20% OFF"
+      },
+      {
+        "name": "ECU Control Module",
+        "image": "/assets/images/parts/ecu.png",
+        "price": "42,500 Rs",
+        "offers": ""
+      }
+    ]
+  },
+  "collections": {
+    "sectionTitle": "Shop by Category",
+    "items": [
+      {
+        "name": "Engine Parts",
+        "image": "/assets/images/collection-1.png",
+        "description": "Complete range of engine components including pistons, gaskets, timing belts, and more.",
+        "variant": "featured"
+      },
+      {
+        "name": "Brake Systems",
+        "image": "/assets/images/collection-2.png",
+        "description": "Premium brake pads, rotors, calipers, and complete brake kits for maximum stopping power.",
+        "variant": "dark"
+      },
+      {
+        "name": "Performance Parts",
+        "image": "/assets/images/collection-3.png",
+        "description": "Upgrade your ride with turbochargers, exhaust systems, and high-performance components.",
+        "variant": "dark"
+      }
+    ]
+  },
+  "aboutUs": {
+    "sectionTitle": "About Us",
+    "headline": "Driving Excellence Since 2010",
+    "description": "At RR Auto Parts, we're passionate about keeping your vehicle running at its best. With over a decade of experience, we supply genuine OEM and premium aftermarket parts to mechanics, garages, and car enthusiasts across the island.",
+    "ctaText": "Learn Our Story",
+    "image": "/assets/images/about.jpg"
+  },
+  "testimonials": {
+    "sectionTitle": "What Our Customers Say",
+    "summary": {
+      "rating": "4.9",
+      "maxRating": "5",
+      "projectsCount": "10,000+",
+      "description": "We've served 10,000+ satisfied customers with quality auto parts and exceptional service.",
+      "brandName": "RR Auto Parts",
+      "trustText": "Trusted by mechanics & car owners",
+      "ctaText": "Write a Review",
+      "profileImages": [
+        "/assets/images/profile1.avif",
+        "/assets/images/profile2.avif",
+        "/assets/images/profile3.jpeg",
+        "/assets/images/profile4.jpeg"
+      ]
+    },
+    "items": [
+      {
+        "name": "Kamal Perera",
+        "company": "KP Auto Garage",
+        "content": "Best supplier for genuine parts! Fast delivery and the quality is always top-notch. My go-to for all engine components.",
+        "image": "/assets/images/profile4.jpeg",
+        "rating": 5,
+        "variant": "default"
+      },
+      {
+        "name": "Nimal Fernando",
+        "role": "Car Enthusiast",
+        "content": "Found the exact brake kit I needed for my Toyota. Great prices and the customer support was super helpful!",
+        "image": "/assets/images/profile1.avif",
+        "rating": 5,
+        "variant": "inverted"
+      },
+      {
+        "name": "Suresh Kumar",
+        "role": "Workshop Owner",
+        "content": "Been ordering parts for my workshop for 3 years now. Reliable, authentic parts with warranty. Highly recommend!",
+        "image": "/assets/images/profile2.avif",
+        "rating": 5,
+        "variant": "default"
+      }
+    ]
+  },
+  "faq": {
+    "sectionLabel": "Support",
+    "sectionTitle": "Frequently Asked Questions",
+    "contactCard": {
+      "title": "Need Help Finding Parts?",
+      "description": "Our expert team is here to help you find the right parts for your vehicle. Contact us for personalized assistance.",
+      "ctaText": "Contact Us"
+    },
+    "items": [
+      {
+        "question": "How do I find the right parts for my vehicle?",
+        "answer": "Simply use our search bar and enter your vehicle make, model, and year. You can also browse by category or contact our support team with your vehicle registration number for personalized recommendations."
+      },
+      {
+        "question": "Do you offer warranty on your auto parts?",
+        "answer": "Yes! All our parts come with manufacturer warranty. OEM parts typically have 1-2 year warranty, while aftermarket parts vary by brand. Warranty details are listed on each product page."
+      },
+      {
+        "question": "What is your return and exchange policy?",
+        "answer": "We offer a 30-day return policy for unused parts in original packaging. If you receive a defective or wrong part, we'll arrange free pickup and replacement. Please keep your invoice for all returns."
+      },
+      {
+        "question": "Do you provide island-wide delivery?",
+        "answer": "Yes, we deliver across Sri Lanka. Colombo metro area orders are delivered within 24-48 hours. Other areas typically receive orders within 3-5 business days. Free shipping on orders over Rs 15,000."
+      }
+    ]
+  },
+  "socialMedia": {
+    "platforms": [
+      {
+        "name": "Facebook",
+        "icon": "facebook",
+        "url": "#"
+      },
+      {
+        "name": "Instagram",
+        "icon": "instagram",
+        "url": "#"
+      },
+      {
+        "name": "YouTube",
+        "icon": "youtube",
+        "iconImage": "/assets/images/pinterest.png",
+        "url": "#"
+      },
+      {
+        "name": "WhatsApp",
+        "icon": "whatsapp",
+        "iconImage": "/assets/images/be.png",
+        "url": "#"
+      }
+    ]
+  },
+  "navbar": {
+    "categories": [
+      { "name": "Engine Parts", "image": "/assets/images/parts/engine-block.png" },
+      { "name": "Transmission", "image": "/assets/images/parts/manual-transmission.png" },
+      { "name": "Suspension", "image": "/assets/images/parts/shock-absorber.png" },
+      { "name": "Brake Systems", "image": "/assets/images/parts/pad-disc.png" },
+      { "name": "Electrical", "image": "/assets/images/parts/starter-motor.png" },
+      { "name": "Lighting", "image": "/assets/images/parts/headlight.png" },
+      { "name": "Interior", "image": "/assets/images/parts/steering-wheel.png" },
+      { "name": "Wheels & Tires", "image": "/assets/images/parts/alloy-wheel.png" },
+      { "name": "Exhaust Systems", "image": "/assets/images/parts/exhaust-manifold.png" }
+    ],
+    "aboutDropdown": ["About Us", "Contact", "FAQ"],
+    "defaultCartItem": {
+      "id": 1,
+      "name": "Brake Pad Set",
+      "material": "Ceramic",
+      "price": 4500,
+      "quantity": 1,
+      "image": "/assets/images/parts/pad-disc.png"
+    }
+  },
+  "footer": {
+    "newsletter": {
+      "headline": "Subscribe for exclusive deals and get 10% off your first order",
+      "placeholder": "Enter your email",
+      "ctaText": "Subscribe"
+    },
+    "navigation": {
+      "pages": {
+        "title": "Company",
+        "links": [
+          { "label": "Home", "href": "#" },
+          { "label": "About Us", "href": "#" },
+          { "label": "Our Brands", "href": "#" },
+          { "label": "Careers", "href": "#" }
+        ]
+      },
+      "help": {
+        "title": "Support",
+        "links": [
+          { "label": "FAQ", "href": "#" },
+          { "label": "Shipping Info", "href": "#" },
+          { "label": "Returns", "href": "#" },
+          { "label": "Warranty", "href": "#" }
+        ]
+      },
+      "cms": {
+        "title": "Shop",
+        "links": [
+          { "label": "All Parts", "href": "#" },
+          { "label": "New Arrivals", "href": "#" },
+          { "label": "Best Sellers", "href": "#" },
+          { "label": "Deals & Offers", "href": "#" },
+          { "label": "Find My Part", "href": "#" }
+        ]
+      }
+    }
+  },
+  "brands": {
+    "sectionTitle": "Trusted by Top Brands",
+    "row1": [
+      { "name": "Toyota", "src": "/assets/images/brands/toyota.png" },
+      { "name": "BMW", "src": "/assets/images/brands/bmw.png" },
+      { "name": "Honda", "src": "/assets/images/brands/honda.png" },
+      { "name": "Ford", "src": "/assets/images/brands/ford.png" },
+      { "name": "Tesla", "src": "/assets/images/brands/tesla.png" },
+      { "name": "Nissan", "src": "/assets/images/brands/nissan.png" },
+      { "name": "Hyundai", "src": "/assets/images/brands/hyundai.png" },
+      { "name": "Mazda", "src": "/assets/images/brands/mazda.png" },
+      { "name": "Subaru", "src": "/assets/images/brands/subaru.png" },
+      { "name": "Mitsubishi", "src": "/assets/images/brands/mitsubishi.png" }
+    ],
+    "row2": [
+      { "name": "Bosch", "src": "/assets/images/brands/bosch.png" },
+      { "name": "Continental", "src": "/assets/images/brands/continental.png" },
+      { "name": "Denso", "src": "/assets/images/brands/denso.png" },
+      { "name": "Magna", "src": "/assets/images/brands/magna.png" },
+      { "name": "Valeo", "src": "/assets/images/brands/valeo.png" },
+      { "name": "ZF", "src": "/assets/images/brands/zf.png" },
+      { "name": "Aisin", "src": "/assets/images/brands/aisin.png" },
+      { "name": "Hella", "src": "/assets/images/brands/hella.png" },
+      { "name": "Yazaki", "src": "/assets/images/brands/yazaki.png" },
+      { "name": "Brembo", "src": "/assets/images/brands/nemak.png" }
+    ]
+  }
+}
