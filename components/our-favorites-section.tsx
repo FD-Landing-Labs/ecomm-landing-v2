@@ -1,62 +1,28 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import placeholderData from "@/data/place_holder.json";
 
-const OurFavoritesSectionData = [
-  {
-    name: "Turbo Charger",
-    image: "/assets/images/parts/turbo-charger.png",
-    price: "850,00 € 1200,00 €",
-    offars: "30% OFF",
-  },
-  {
-    name: "Engine Block",
-    image: "/assets/images/parts/engine-block.png",
-    price: "2500,00 Rs",
-    offars: "",
-  },
-  {
-    name: "Brake Disc & Pad",
-    image: "/assets/images/parts/pad-disc.png",
-    price: "180,00 Rs",
-    offars: "",
-  },
-  {
-    name: "Shock Absorber",
-    image: "/assets/images/parts/shock-absorber.png",
-    price: "120,00 Rs 200,00 Rs",
-    offars: "40% OFF",
-  },
-  {
-    name: "Alloy Wheel",
-    image: "/assets/images/parts/alloy-wheel.png",
-    price: "350,00 Rs",
-    offars: "",
-  },
-  {
-    name: "Headlight Assembly",
-    image: "/assets/images/parts/headlight.png",
-    price: "280,00 Rs",
-    offars: "",
-  },
-  {
-    name: "Manual Transmission",
-    image: "/assets/images/parts/manual-transmission.png",
-    price: "1800,00 Rs 2400,00 Rs",
-    offars: "25% OFF",
-  },
-  {
-    name: "Radiator Fan",
-    image: "/assets/images/parts/radiator-fan.png",
-    price: "95,00 Rs",
-    offars: "",
-  },
-];
+const OurFavoritesSectionData = placeholderData.ourFavorites.products.map(product => ({
+  name: product.name,
+  image: product.image,
+  price: product.price,
+  offars: product.offers,
+}));
 
 export const OurFavoritesSection = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(4);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Touch/Swipe state
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
 
   useEffect(() => {
     const handleResize = () => {
@@ -86,13 +52,66 @@ export const OurFavoritesSection = () => {
     setStartIndex((prev) => Math.max(prev - 1, 0));
   };
 
+  // Autoplay effect
+  useEffect(() => {
+    if (isPaused) return;
+
+    const autoplayInterval = setInterval(() => {
+      setStartIndex((prev) => {
+        // If at the end, loop back to start
+        if (prev >= OurFavoritesSectionData.length - itemsToShow) {
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(autoplayInterval);
+  }, [isPaused, itemsToShow]);
+
+  // Touch event handlers for swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && startIndex < OurFavoritesSectionData.length - itemsToShow) {
+      nextSlide();
+    } else if (isRightSwipe && startIndex > 0) {
+      prevSlide();
+    }
+
+    // Reset touch state
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
   return (
     <div className="flex flex-col gap-4 px-4 ">
-      <div className="bg-[#f6f6f6] text-sm md:text-xl rounded-lg p-4 text-black/70  font-medium flex justify-center tracking-tighter">
-        Our Featured Products
+      <div className="bg-[#f6f6f6] text-lg md:text-xl rounded-lg p-4 text-black/70  font-medium flex justify-center tracking-tighter">
+        {placeholderData.ourFavorites.sectionTitle}
       </div>
 
-      <div className="relative group">
+      <div
+        ref={carouselRef}
+        className="relative group touch-pan-y"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         {/* Left Navigation Button */}
         <button
           onClick={prevSlide}

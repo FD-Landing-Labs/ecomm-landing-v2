@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Phone } from "lucide-react";
+import placeholderData from "@/data/place_holder.json";
 
 interface MarqueeProps {
   data: {
@@ -12,32 +13,9 @@ interface MarqueeProps {
   };
 }
 
-// Brand logos from /assets/images/brands
-const brandLogosRow1 = [
-  { name: "Toyota", src: "/assets/images/brands/toyota.png" },
-  { name: "BMW", src: "/assets/images/brands/bmw.png" },
-  { name: "Honda", src: "/assets/images/brands/honda.png" },
-  { name: "Ford", src: "/assets/images/brands/ford.png" },
-  { name: "Tesla", src: "/assets/images/brands/tesla.png" },
-  { name: "Nissan", src: "/assets/images/brands/nissan.png" },
-  { name: "Hyundai", src: "/assets/images/brands/hyundai.png" },
-  { name: "Mazda", src: "/assets/images/brands/mazda.png" },
-  { name: "Subaru", src: "/assets/images/brands/subaru.png" },
-  { name: "Mitsubishi", src: "/assets/images/brands/mitsubishi.png" },
-];
-
-const brandLogosRow2 = [
-  { name: "Bosch", src: "/assets/images/brands/bosch.png" },
-  { name: "Continental", src: "/assets/images/brands/continental.png" },
-  { name: "Denso", src: "/assets/images/brands/denso.png" },
-  { name: "Magna", src: "/assets/images/brands/magna.png" },
-  { name: "Valeo", src: "/assets/images/brands/valeo.png" },
-  { name: "ZF", src: "/assets/images/brands/zf.png" },
-  { name: "Aisin", src: "/assets/images/brands/aisin.png" },
-  { name: "Hella", src: "/assets/images/brands/hella.png" },
-  { name: "Yazaki", src: "/assets/images/brands/yazaki.png" },
-  { name: "Nemak", src: "/assets/images/brands/nemak.png" },
-];
+const brandsData = placeholderData.brands;
+const brandLogosRow1 = brandsData.row1;
+const brandLogosRow2 = brandsData.row2;
 
 function BrandMarqueeRow({
   brands,

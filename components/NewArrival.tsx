@@ -1,62 +1,28 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import placeholderData from "@/data/place_holder.json";
 
-const NewArrivalsData = [
-    {
-        name: "Starter Motor",
-        image: "/assets/images/parts/starter-motor.png",
-        price: "220,00 Rs",
-        offars: "",
-    },
-    {
-        name: "Exhaust Manifold",
-        image: "/assets/images/parts/exhaust-manifold.png",
-        price: "450,00 Rs 600,00 Rs",
-        offars: "25% OFF",
-    },
-    {
-        name: "Steering Wheel",
-        image: "/assets/images/parts/steering-wheel.png",
-        price: "320,00 Rs",
-        offars: "",
-    },
-    {
-        name: "Car Battery",
-        image: "/assets/images/parts/car-battery.png",
-        price: "150,00 Rs 200,00 Rs",
-        offars: "25% OFF",
-    },
-    {
-        name: "AC Compressor",
-        image: "/assets/images/parts/ac-compressor.png",
-        price: "680,00 Rs",
-        offars: "",
-    },
-    {
-        name: "Crankshaft",
-        image: "/assets/images/parts/crankshaft.png",
-        price: "950,00 Rs",
-        offars: "",
-    },
-    {
-        name: "Cylinder Head",
-        image: "/assets/images/parts/cylinder-head.png",
-        price: "1200,00 Rs 1500,00 Rs",
-        offars: "20% OFF",
-    },
-    {
-        name: "ECU Module",
-        image: "/assets/images/parts/ecu.png",
-        price: "850,00 Rs",
-        offars: "",
-    },
-];
+const NewArrivalsData = placeholderData.newArrivals.products.map(product => ({
+    name: product.name,
+    image: product.image,
+    price: product.price,
+    offars: product.offers,
+}));
 
 export const NewArrival = () => {
     const [startIndex, setStartIndex] = useState(0);
     const [itemsToShow, setItemsToShow] = useState(4);
+    const [isPaused, setIsPaused] = useState(false);
+
+    // Touch/Swipe state
+    const [touchStart, setTouchStart] = useState<number | null>(null);
+    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    const carouselRef = useRef<HTMLDivElement>(null);
+
+    // Minimum swipe distance (in px)
+    const minSwipeDistance = 50;
 
     useEffect(() => {
         const handleResize = () => {
@@ -86,14 +52,67 @@ export const NewArrival = () => {
         setStartIndex((prev) => Math.max(prev - 1, 0));
     };
 
+    // Autoplay effect
+    useEffect(() => {
+        if (isPaused) return;
+
+        const autoplayInterval = setInterval(() => {
+            setStartIndex((prev) => {
+                // If at the end, loop back to start
+                if (prev >= NewArrivalsData.length - itemsToShow) {
+                    return 0;
+                }
+                return prev + 1;
+            });
+        }, 5000); // Change slide every 5 seconds
+
+        return () => clearInterval(autoplayInterval);
+    }, [isPaused, itemsToShow]);
+
+    // Touch event handlers for swipe
+    const onTouchStart = (e: React.TouchEvent) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const onTouchMove = (e: React.TouchEvent) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe && startIndex < NewArrivalsData.length - itemsToShow) {
+            nextSlide();
+        } else if (isRightSwipe && startIndex > 0) {
+            prevSlide();
+        }
+
+        // Reset touch state
+        setTouchStart(null);
+        setTouchEnd(null);
+    };
+
     return (
         <div className="flex flex-col gap-4 px-4">
             {/* New Arrivals Section */}
-            <div className="bg-[#f6f6f6] text-sm md:text-xl rounded-lg p-4 text-black/70 font-medium flex justify-center tracking-tighter">
-                New Arrivals
+            <div className="bg-[#f6f6f6] text-lg md:text-xl rounded-lg p-4 text-black/70 font-medium flex justify-center tracking-tighter">
+                {placeholderData.newArrivals.sectionTitle}
             </div>
 
-            <div className="relative group">
+            <div
+                ref={carouselRef}
+                className="relative group touch-pan-y"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+            >
                 {/* Left Navigation Button */}
                 <button
                     onClick={prevSlide}

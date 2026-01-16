@@ -14,50 +14,30 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import placeholderData from "@/data/place_holder.json";
 
 export const HeroSection = () => {
   // Start at index 1 because index 0 is the clone of the last slide
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const collectionItems = [
-    { name: "Dark", image: "/assets/images/hero-1.png" },
-    // { name: "Modern", image: "/assets/images/hero-2.png" },
-    // { name: "Wood", image: "/assets/images/hero-3.png" },
-  ];
+  // Touch/Swipe state
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  const images = [
-    "/assets/images/hero-1.png",
-    "/assets/images/hero-2.jpg",
-    "/assets/images/hero-5.png",
-    "/assets/images/hero-4.jpg",
-  ];
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const images = placeholderData.hero.images;
 
   // Create extended array: [Last, ...Originals, First]
   const extendedImages = [images[images.length - 1], ...images, images[0]];
 
-  const cardData = [
-    {
-      title: "Crafting Comfort, Inspired by the North.",
-      description: "Simple, sleek, and built for a cozy, stylish lifestyle.",
-    },
-    {
-      title: "Natural Elegance in Every Detail",
-      description:
-        "Crafted for style and lasting durability, perfect for any space.",
-    },
-    {
-      title: "Modern Minimalism, Maximum Comfort",
-      description:
-        "Crafted from solid oak with a smooth finish, timeless and durable.",
-    },
-    {
-      title: "Sleek Designs for Contemporary Living",
-      description:
-        "Blending form and function with clean lines and quality materials.",
-    },
-  ];
+  const cardData = placeholderData.hero.slides;
+  const features = placeholderData.hero.features;
 
   const nextSlide = () => {
     if (isTransitioning) return;
@@ -100,10 +80,60 @@ export const HeroSection = () => {
 
   const realIndex = getRealIndex(currentIndex);
 
+  // Autoplay effect
+  useEffect(() => {
+    if (isPaused) return;
+
+    const autoplayInterval = setInterval(() => {
+      if (!isTransitioning) {
+        setIsTransitioning(true);
+        setCurrentIndex((prev) => prev + 1);
+      }
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(autoplayInterval);
+  }, [isPaused, isTransitioning]);
+
+  // Touch event handlers for swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+
+    // Reset touch state
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
   return (
     <div className="p-4 space-y-4">
       {/* Carousel Section */}
-      <div className="relative w-full h-[500px] md:h-[560px] rounded-3xl overflow-hidden group">
+      <div
+        ref={carouselRef}
+        className="relative w-full h-[500px] md:h-[560px] rounded-3xl overflow-hidden group touch-pan-y"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         {/* Sliding Image Track */}
         <div
           className="flex h-full"
@@ -134,19 +164,19 @@ export const HeroSection = () => {
         {/* Content Card Overlay */}
         <div
           key={realIndex} // Key ensures animation restarts on slide change
-          className="absolute bottom-4 left-4 right-4 md:right-auto md:bottom-10 h-auto md:h-[250px] md:left-10 z-20 max-w-full md:max-w-[400px] bg-white rounded-lg p-6 shadow-xl block animate-in fade-in slide-in-from-bottom-10 duration-1000"
+          className="absolute bottom-4 left-4 right-4 md:right-auto md:bottom-10 h-auto md:h-[250px] md:left-10 z-20 max-w-full md:max-w-[400px] bg-white rounded-lg p-4 shadow-xl block animate-in fade-in slide-in-from-bottom-10 duration-1000"
         >
           <div className="flex flex-col justify-between h-full items-start">
             <div>
               <h2 className="text-xl md:text-3xl font-medium text-black tracking-tighter">
                 {cardData[realIndex].title}
               </h2>
-              <p className="mt-2 md:mt-4 text-gray-500 text-base tracking-tight leading-snug">
+              <p className="hidden md:block mt-2 md:mt-4 text-gray-500 text-base tracking-tight leading-snug">
                 {cardData[realIndex].description}
               </p>
             </div>
 
-            <button className="text-base tracking-tighter font-medium text-gray-500 border-2 border-gray-300 cursor-pointer rounded-md px-4 py-2 hover:text-gray-700 transition-colors">
+            <button className="hidden md:block text-base tracking-tighter font-medium text-gray-500 border-2 border-gray-300 cursor-pointer rounded-md px-4 py-2 hover:text-gray-700 transition-colors">
               View Product
             </button>
           </div>
@@ -192,48 +222,19 @@ export const HeroSection = () => {
       </div>
 
       {/* Features Section */}
-      <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 bg-black text-gray-400 font-medium p-4 md:p-5 rounded-lg text-sm md:text-base">
-        <div className="flex items-center gap-2">
-          <Image
-            src="/assets/images/van.png"
-            alt="Free Shipping"
-            width={20}
-            height={20}
-            className="w-5 h-5"
-          />
-          <span className="text-xs md:text-base tracking-tighter">Free Shipping over 500€</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Image
-            src="/assets/images/world.png"
-            alt="Worldwide Shipping"
-            width={20}
-            height={20}
-            className="w-5 h-5"
-          />
-          <span className="text-xs md:text-base tracking-tighter">Worldwide Shipping</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Image
-            src="/assets/images/box.png"
-            alt="Free Returns"
-            width={20}
-            height={20}
-            className="w-5 h-5"
-          />
-          <span className="text-xs md:text-base tracking-tighter">Free Returns</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Image
-            src="/assets/images/warranty.png"
-            alt="5-Year Warranty"
-            width={20}
-            height={20}
-            className="w-5 h-5"
-          />
-          <span className="text-xs md:text-base tracking-tighter">5-Year Warranty</span>
-        </div>
+      <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 bg-black text-gray-100 font-medium p-4 md:p-5 rounded-lg text-sm md:text-base">
+        {features.map((feature, index) => (
+          <div key={index} className="flex items-center gap-2">
+            <Image
+              src={feature.icon}
+              alt={feature.alt}
+              width={20}
+              height={20}
+              className="w-5 h-5"
+            />
+            <span className="text-xs md:text-base tracking-tighter">{feature.text}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

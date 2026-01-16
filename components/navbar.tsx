@@ -2,7 +2,11 @@
 
 import React, { useState } from 'react'
 import Image from "next/image";
-import { Plus, Search, ShoppingCart, ArrowRight, Menu, X, Minus } from "lucide-react";
+import { Plus, Search, ShoppingCart, ArrowRight, Menu, X, Minus, MenuIcon } from "lucide-react";
+import placeholderData from "@/data/place_holder.json";
+
+const navbarData = placeholderData.navbar;
+const brandData = placeholderData.brand;
 
 interface NavbarProps {
     onMobileMenuOpen?: () => void;
@@ -23,14 +27,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [cartItems, setCartItems] = useState<CartItem[]>([
-        {
-            id: 1,
-            name: "Runa",
-            material: "Teak",
-            price: 300,
-            quantity: 1,
-            image: "/assets/images/f-chair-1"
-        }
+        navbarData.defaultCartItem
     ]);
 
     const updateQuantity = (id: number, delta: number) => {
@@ -57,7 +54,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                     {/* Logo */}
                     <div className="flex items-center gap-1.5 cursor-pointer group/brand">
                         {/* Brand Name */}
-                        <span className="font-semibold text-xl text-black tracking-tighter">RR Auto Parts</span>
+                        <span className="font-semibold text-xl text-black tracking-tighter">{brandData.name}</span>
                     </div>
                 </div>
 
@@ -93,17 +90,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                         {/* Dropdown Menu */}
                         <div className="absolute top-10 left-1/2 -translate-x-1/2 pt-4 w-[90vw] max-w-[700px] opacity-0 invisible group-hover/collection:opacity-100 group-hover/collection:visible transition-all duration-300 z-50">
                             <div className="bg-gray-100 rounded-xl shadow-xl p-3 grid grid-cols-2 lg:grid-cols-3 gap-2 text-black text-left">
-                                {[
-                                    { name: "Engine", image: "/assets/images/parts/engine-block.png" },
-                                    { name: "Transmission", image: "/assets/images/parts/manual-transmission.png" },
-                                    { name: "Suspension", image: "/assets/images/parts/shock-absorber.png" },
-                                    { name: "Brakes", image: "/assets/images/parts/pad-disc.png" },
-                                    { name: "Electrical", image: "/assets/images/parts/starter-motor.png" },
-                                    { name: "Exterior", image: "/assets/images/parts/headlight.png" },
-                                    { name: "Interior", image: "/assets/images/parts/steering-wheel.png" },
-                                    { name: "Wheels", image: "/assets/images/parts/alloy-wheel.png" },
-                                    { name: "Exhaust", image: "/assets/images/parts/exhaust-manifold.png" },
-                                ].map((item) => (
+                                {navbarData.categories.map((item) => (
                                     <div
                                         key={item.name}
                                         className="flex items-center bg-white justify-between p-2 hover:bg-gray-200 rounded-lg transition-colors group/item"
@@ -157,7 +144,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                         {/* Dropdown Menu */}
                         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-48 opacity-0 invisible group-hover/about:opacity-100 group-hover/about:visible transition-all duration-300 z-50">
                             <div className="bg-white rounded-xl shadow-xl p-2 flex flex-col gap-1 text-black text-left">
-                                {["About", "Contact", "FAQ"].map((item) => (
+                                {navbarData.aboutDropdown.map((item) => (
                                     <div
                                         key={item}
                                         className="flex bg-gray-100 items-center justify-between p-3 hover:bg-gray-200 rounded-lg transition-colors group/item"
@@ -200,7 +187,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                         onClick={() => setIsMobileMenuOpen(true)}
                         className="md:hidden text-sm font-medium hover:opacity-70 transition-opacity"
                     >
-                        Menu
+                        <MenuIcon size={20} />
                     </button>
                 </div>
             </nav>
@@ -269,17 +256,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                                     <span className="text-sm font-medium text-black">Categories</span>
                                 </div>
                                 <div className="p-2 space-y-1">
-                                    {[
-                                        { name: "Engine", image: "/assets/images/parts/engine-block.png" },
-                                        { name: "Transmission", image: "/assets/images/parts/manual-transmission.png" },
-                                        { name: "Suspension", image: "/assets/images/parts/shock-absorber.png" },
-                                        { name: "Brakes", image: "/assets/images/parts/pad-disc.png" },
-                                        { name: "Electrical", image: "/assets/images/parts/starter-motor.png" },
-                                        { name: "Exterior", image: "/assets/images/parts/headlight.png" },
-                                        { name: "Interior", image: "/assets/images/parts/steering-wheel.png" },
-                                        { name: "Wheels", image: "/assets/images/parts/alloy-wheel.png" },
-                                        { name: "Exhaust", image: "/assets/images/parts/exhaust-manifold.png" },
-                                    ].map((item) => (
+                                    {navbarData.categories.map((item) => (
                                         <div
                                             key={item.name}
                                             className="flex items-center justify-between bg-white p-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors group/item"
@@ -307,7 +284,7 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                                     <span className="text-sm font-medium text-black">About</span>
                                 </div>
                                 <div className="p-2 space-y-1">
-                                    {["About", "Contact", "FAQ"].map((item) => (
+                                    {navbarData.aboutDropdown.map((item) => (
                                         <div
                                             key={item}
                                             className="flex items-center justify-between bg-white p-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors group/item"

@@ -3,34 +3,15 @@
 import { useState } from "react";
 import { Plus, Minus, Mail, ArrowRight } from "lucide-react";
 import SocialMedia from "./social-media";
+import placeholderData from "@/data/place_holder.json";
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
-const faqs: FAQItem[] = [
-  {
-    question: "What is finance analytics and how can it help my business?",
-    answer:
-      "Finance analytics helps you understand your financial data better, so you can make smarter decisions, spot trends, and improve your business strategy.",
-  },
-  {
-    question: "How do I start using your finance analytics platform?",
-    answer:
-      "Getting started is easy. Simply sign up for an account, connect your data sources, and our platform will improvedlly begin analyzing your financial information.",
-  },
-  {
-    question: "Is my financial data secure with your platform?",
-    answer:
-      "Yes, we take security very seriously. We use bank-level encryption and adhere to strict data privacy regulations to ensure your financial information remains confidential and secure.",
-  },
-  {
-    question: "Can I customize the reports and dashboards?",
-    answer:
-      "Absolutely. Our platform offers highly customizable dashboards and reports, allowing you to focus on the metrics that matter most to your specific business needs.",
-  },
-];
+const faqData = placeholderData.faq;
+const faqs: FAQItem[] = faqData.items;
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -40,16 +21,16 @@ export default function FaqSection() {
   };
   return (
     <section className="px-4 pb-4 md:px-8 md:pb-4 lg:px-4 lg:pb-4">
-      <div className=" mx-auto p-6 md:p-10 lg:p-12 rounded-3xl bg-gray-100 mb-4">
-        <div className="grid grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+      <div className=" mx-auto p-4 md:p-10 lg:p-12 rounded-3xl bg-gray-100 mb-4">
+        <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
           {/* Left Column: Title & Contact */}
           <div className="flex flex-col space-y-8">
             <div className="space-y-4">
               <span className="inline-block px-3 py-1 text-sm font-medium bg-black text-white rounded-full">
-                Support
+                {faqData.sectionLabel}
               </span>
               <h2 className="text-2xl md:text-4xl lg:text-5xl tracking-tighter font-medium capitalize text-black">
-                Frequently asked questions
+                {faqData.sectionTitle}
               </h2>
             </div>
 
@@ -61,15 +42,14 @@ export default function FaqSection() {
                 </div>
                 <div>
                   <h3 className="text-xl  font-medium text-gray-900">
-                    Still have questions?
+                    {faqData.contactCard.title}
                   </h3>
                   <p className="mt-2 text-base tracking-tighter text-gray-600">
-                    Can&apos;t find the answer you&apos;re looking for? Please
-                    chat to our friendly team.
+                    {faqData.contactCard.description}
                   </p>
                 </div>
                 <button className="inline-flex cursor-pointer items-center px-4 py-2 md:px-6 md:py-3 text-base tracking-tighter capitalize font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors">
-                  Get in touch
+                  {faqData.contactCard.ctaText}
                 </button>
               </div>
             </div>
@@ -91,7 +71,7 @@ export default function FaqSection() {
                     className="flex items-center justify-between w-full p-6 text-left focus:outline-none cursor-pointer  "
                   >
                     <span
-                      className={`text-sm md:text-xl tracking-tighter font-medium  ${openIndex === index ? "text-gray-900" : "text-gray-600"
+                      className={`text-lg md:text-xl tracking-tighter font-medium  ${openIndex === index ? "text-gray-900" : "text-gray-600"
                         }`}
                     >
                       {faq.question}
@@ -120,7 +100,7 @@ export default function FaqSection() {
                       : "max-h-0 opacity-0"
                       }`}
                   >
-                    <div className="px-6 pb-6 text-sm md:text-lg tracking-tighter text-gray-600 leading-relaxed">
+                    <div className="px-6 pb-6 text-base md:text-lg tracking-tighter text-gray-600 leading-relaxed">
                       {faq.answer}
                     </div>
                   </div>
