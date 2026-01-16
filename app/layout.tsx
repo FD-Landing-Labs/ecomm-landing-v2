@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
+import FloatingBadge from "@/components/FloatingBadge";
+import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -20,7 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.className} antialiased`}>{children}</body>
+      <body className={`${dmSans.className} antialiased`} suppressHydrationWarning>
+        <SmoothScrollProvider>
+          {children}
+        </SmoothScrollProvider>
+        <FloatingBadge />
+      </body>
     </html>
   );
 }
