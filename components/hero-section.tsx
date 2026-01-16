@@ -95,32 +95,29 @@ export const HeroSection = () => {
   const realIndex = getRealIndex(currentIndex);
 
   return (
-    <div className="p-4 md:p-6 lg:p-8 space-y-4 md:space-y-6">
+    <div className="p-4 space-y-4">
       {/* Marquee Section */}
-      <div className="bg-black rounded-lg">
+      {/* <div className="bg-black rounded-lg">
         <div className="relative max-w-md mx-auto text-white text-center bg-black overflow-hidden whitespace-nowrap">
-          {/* Left fade */}
           <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 z-10 bg-gradient-to-r from-black to-transparent"></div>
 
-          {/* Right fade */}
           <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 z-10 bg-gradient-to-l from-black to-transparent"></div>
 
-          {/* Marquee */}
           <div className="flex space-x-2 animate-marquee inline-block p-2 text-sm md:text-base">
             <span>Save 20% on your first order -</span>
             <span>Save 20% on your first order -</span>
             <span>Save 20% on your first order -</span>
 
-            {/* duplicate (required for infinite loop) */}
             <span>Save 20% on your first order -</span>
             <span>Save 20% on your first order -</span>
             <span>Save 20% on your first order -</span>
           </div>
         </div>
-      </div>
+      </div> */}
+
 
       {/* Carousel Section */}
-      <div className="relative w-full h-[500px] md:h-[560px] rounded-lg overflow-hidden group">
+      <div className="relative w-full h-[500px] md:h-[560px] rounded-3xl overflow-hidden group bg-[#b08a82]">
         {/* Sliding Image Track */}
         <div
           className="flex h-full"
@@ -141,154 +138,6 @@ export const HeroSection = () => {
                 className="object-cover"
                 priority={index === 1} // Prioritize the first "real" image
               />
-
-              {/* Mobile Menu Trigger */}
-              <button
-                onClick={() => setIsMobileMenuOpen(true)}
-                className="md:hidden absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-sm p-3 rounded-full text-black shadow-sm"
-              >
-                <Menu size={20} />
-              </button>
-
-              <div className="hidden md:flex gap-4 absolute -top-1 -left-1 bg-white p-2.5 text-xs font-medium text-black rounded-sm z-10 transition-opacity duration-300 group-hover/card:opacity-0">
-                <div className="flex items-center group/brand cursor-pointer">
-                  {/* Static Icon */}
-                  <div className="flex w-4 h-4 border-2 border-black rounded-full items-center justify-center">
-                    <div className="w-2 h-2 bg-black rounded-full" />
-                  </div>
-
-                  {/* Swapping Text */}
-                  <div className="relative overflow-hidden h-6 w-10 flex items-center font-semibold justify-center">
-                    <span className="absolute transition-all duration-300 group-hover/brand:-translate-y-full group-hover/brand:opacity-0">
-                      Fjord
-                    </span>
-                    <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/brand:translate-y-0 group-hover/brand:opacity-100">
-                      Home
-                    </span>
-                  </div>
-                </div>
-
-                <div className="relative overflow-hidden h-6 w-8 flex items-center justify-center group/shop cursor-pointer">
-                  <span className="absolute transition-all duration-300 group-hover/shop:-translate-y-full group-hover/shop:opacity-0">
-                    Shop
-                  </span>
-                  <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/shop:translate-y-0 group-hover/shop:opacity-100">
-                    Shop
-                  </span>
-                </div>
-                <div className="relative flex items-center gap-0.5 text-center group/collection cursor-pointer">
-                  <div className="flex items-center gap-0.5">
-                    <div className="relative overflow-hidden h-6 w-16 flex items-center justify-center">
-                      <span className="absolute transition-all duration-300 group-hover/collection:-translate-y-full group-hover/collection:opacity-0">
-                        Collaction
-                      </span>
-                      <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/collection:translate-y-0 group-hover/collection:opacity-100">
-                        Collaction
-                      </span>
-                    </div>
-                    <Plus
-                      size={13}
-                      className="transition-transform duration-300 group-hover/collection:rotate-45"
-                    />
-                  </div>
-
-                  {/* Dropdown Menu */}
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-60 opacity-0 invisible group-hover/collection:opacity-100 group-hover/collection:visible transition-all duration-300 z-50">
-                    <div className="bg-white rounded-xl shadow-xl p-2 flex flex-col gap-1 text-black text-left">
-                      {[
-                        { name: "Dark", image: "/assets/images/chair-1.webp" },
-                        { name: "Modern", image: "/assets/images/f.avif" },
-                        { name: "Wood", image: "/assets/images/c-chair2.avif" },
-                      ].map((item) => (
-                        <div
-                          key={item.name}
-                          className="flex items-center bg-gray-100 justify-between p-2 hover:bg-gray-200 rounded-lg transition-colors group/item"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="relative w-10 h-10 rounded-md overflow-hidden bg-gray-100">
-                              <Image
-                                src={item.image}
-                                alt={item.name}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                            <span className="text-sm font-medium">
-                              {item.name}
-                            </span>
-                          </div>
-                          <div className="relative overflow-hidden w-4 h-4 flex items-center justify-center">
-                            <ArrowRight
-                              size={14}
-                              className="absolute text-gray-400 transition-all duration-300 group-hover/item:-translate-y-full group-hover/item:opacity-0"
-                            />
-                            <ArrowRight
-                              size={14}
-                              className="absolute text-black transition-all duration-300 translate-y-full opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100"
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="relative flex items-center gap-0.5 text-center group/about cursor-pointer">
-                  <div className="flex items-center gap-0.5">
-                    <div className="relative overflow-hidden h-6 w-10 flex items-center justify-center">
-                      <span className="absolute transition-all duration-300 group-hover/about:-translate-y-full group-hover/about:opacity-0">
-                        About
-                      </span>
-                      <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/about:translate-y-0 group-hover/about:opacity-100">
-                        About
-                      </span>
-                    </div>
-                    <Plus
-                      size={13}
-                      className="transition-transform duration-300 group-hover/about:rotate-45"
-                    />
-                  </div>
-
-                  {/* Dropdown Menu */}
-                  <div className="absolute top-full right-0 pt-4 w-48 opacity-0 invisible group-hover/about:opacity-100 group-hover/about:visible transition-all duration-300 z-50">
-                    <div className="bg-white rounded-xl shadow-xl p-2 flex flex-col gap-1 text-black text-left">
-                      {["About", "Contact", "FAQ"].map((item) => (
-                        <div
-                          key={item}
-                          className="flex bg-gray-100 items-center justify-between p-3 hover:bg-gray-200 rounded-lg transition-colors group/item"
-                        >
-                          <span className="text-sm font-medium">{item}</span>
-                          <div className="relative overflow-hidden w-4 h-4 flex items-center justify-center">
-                            <ArrowRight
-                              size={14}
-                              className="absolute text-gray-400 transition-all duration-300 group-hover/item:-translate-y-full group-hover/item:opacity-0"
-                            />
-                            <ArrowRight
-                              size={14}
-                              className="absolute text-black transition-all duration-300 translate-y-full opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100"
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="relative overflow-hidden h-6 w-6 flex items-center justify-center group/blog cursor-pointer">
-                  <span className="absolute transition-all duration-300 group-hover/blog:-translate-y-full group-hover/blog:opacity-0">
-                    Blog
-                  </span>
-                  <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/blog:translate-y-0 group-hover/blog:opacity-100">
-                    Blog
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex gap-2 absolute -top-1 -right-1 bg-white p-2.5 text-xs font-medium text-black rounded-sm z-10 transition-opacity duration-300 group-hover/card:opacity-0">
-                <Search size={15} />
-                <div className="flex items-center gap-1 text-center">
-                  <ShoppingCart size={15} />
-                  <span>(0)</span>
-                </div>
-              </div>
             </div>
           ))}
         </div>
@@ -332,11 +181,10 @@ export const HeroSection = () => {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`transition-all duration-300 ${
-                realIndex === index
-                  ? "text-white scale-125 "
-                  : "text-white/50 hover:text-white/80 "
-              }`}
+              className={`transition-all duration-300 ${realIndex === index
+                ? "text-white scale-125 "
+                : "text-white/50 hover:text-white/80 "
+                }`}
             >
               <Circle
                 size={8}
@@ -347,6 +195,8 @@ export const HeroSection = () => {
           ))}
         </div>
       </div>
+
+      {/* Features Section */}
       <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 bg-black text-gray-400 font-medium p-4 md:p-5 rounded-lg text-sm md:text-base">
         <div className="flex items-center gap-2">
           <Image

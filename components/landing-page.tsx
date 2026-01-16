@@ -5,10 +5,12 @@ import Footer from "./footer";
 import { OurFavoritesSection } from "./our-favorites-section";
 import FaqSection from "./faq-section";
 import TestimonialSection from "./testimonial-section";
+import Navbar from "./navbar";
 
 export const LandingPage = () => {
   return (
     <div>
+      <Navbar />
       <HeroSection />
       <OurFavoritesSection />
       <CollactionSection />
