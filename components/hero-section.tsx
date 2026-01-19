@@ -95,7 +95,7 @@ export const HeroSection = () => {
   const realIndex = getRealIndex(currentIndex);
 
   return (
-    <div className="p-4 md:p-6 lg:p-8 space-y-4 md:space-y-6">
+    <div className="p-4 md:p-6 lg:p-8 space-y-4 md:space-y-4">
       {/* Marquee Section */}
       <div className="bg-black rounded-lg">
         <div className="relative max-w-md mx-auto text-white text-center bg-black overflow-hidden whitespace-nowrap">
