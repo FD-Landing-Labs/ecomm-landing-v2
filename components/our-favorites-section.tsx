@@ -1,62 +1,55 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import placeholderData from "@/data/place_holder.json";
 
-const OurFavoritesSectionData = [
-  {
-    name: "Skala",
-    image: "/assets/images/f-chair-2.avif",
-    price: "210,00 €420,00 €",
-    offars: "50% OFF",
-  },
-  {
-    name: "Nest",
-    image: "/assets/images/f.avif",
-    price: "450,00 €",
-    offars: "",
-  },
-  {
-    name: "Runa",
-    image: "/assets/images/f-chair-3.avif",
-    price: "300,00 €",
-    offars: "",
-  },
-  {
-    name: "Lykke",
-    image: "/assets/images/f-chair-4.avif",
-    price: "250,00 € 400,00 €",
-    offars: "54% OFF",
-  },
-  {
-    name: "Holt",
-    image: "/assets/images/f-chair-5.avif",
-    price: "320,00 €",
-    offars: "",
-  },
-  {
-    name: "Kappa",
-    image: "/assets/images/f-chair-6.avif",
-    price: "280,00 €",
-    offars: "",
-  },
-  {
-    name: "Sol",
-    image: "/assets/images/f-chair-7.avif",
-    price: "300,00 €",
-    offars: "65% OFF",
-  },
-  {
-    name: "ELM",
-    image: "/assets/images/f-chair-8.avif",
-    price: "280,00 €",
-    offars: "",
-  },
-];
+// Generate slug from product name
+function generateSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+// Animation variants
+const easeOut: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.6, ease: easeOut }
+};
+
+const scaleUp = {
+  initial: { opacity: 0, scale: 0.95 },
+  whileInView: { opacity: 1, scale: 1 },
+  viewport: { once: true },
+  transition: { duration: 0.5, ease: easeOut }
+};
+
+const OurFavoritesSectionData = placeholderData.ourFavorites.products.map(product => ({
+  name: product.name,
+  image: product.image,
+  price: product.price,
+  offars: product.offers,
+}));
 
 export const OurFavoritesSection = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(4);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Touch/Swipe state
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
 
   useEffect(() => {
     const handleResize = () => {
@@ -86,21 +79,90 @@ export const OurFavoritesSection = () => {
     setStartIndex((prev) => Math.max(prev - 1, 0));
   };
 
-  return (
-    <div className="flex flex-col gap-4 px-4 ">
-      <div className="bg-[#f6f6f6] text-sm md:text-lg rounded-lg p-4 text-black/70  font-medium flex justify-center">
-        Our Favorites
-      </div>
+  // Autoplay effect
+  useEffect(() => {
+    if (isPaused) return;
 
-      <div className="relative group">
+    const autoplayInterval = setInterval(() => {
+      setStartIndex((prev) => {
+        // If at the end, loop back to start
+        if (prev >= OurFavoritesSectionData.length - itemsToShow) {
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(autoplayInterval);
+  }, [isPaused, itemsToShow]);
+
+  // Touch event handlers for swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && startIndex < OurFavoritesSectionData.length - itemsToShow) {
+      nextSlide();
+    } else if (isRightSwipe && startIndex > 0) {
+      prevSlide();
+    }
+
+    // Reset touch state
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
+  return (
+    <motion.div
+      className="flex flex-col gap-4 px-4"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="bg-[#f6f6f6] text-lg md:text-xl rounded-lg p-4 text-black/70 font-medium flex justify-center tracking-tighter"
+        {...fadeUp}
+      >
+        {placeholderData.ourFavorites.sectionTitle}
+      </motion.div>
+
+      <motion.div
+        ref={carouselRef}
+        className="relative group touch-pan-y"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
         {/* Left Navigation Button */}
-        <button
+        <motion.button
           onClick={prevSlide}
           disabled={startIndex === 0}
-          className="absolute left-6 md:left-14 top-1/2 -translate-y-1/2 -translate-x-4 text-white z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+          className="absolute left-6 md:left-14 top-1/2 -translate-y-1/2 -translate-x-4 text-white z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-black transition-colors cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           <ChevronLeft size={24} />
-        </button>
+        </motion.button>
 
         {/* Carousel Window */}
         <div className="overflow-hidden -mx-2">
@@ -115,6 +177,7 @@ export const OurFavoritesSection = () => {
                 key={item.name}
                 className="min-w-full md:min-w-[50%] lg:min-w-[25%] mb-4 px-2 "
               >
+                <Link href={`/shop/${generateSlug(item.name)}`}>
                 <div className="flex flex-col gap-4 group/card cursor-pointer">
                   <div className=" relative overflow-hidden rounded-lg">
                     <Image
@@ -129,7 +192,7 @@ export const OurFavoritesSection = () => {
                         {item.offars}
                       </span>
                     )}
-                    <span className="flex items-center absolute -top-1 -left-1 bg-white px-4 py-2 text-xs font-medium text-black rounded-md z-10 shadow-sm">
+                    <span className="flex items-center absolute -top-1 -left-1 bg-white px-4 py-2 text-base tracking-tighter font-medium text-black rounded-md z-10">
                       {item.name}
                       <ArrowRight
                         size={14}
@@ -140,13 +203,13 @@ export const OurFavoritesSection = () => {
                     {/* Bottom Overlay Bar */}
                     <div className="absolute bottom-4 left-4 right-4 bg-white p-3 rounded-lg shadow-lg flex justify-between items-center opacity-0 translate-y-4 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-300 z-10">
                       <span className="text-sm font-medium text-black">
-                        {item.price.includes("€") &&
-                        item.price.split("€").filter((p) => p.trim()).length >
+                        {item.price.includes("Rs") &&
+                          item.price.split("Rs").filter((p) => p.trim()).length >
                           1 ? (
                           <div className="flex gap-2 items-center">
-                            <span>{item.price.split("€")[0].trim()} €</span>
+                            <span>{item.price.split("Rs")[0].trim()} Rs</span>
                             <span className="text-gray-400 line-through text-xs">
-                              {item.price.split("€")[1].trim()} €
+                              Rs{item.price.split("Rs")[1].trim()} Rs
                             </span>
                           </div>
                         ) : (
@@ -159,20 +222,24 @@ export const OurFavoritesSection = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right Navigation Button */}
-        <button
+        <motion.button
           onClick={nextSlide}
           disabled={startIndex >= OurFavoritesSectionData.length - itemsToShow}
-          className="absolute right-6 md:right-14 text-white top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+          className="absolute right-6 md:right-14 text-white top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-black/50 p-2 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:text-black transition-colors cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           <ChevronRight size={24} />
-        </button>
-      </div>
-    </div>
+        </motion.button>
+      </motion.div>
+    </motion.div>
   );
 };

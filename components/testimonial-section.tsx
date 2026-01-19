@@ -1,6 +1,43 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Star, Plus } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import placeholderData from "@/data/place_holder.json";
+
+const testimonialData = placeholderData.testimonials;
+
+// Animation variants
+const easeOut: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.6, ease: easeOut }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const cardItem = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: easeOut }
+  }
+};
 
 interface TestimonialCardProps {
   variant?: "default" | "inverted" | "summary";
@@ -25,40 +62,36 @@ const TestimonialCard = ({
 }: TestimonialCardProps) => {
   // Summary Card Implementation (remains a single large block)
   if (variant === "summary") {
+    const summaryData = testimonialData.summary;
     return (
       <div
         className={cn(
-          "bg-gray-200 p-6 rounded-3xl flex flex-col justify-between h-full min-h-[300px] ",
+          "bg-gray-200 p-6 rounded-3xl flex flex-col justify-between h-full min-h-[400px] ",
           className
         )}
       >
         <div>
           <div className="flex items-baseline gap-1">
-            <span className="md:text-5xl text-3xl font-bold tracking-tighter">4.9</span>
-            <span className="text-gray-400 text-xl font-medium">/5</span>
+            <span className="md:text-5xl text-3xl font-bold tracking-tighter">{summaryData.rating}</span>
+            <span className="text-gray-400 text-xl font-medium">/{summaryData.maxRating}</span>
           </div>
-          <p className="text-gray-500 mt-4 text-sm leading-relaxed">
-            We&apos;ve delivered{" "}
-            <span className="font-semibold text-black">56+ projects</span> that
-            help companies generate real results.
+          <p className="text-gray-500 mt-4 text-lg tracking-tight leading-snug">
+            {summaryData.description.split(summaryData.projectsCount)[0]}
+            <span className="font-semibold text-black">{summaryData.projectsCount} projects</span>
+            {summaryData.description.split(summaryData.projectsCount + " projects")[1]}
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div className="flex items-center gap-4">
             <span className="font-bold md:text-xl text-lg tracking-tight">
-              fabrica&reg;
+              {summaryData.brandName}
             </span>
           </div>
 
           <div className="flex items-center justify-between">
             <div className="flex -space-x-2">
-              {[
-                "/assets/images/profile1.avif",
-                "/assets/images/profile2.avif",
-                "/assets/images/profile3.jpeg",
-                "/assets/images/profile4.jpeg",
-              ].map((src, i) => (
+              {summaryData.profileImages.map((src, i) => (
                 <div
                   key={i}
                   className="w-8 h-8 rounded-full border-2 border-white overflow-hidden relative"
@@ -72,7 +105,7 @@ const TestimonialCard = ({
                 </div>
               ))}
               <div className="w-8 h-8 rounded-full bg-black text-white border-2 border-white flex items-center justify-center text-[10px] font-medium">
-                56+
+                {summaryData.projectsCount}
               </div>
             </div>
             <div className="flex gap-0.5 text-black">
@@ -83,11 +116,11 @@ const TestimonialCard = ({
           </div>
 
           <p className="text-xs text-gray-400 font-medium">
-            Trusted by clients worldwide
+            {summaryData.trustText}
           </p>
 
-          <button className="w-40 md:w-full bg-black text-white md:py-3 py-2 rounded-full font-medium text-sm hover:bg-gray-800 transition-colors">
-            Leave a review
+          <button className="w-40 md:w-full bg-black text-white md:py-3 py-2 rounded-lg cursor-pointer font-medium text-sm hover:bg-gray-800 transition-colors">
+            {summaryData.ctaText}
           </button>
         </div>
       </div>
@@ -96,8 +129,8 @@ const TestimonialCard = ({
 
   // Common blocks for Standard Testimonials
   const ProfileBlock = () => (
-    <div className="bg-gray-200 p-4 rounded-3xl flex items-center gap-3">
-      <div className="w-10 h-10 rounded-sm bg-gray-200 overflow-hidden relative flex-shrink-0">
+    <div className="bg-gray-100 p-4 rounded-3xl flex items-center gap-3">
+      <div className="w-10 h-10 rounded-sm bg-gray-100 overflow-hidden relative flex-shrink-0">
         {imageSrc ? (
           <Image
             src={imageSrc}
@@ -106,12 +139,12 @@ const TestimonialCard = ({
             className="object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-gray-300" />
+          <div className="w-full h-full bg-gray-100" />
         )}
       </div>
       <div>
-        <h4 className="font-bold text-sm text-gray-900">{name}</h4>
-        <p className="text-xs text-gray-500">{role || company}</p>
+        <h4 className="font-semibold tracking-tighter text-lg text-gray-900">{name}</h4>
+        <p className="text-xs text-gray-500 uppercase tracking-widest">{role || company}</p>
       </div>
     </div>
   );
@@ -135,7 +168,7 @@ const TestimonialCard = ({
     return (
       <div
         className={cn(
-          "bg-gray-200 p-6 rounded-3xl flex flex-col justify-between flex-grow h-full min-h-[200px]",
+          "bg-gray-100 p-6 rounded-3xl flex flex-col justify-between flex-grow h-full min-h-[200px]",
           className
         )}
       >
@@ -145,7 +178,7 @@ const TestimonialCard = ({
           </div>
         )}
 
-        <p className=" md:text-lg text-sm font-medium leading-snug text-gray-900">
+        <p className=" md:text-xl text-lg tracking-tighter font-medium leading-snug text-gray-900">
           {content}
         </p>
 
@@ -159,7 +192,11 @@ const TestimonialCard = ({
   };
 
   return (
-    <div className={cn("flex flex-col gap-3 h-full", className)}>
+    <div className={cn(
+      "flex gap-3 h-full",
+      variant === "default" ? "flex-col-reverse md:flex-col" : "flex-col",
+      className
+    )}>
       {variant === "default" ? (
         <>
           <ProfileBlock />
@@ -176,66 +213,68 @@ const TestimonialCard = ({
 };
 
 const TestimonialSection = () => {
+  const testimonials = testimonialData.items;
   return (
-    <section className=" px-4 md:px-4 lg:px-4 pb-4  ">
-      <div className="p-6 mx-auto bg-gray-100 rounded-lg  ">
-        <div className="mb-16 relative">
-          <div className="flex items-center gap-2 mb-8 md:mb-0 md:absolute md:left-0 md:top-2">
-            <div className="w-4 h-4 rounded-full bg-black border-4 border-gray-200 flex items-center justify-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-white" />
-            </div>
-            <span className="font-semibold text-sm">Testimonials</span>
-          </div>
-
-          <div className="text-center">
-            <h2 className="text-2xl md:text-4xl font-bold tracking-tighter mb-2">
-              Experiences.
-            </h2>
-            <p className="font-bold text-lg md:text-xl text-gray-900">
-              &copy;2025
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <motion.section
+      className="px-4 pb-4"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="bg-[#f6f6f6] text-lg md:text-xl tracking-tighter rounded-lg p-4 text-black/80 font-medium flex justify-center"
+        {...fadeUp}
+      >
+        {testimonialData.sectionTitle}
+      </motion.div>
+      <div className="pt-4 mx-auto rounded-lg">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {/* Column 1: Summary Card */}
-          <TestimonialCard variant="summary" />
+          <motion.div variants={cardItem}>
+            <TestimonialCard variant="summary" />
+          </motion.div>
 
           {/* Column 2 */}
-          <div className="flex flex-col gap-6">
+          <motion.div className="flex flex-col gap-6" variants={cardItem}>
             <TestimonialCard
-              name="James Carter"
-              company="Wilson & Co"
-              content="Incredible team! They delivered exactly what we needed, on time and beyond expectations."
-              imageSrc="/assets/images/profile4.jpeg"
+              name={testimonials[0].name}
+              company={testimonials[0].company}
+              content={testimonials[0].content}
+              imageSrc={testimonials[0].image}
             />
-            {/* Placeholder for vertical stacking if needed, or just single card */}
-          </div>
+          </motion.div>
 
           {/* Column 3 */}
-          <div className="flex flex-col gap-6">
+          <motion.div className="flex flex-col gap-6" variants={cardItem}>
             <TestimonialCard
               variant="inverted"
-              content="A smooth process from start to finish. Highly professional team!"
-              rating={5}
-              name="Emily Davis"
-              role="StartUp Hub"
-              imageSrc="/assets/images/profile1.avif"
+              content={testimonials[1].content}
+              rating={testimonials[1].rating}
+              name={testimonials[1].name}
+              role={testimonials[1].role}
+              imageSrc={testimonials[1].image}
             />
-          </div>
+          </motion.div>
 
           {/* Column 4 */}
-          <div className="flex flex-col gap-6">
+          <motion.div className="flex flex-col gap-6" variants={cardItem}>
             <TestimonialCard
-              name="Anna Martinez"
-              role="Marketing Director"
-              content="Our new branding is exactly what we envisioned—clean, modern, and unique. #1 in our industry."
-              imageSrc="/assets/images/profile2.avif"
+              name={testimonials[2].name}
+              role={testimonials[2].role}
+              content={testimonials[2].content}
+              imageSrc={testimonials[2].image}
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
+import FloatingBadge from "@/components/FloatingBadge";
+import SmoothScrollProvider from "@/components/smooth-scroll-provider";
+import { CartProvider } from "@/context/cart-context";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -9,8 +13,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "E-commerce",
-  description: "",
+  title: "RR Auto Parts - Premium Auto Parts for Every Vehicle",
+  description: "RR Auto Parts offers a wide selection of high-quality auto parts designed to enhance your vehicle's performance and durability. Shop now for the best deals on OEM and aftermarket parts.",
 };
 
 export default function RootLayout({
@@ -20,7 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.className} antialiased`}>{children}</body>
+      <body className={`${dmSans.className} antialiased`} suppressHydrationWarning>
+        <CartProvider>
+          <SmoothScrollProvider>
+            {children}
+          </SmoothScrollProvider>
+          <FloatingBadge />
+        </CartProvider>
+      </body>
     </html>
   );
 }

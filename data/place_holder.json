@@ -1,0 +1,948 @@
+{
+  "brand": {
+    "name": "RR Auto Parts",
+    "logo": "/assets/images/rrlogo.png",
+    "description": "Your trusted source for premium automotive parts and accessories. Quality components for every vehicle, backed by expert support and fast delivery."
+  },
+  "shop": {
+    "title": "Shop",
+    "description": "Explore our extensive collection of premium auto parts. From engine components to brake systems, find everything your vehicle needs.",
+    "categories": [
+      {
+        "id": "all",
+        "name": "All Parts"
+      },
+      {
+        "id": "engine",
+        "name": "Engine Parts"
+      },
+      {
+        "id": "brakes",
+        "name": "Brake Systems"
+      },
+      {
+        "id": "transmission",
+        "name": "Transmission"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension"
+      },
+      {
+        "id": "electrical",
+        "name": "Electrical"
+      },
+      {
+        "id": "lighting",
+        "name": "Lighting"
+      },
+      {
+        "id": "interior",
+        "name": "Interior"
+      },
+      {
+        "id": "wheels",
+        "name": "Wheels & Tires"
+      },
+      {
+        "id": "exhaust",
+        "name": "Exhaust Systems"
+      },
+      {
+        "id": "cooling",
+        "name": "Cooling & AC"
+      }
+    ],
+    "productFeatures": [
+      { "icon": "truck", "text": "Free Shipping over Rs 15,000" },
+      { "icon": "globe", "text": "Islandwide Delivery" },
+      { "icon": "refresh", "text": "30-Day Returns" }
+    ],
+    "shippingInfo": {
+      "title": "Shipping",
+      "content": "We ship your auto parts securely within 3-5 business days. Delivery times vary by location. You will receive tracking details upon dispatch. International orders may incur customs fees."
+    },
+    "returnPolicy": {
+      "title": "Return Policy",
+      "content": "Not satisfied? Return items in their original condition within 30 days. For damaged or defective items, return shipping is free. Refunds are issued after inspection. Contact us for assistance!"
+    },
+    "allProducts": [
+      {
+        "id": 1,
+        "name": "Turbo Charger",
+        "slug": "turbo-charger",
+        "image": "/assets/images/parts/turbo-charger.png",
+        "images": ["/assets/images/parts/turbo-charger.png", "/assets/images/parts/turbo.png", "/assets/images/parts/engine-block.png"],
+        "price": "45,000 Rs",
+        "originalPrice": "65,000 Rs",
+        "offers": "30% OFF",
+        "category": "engine",
+        "shortDescription": "High-performance turbocharger designed for maximum boost and efficiency. Compatible with most 4-cylinder engines.",
+        "fullDescription": "Elevate your engine's performance with this premium Turbo Charger, a perfect blend of power and precision engineering. Made from high-grade materials, this turbocharger delivers exceptional boost pressure while maintaining reliability. The advanced bearing system ensures smooth operation and extended lifespan.",
+        "materials": ["Steel", "Aluminum"],
+        "dimensions": {
+          "materials": "Steel housing, Aluminum compressor wheel",
+          "boost": "Up to 15 PSI",
+          "inlet": "2.5 inch",
+          "outlet": "2.0 inch",
+          "weight": "8 kg"
+        }
+      },
+      {
+        "id": 2,
+        "name": "Twin Turbo Kit",
+        "slug": "twin-turbo-kit",
+        "image": "/assets/images/parts/turbo.png",
+        "images": ["/assets/images/parts/turbo.png", "/assets/images/parts/turbo-charger.png", "/assets/images/parts/engine-block.png"],
+        "price": "85,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "engine",
+        "shortDescription": "Complete twin turbo setup for V6 and V8 engines. Includes all mounting hardware and gaskets.",
+        "fullDescription": "Transform your vehicle's performance with this comprehensive Twin Turbo Kit. Engineered for serious power gains, this kit includes matched turbos, intercooler piping, blow-off valves, and all necessary hardware for a complete installation.",
+        "materials": ["Steel", "Aluminum"],
+        "dimensions": {
+          "materials": "Stainless steel manifolds, Aluminum intercooler",
+          "boost": "Up to 18 PSI",
+          "compatibility": "V6/V8 engines",
+          "kit_contents": "2x Turbos, Manifolds, Piping, BOV",
+          "weight": "25 kg"
+        }
+      },
+      {
+        "id": 3,
+        "name": "Engine Block",
+        "slug": "engine-block",
+        "image": "/assets/images/parts/engine-block.png",
+        "images": ["/assets/images/parts/engine-block.png", "/assets/images/parts/cylinder-head.png", "/assets/images/parts/crankshaft.png"],
+        "price": "125,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "engine",
+        "shortDescription": "Cast iron engine block with precision machined cylinder bores. Suitable for rebuilds and performance builds.",
+        "fullDescription": "This premium Engine Block is manufactured to OEM specifications with enhanced durability for high-performance applications. Features precision-machined cylinder bores, main bearing journals, and cam bearing bores. Ideal for both restoration projects and performance builds.",
+        "materials": ["Cast Iron", "Aluminum"],
+        "dimensions": {
+          "materials": "High-strength cast iron",
+          "cylinders": "4-cylinder inline",
+          "bore": "86mm",
+          "deck_height": "220mm",
+          "weight": "45 kg"
+        }
+      },
+      {
+        "id": 4,
+        "name": "Cylinder Head Assembly",
+        "slug": "cylinder-head-assembly",
+        "image": "/assets/images/parts/cylinder-head.png",
+        "images": ["/assets/images/parts/cylinder-head.png", "/assets/images/parts/engine-block.png", "/assets/images/parts/crankshaft.png"],
+        "price": "60,000 Rs",
+        "originalPrice": "75,000 Rs",
+        "offers": "20% OFF",
+        "category": "engine",
+        "shortDescription": "Complete cylinder head with valves, springs, and camshaft. Ready for installation.",
+        "fullDescription": "This fully assembled Cylinder Head comes complete with valves, valve springs, retainers, and camshaft. Professionally rebuilt to exceed OEM specifications with upgraded valve seals for improved oil control and longevity.",
+        "materials": ["Aluminum", "Steel Valves"],
+        "dimensions": {
+          "materials": "Aluminum alloy head, Steel valves",
+          "valves": "16-valve DOHC",
+          "intake_port": "32mm",
+          "exhaust_port": "28mm",
+          "weight": "18 kg"
+        }
+      },
+      {
+        "id": 5,
+        "name": "Performance Crankshaft",
+        "slug": "performance-crankshaft",
+        "image": "/assets/images/parts/crankshaft.png",
+        "images": ["/assets/images/parts/crankshaft.png", "/assets/images/parts/engine-block.png", "/assets/images/parts/cylinder-head.png"],
+        "price": "47,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "engine",
+        "shortDescription": "Forged steel crankshaft with improved balance and strength for high-RPM applications.",
+        "fullDescription": "Engineered for performance enthusiasts, this forged steel Performance Crankshaft features superior strength and precise balance for smooth high-RPM operation. Fully counterweighted and shot-peened for maximum durability under extreme conditions.",
+        "materials": ["Forged Steel"],
+        "dimensions": {
+          "materials": "4340 Forged steel",
+          "stroke": "88mm",
+          "main_journal": "52mm",
+          "rod_journal": "45mm",
+          "weight": "15 kg"
+        }
+      },
+      {
+        "id": 6,
+        "name": "EGR Valve",
+        "image": "/assets/images/parts/egr-valve.png",
+        "price": "12,500 Rs",
+        "originalPrice": "16,000 Rs",
+        "offers": "22% OFF",
+        "category": "engine"
+      },
+      {
+        "id": 7,
+        "name": "Radiator Fan Assembly",
+        "image": "/assets/images/parts/radiator-fan.png",
+        "price": "4,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "cooling"
+      },
+      {
+        "id": 8,
+        "name": "AC Compressor",
+        "image": "/assets/images/parts/ac-compressor.png",
+        "price": "34,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "cooling"
+      },
+      {
+        "id": 9,
+        "name": "Manual Transmission",
+        "image": "/assets/images/parts/manual-transmission.png",
+        "price": "95,000 Rs",
+        "originalPrice": "125,000 Rs",
+        "offers": "25% OFF",
+        "category": "transmission"
+      },
+      {
+        "id": 10,
+        "name": "Clutch Plate Kit",
+        "image": "/assets/images/parts/clutch-plate.png",
+        "price": "8,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "transmission"
+      },
+      {
+        "id": 11,
+        "name": "Torque Converter",
+        "image": "/assets/images/parts/torque-converter.png",
+        "price": "28,000 Rs",
+        "originalPrice": "35,000 Rs",
+        "offers": "20% OFF",
+        "category": "transmission"
+      },
+      {
+        "id": 12,
+        "name": "Brake Disc & Pad Kit",
+        "image": "/assets/images/parts/pad-disc.png",
+        "price": "8,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "brakes"
+      },
+      {
+        "id": 13,
+        "name": "Brake Master Cylinder",
+        "image": "/assets/images/parts/brake-master-cylinder.png",
+        "price": "15,000 Rs",
+        "originalPrice": "18,500 Rs",
+        "offers": "19% OFF",
+        "category": "brakes"
+      },
+      {
+        "id": 14,
+        "name": "ABS Sensor",
+        "image": "/assets/images/parts/abs-sensor.png",
+        "price": "4,200 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "brakes"
+      },
+      {
+        "id": 15,
+        "name": "Shock Absorber Set",
+        "image": "/assets/images/parts/shock-absorber.png",
+        "price": "12,000 Rs",
+        "originalPrice": "20,000 Rs",
+        "offers": "40% OFF",
+        "category": "suspension"
+      },
+      {
+        "id": 16,
+        "name": "Control Arms",
+        "image": "/assets/images/parts/control-arms.png",
+        "price": "9,800 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "suspension"
+      },
+      {
+        "id": 17,
+        "name": "Power Steering Pump",
+        "image": "/assets/images/parts/power-steering-pump.png",
+        "price": "18,500 Rs",
+        "originalPrice": "22,000 Rs",
+        "offers": "16% OFF",
+        "category": "suspension"
+      },
+      {
+        "id": 18,
+        "name": "Starter Motor",
+        "image": "/assets/images/parts/starter-motor.png",
+        "price": "11,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "electrical"
+      },
+      {
+        "id": 19,
+        "name": "AGM Car Battery 75Ah",
+        "image": "/assets/images/parts/car-battery.png",
+        "price": "18,000 Rs",
+        "originalPrice": "24,000 Rs",
+        "offers": "25% OFF",
+        "category": "electrical"
+      },
+      {
+        "id": 20,
+        "name": "ECU Control Module",
+        "image": "/assets/images/parts/ecu.png",
+        "price": "42,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "electrical"
+      },
+      {
+        "id": 21,
+        "name": "Ignition Coil Set",
+        "image": "/assets/images/parts/ignition-coils.png",
+        "price": "6,800 Rs",
+        "originalPrice": "8,500 Rs",
+        "offers": "20% OFF",
+        "category": "electrical"
+      },
+      {
+        "id": 22,
+        "name": "LED Headlight Assembly",
+        "image": "/assets/images/parts/headlight.png",
+        "price": "14,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "lighting"
+      },
+      {
+        "id": 23,
+        "name": "Tail Light Assembly",
+        "image": "/assets/images/parts/tail-light.png",
+        "price": "8,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "lighting"
+      },
+      {
+        "id": 24,
+        "name": "Fog Lamp Kit",
+        "image": "/assets/images/parts/fog-lamps.png",
+        "price": "5,500 Rs",
+        "originalPrice": "7,000 Rs",
+        "offers": "21% OFF",
+        "category": "lighting"
+      },
+      {
+        "id": 25,
+        "name": "Sport Steering Wheel",
+        "image": "/assets/images/parts/steering-wheel.png",
+        "price": "16,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "interior"
+      },
+      {
+        "id": 26,
+        "name": "Airbag Module",
+        "image": "/assets/images/parts/airbag.png",
+        "price": "35,000 Rs",
+        "originalPrice": "42,000 Rs",
+        "offers": "17% OFF",
+        "category": "interior"
+      },
+      {
+        "id": 27,
+        "name": "Infotainment System",
+        "image": "/assets/images/parts/infotainment-system.png",
+        "price": "45,000 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "interior"
+      },
+      {
+        "id": 28,
+        "name": "Instrument Cluster",
+        "image": "/assets/images/parts/instrument-cluster.png",
+        "price": "22,000 Rs",
+        "originalPrice": "28,000 Rs",
+        "offers": "21% OFF",
+        "category": "interior"
+      },
+      {
+        "id": 29,
+        "name": "Wiper Blade Set",
+        "image": "/assets/images/parts/wiper.png",
+        "price": "2,800 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "interior"
+      },
+      {
+        "id": 30,
+        "name": "Alloy Wheel 17\"",
+        "image": "/assets/images/parts/alloy-wheel.png",
+        "price": "18,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "wheels"
+      },
+      {
+        "id": 31,
+        "name": "Performance Tires",
+        "image": "/assets/images/parts/tires.png",
+        "price": "12,500 Rs",
+        "originalPrice": "15,000 Rs",
+        "offers": "17% OFF",
+        "category": "wheels"
+      },
+      {
+        "id": 32,
+        "name": "Wheel Hub Assembly",
+        "image": "/assets/images/parts/wheel-hub.png",
+        "price": "7,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "wheels"
+      },
+      {
+        "id": 33,
+        "name": "Exhaust Manifold",
+        "image": "/assets/images/parts/exhaust-manifold.png",
+        "price": "22,500 Rs",
+        "originalPrice": "30,000 Rs",
+        "offers": "25% OFF",
+        "category": "exhaust"
+      },
+      {
+        "id": 34,
+        "name": "Performance Muffler",
+        "image": "/assets/images/parts/muffler.png",
+        "price": "8,500 Rs",
+        "originalPrice": "",
+        "offers": "",
+        "category": "exhaust"
+      },
+      {
+        "id": 35,
+        "name": "Fuel Filter",
+        "image": "/assets/images/parts/fuel-filter.png",
+        "price": "1,800 Rs",
+        "originalPrice": "2,200 Rs",
+        "offers": "18% OFF",
+        "category": "engine"
+      }
+    ]
+  },
+  "hero": {
+    "images": [
+      "/assets/images/hero-1.png",
+      "/assets/images/hero-2.jpg",
+      "/assets/images/hero-5.png",
+      "/assets/images/hero-4.jpg"
+    ],
+    "slides": [
+      {
+        "title": "Premium Auto Parts, Built to Perform.",
+        "description": "High-quality OEM and aftermarket parts for all major vehicle brands."
+      },
+      {
+        "title": "Drive with Confidence, Every Mile.",
+        "description": "Genuine parts tested for durability, safety, and peak performance."
+      },
+      {
+        "title": "Your Vehicle Deserves the Best.",
+        "description": "From engine components to brake systems, we've got you covered."
+      },
+      {
+        "title": "Expert Parts for Expert Drivers.",
+        "description": "Professional-grade auto parts trusted by mechanics nationwide."
+      }
+    ],
+    "features": [
+      {
+        "icon": "/assets/images/van.png",
+        "alt": "Free Shipping",
+        "text": "Free Shipping over Rs 15,000"
+      },
+      {
+        "icon": "/assets/images/world.png",
+        "alt": "Islandwide Delivery",
+        "text": "Islandwide Delivery"
+      },
+      {
+        "icon": "/assets/images/box.png",
+        "alt": "Easy Returns",
+        "text": "30-Day Easy Returns"
+      },
+      {
+        "icon": "/assets/images/warranty.png",
+        "alt": "Warranty",
+        "text": "Manufacturer Warranty"
+      }
+    ]
+  },
+  "ourFavorites": {
+    "sectionTitle": "Best Selling Parts",
+    "products": [
+      {
+        "name": "Turbo Charger",
+        "image": "/assets/images/parts/turbo-charger.png",
+        "price": "45,000 Rs 65,000 Rs",
+        "offers": "30% OFF"
+      },
+      {
+        "name": "Engine Block",
+        "image": "/assets/images/parts/engine-block.png",
+        "price": "125,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Brake Disc & Pad Kit",
+        "image": "/assets/images/parts/pad-disc.png",
+        "price": "8,500 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Shock Absorber Set",
+        "image": "/assets/images/parts/shock-absorber.png",
+        "price": "12,000 Rs 20,000 Rs",
+        "offers": "40% OFF"
+      },
+      {
+        "name": "Alloy Wheel 17\"",
+        "image": "/assets/images/parts/alloy-wheel.png",
+        "price": "18,500 Rs",
+        "offers": ""
+      },
+      {
+        "name": "LED Headlight Assembly",
+        "image": "/assets/images/parts/headlight.png",
+        "price": "14,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Manual Transmission",
+        "image": "/assets/images/parts/manual-transmission.png",
+        "price": "95,000 Rs 125,000 Rs",
+        "offers": "25% OFF"
+      },
+      {
+        "name": "Radiator Fan Assembly",
+        "image": "/assets/images/parts/radiator-fan.png",
+        "price": "4,500 Rs",
+        "offers": ""
+      }
+    ]
+  },
+  "newArrivals": {
+    "sectionTitle": "New Arrivals",
+    "products": [
+      {
+        "name": "Starter Motor",
+        "image": "/assets/images/parts/starter-motor.png",
+        "price": "11,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Exhaust Manifold",
+        "image": "/assets/images/parts/exhaust-manifold.png",
+        "price": "22,500 Rs 30,000 Rs",
+        "offers": "25% OFF"
+      },
+      {
+        "name": "Sport Steering Wheel",
+        "image": "/assets/images/parts/steering-wheel.png",
+        "price": "16,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "AGM Car Battery 75Ah",
+        "image": "/assets/images/parts/car-battery.png",
+        "price": "18,000 Rs 24,000 Rs",
+        "offers": "25% OFF"
+      },
+      {
+        "name": "AC Compressor",
+        "image": "/assets/images/parts/ac-compressor.png",
+        "price": "34,000 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Performance Crankshaft",
+        "image": "/assets/images/parts/crankshaft.png",
+        "price": "47,500 Rs",
+        "offers": ""
+      },
+      {
+        "name": "Cylinder Head Assembly",
+        "image": "/assets/images/parts/cylinder-head.png",
+        "price": "60,000 Rs 75,000 Rs",
+        "offers": "20% OFF"
+      },
+      {
+        "name": "ECU Control Module",
+        "image": "/assets/images/parts/ecu.png",
+        "price": "42,500 Rs",
+        "offers": ""
+      }
+    ]
+  },
+  "collections": {
+    "sectionTitle": "Shop by Category",
+    "items": [
+      {
+        "name": "Engine Parts",
+        "image": "/assets/images/collection-1.png",
+        "description": "Complete range of engine components including pistons, gaskets, timing belts, and more.",
+        "variant": "featured"
+      },
+      {
+        "name": "Brake Systems",
+        "image": "/assets/images/collection-2.png",
+        "description": "Premium brake pads, rotors, calipers, and complete brake kits for maximum stopping power.",
+        "variant": "dark"
+      },
+      {
+        "name": "Performance Parts",
+        "image": "/assets/images/collection-3.png",
+        "description": "Upgrade your ride with turbochargers, exhaust systems, and high-performance components.",
+        "variant": "dark"
+      }
+    ]
+  },
+  "aboutUs": {
+    "sectionTitle": "About Us",
+    "headline": "Driving Excellence Since 2010",
+    "description": "At RR Auto Parts, we're passionate about keeping your vehicle running at its best. With over a decade of experience, we supply genuine OEM and premium aftermarket parts to mechanics, garages, and car enthusiasts across the island.",
+    "ctaText": "Learn Our Story",
+    "image": "/assets/images/about.jpg"
+  },
+  "testimonials": {
+    "sectionTitle": "What Our Customers Say",
+    "summary": {
+      "rating": "4.9",
+      "maxRating": "5",
+      "projectsCount": "10,000+",
+      "description": "We've served 10,000+ satisfied customers with quality auto parts and exceptional service.",
+      "brandName": "RR Auto Parts",
+      "trustText": "Trusted by mechanics & car owners",
+      "ctaText": "Write a Review",
+      "profileImages": [
+        "/assets/images/profile1.avif",
+        "/assets/images/profile2.avif",
+        "/assets/images/profile3.jpeg",
+        "/assets/images/profile4.jpeg"
+      ]
+    },
+    "items": [
+      {
+        "name": "Kamal Perera",
+        "company": "KP Auto Garage",
+        "content": "Best supplier for genuine parts! Fast delivery and the quality is always top-notch. My go-to for all engine components.",
+        "image": "/assets/images/profile4.jpeg",
+        "rating": 5,
+        "variant": "default"
+      },
+      {
+        "name": "Nimal Fernando",
+        "role": "Car Enthusiast",
+        "content": "Found the exact brake kit I needed for my Toyota. Great prices and the customer support was super helpful!",
+        "image": "/assets/images/profile1.avif",
+        "rating": 5,
+        "variant": "inverted"
+      },
+      {
+        "name": "Suresh Kumar",
+        "role": "Workshop Owner",
+        "content": "Been ordering parts for my workshop for 3 years now. Reliable, authentic parts with warranty. Highly recommend!",
+        "image": "/assets/images/profile2.avif",
+        "rating": 5,
+        "variant": "default"
+      }
+    ]
+  },
+  "faq": {
+    "sectionLabel": "Support",
+    "sectionTitle": "Frequently Asked Questions",
+    "contactCard": {
+      "title": "Need Help Finding Parts?",
+      "description": "Our expert team is here to help you find the right parts for your vehicle. Contact us for personalized assistance.",
+      "ctaText": "Contact Us"
+    },
+    "items": [
+      {
+        "question": "How do I find the right parts for my vehicle?",
+        "answer": "Simply use our search bar and enter your vehicle make, model, and year. You can also browse by category or contact our support team with your vehicle registration number for personalized recommendations."
+      },
+      {
+        "question": "Do you offer warranty on your auto parts?",
+        "answer": "Yes! All our parts come with manufacturer warranty. OEM parts typically have 1-2 year warranty, while aftermarket parts vary by brand. Warranty details are listed on each product page."
+      },
+      {
+        "question": "What is your return and exchange policy?",
+        "answer": "We offer a 30-day return policy for unused parts in original packaging. If you receive a defective or wrong part, we'll arrange free pickup and replacement. Please keep your invoice for all returns."
+      },
+      {
+        "question": "Do you provide island-wide delivery?",
+        "answer": "Yes, we deliver across Sri Lanka. Colombo metro area orders are delivered within 24-48 hours. Other areas typically receive orders within 3-5 business days. Free shipping on orders over Rs 15,000."
+      },
+      {
+        "question": "Can I get assistance with installation?",
+        "answer": "While we don't offer installation services, our support team can provide guidance and resources for installing parts. We also recommend consulting a professional mechanic for complex installations."
+      }
+    ]
+  },
+  "socialMedia": {
+    "platforms": [
+      {
+        "name": "Facebook",
+        "icon": "facebook",
+        "url": "#"
+      },
+      {
+        "name": "Instagram",
+        "icon": "instagram",
+        "url": "#"
+      },
+      {
+        "name": "YouTube",
+        "icon": "youtube",
+        "iconImage": "/assets/images/pinterest.png",
+        "url": "#"
+      },
+      {
+        "name": "WhatsApp",
+        "icon": "whatsapp",
+        "iconImage": "/assets/images/be.png",
+        "url": "#"
+      }
+    ]
+  },
+  "navbar": {
+    "categories": [
+      {
+        "name": "Engine Parts",
+        "image": "/assets/images/parts/engine-block.png"
+      },
+      {
+        "name": "Transmission",
+        "image": "/assets/images/parts/manual-transmission.png"
+      },
+      {
+        "name": "Suspension",
+        "image": "/assets/images/parts/shock-absorber.png"
+      },
+      {
+        "name": "Brake Systems",
+        "image": "/assets/images/parts/pad-disc.png"
+      },
+      {
+        "name": "Electrical",
+        "image": "/assets/images/parts/starter-motor.png"
+      },
+      {
+        "name": "Lighting",
+        "image": "/assets/images/parts/headlight.png"
+      },
+      {
+        "name": "Interior",
+        "image": "/assets/images/parts/steering-wheel.png"
+      },
+      {
+        "name": "Wheels & Tires",
+        "image": "/assets/images/parts/alloy-wheel.png"
+      },
+      {
+        "name": "Exhaust Systems",
+        "image": "/assets/images/parts/exhaust-manifold.png"
+      }
+    ],
+    "aboutDropdown": [
+      "About Us",
+      "Contact",
+      "FAQ"
+    ],
+    "defaultCartItem": {
+      "id": 1,
+      "name": "Brake Pad Set",
+      "material": "Ceramic",
+      "price": 4500,
+      "quantity": 1,
+      "image": "/assets/images/parts/pad-disc.png"
+    }
+  },
+  "footer": {
+    "newsletter": {
+      "headline": "Subscribe for exclusive deals and get 10% off your first order",
+      "placeholder": "Enter your email",
+      "ctaText": "Subscribe"
+    },
+    "navigation": {
+      "pages": {
+        "title": "Company",
+        "links": [
+          {
+            "label": "Home",
+            "href": "#"
+          },
+          {
+            "label": "About Us",
+            "href": "#"
+          },
+          {
+            "label": "Our Brands",
+            "href": "#"
+          },
+          {
+            "label": "Careers",
+            "href": "#"
+          }
+        ]
+      },
+      "help": {
+        "title": "Support",
+        "links": [
+          {
+            "label": "FAQ",
+            "href": "#"
+          },
+          {
+            "label": "Shipping Info",
+            "href": "#"
+          },
+          {
+            "label": "Returns",
+            "href": "#"
+          },
+          {
+            "label": "Warranty",
+            "href": "#"
+          }
+        ]
+      },
+      "cms": {
+        "title": "Shop",
+        "links": [
+          {
+            "label": "All Parts",
+            "href": "#"
+          },
+          {
+            "label": "New Arrivals",
+            "href": "#"
+          },
+          {
+            "label": "Best Sellers",
+            "href": "#"
+          },
+          {
+            "label": "Deals & Offers",
+            "href": "#"
+          },
+          {
+            "label": "Find My Part",
+            "href": "#"
+          }
+        ]
+      }
+    }
+  },
+  "brands": {
+    "sectionTitle": "Trusted by Top Brands",
+    "row1": [
+      {
+        "name": "Toyota",
+        "src": "/assets/images/brands/toyota.png"
+      },
+      {
+        "name": "BMW",
+        "src": "/assets/images/brands/bmw.png"
+      },
+      {
+        "name": "Honda",
+        "src": "/assets/images/brands/honda.png"
+      },
+      {
+        "name": "Ford",
+        "src": "/assets/images/brands/ford.png"
+      },
+      {
+        "name": "Tesla",
+        "src": "/assets/images/brands/tesla.png"
+      },
+      {
+        "name": "Nissan",
+        "src": "/assets/images/brands/nissan.png"
+      },
+      {
+        "name": "Hyundai",
+        "src": "/assets/images/brands/hyundai.png"
+      },
+      {
+        "name": "Mazda",
+        "src": "/assets/images/brands/mazda.png"
+      },
+      {
+        "name": "Subaru",
+        "src": "/assets/images/brands/subaru.png"
+      },
+      {
+        "name": "Mitsubishi",
+        "src": "/assets/images/brands/mitsubishi.png"
+      }
+    ],
+    "row2": [
+      {
+        "name": "Bosch",
+        "src": "/assets/images/brands/bosch.png"
+      },
+      {
+        "name": "Continental",
+        "src": "/assets/images/brands/continental.png"
+      },
+      {
+        "name": "Denso",
+        "src": "/assets/images/brands/denso.png"
+      },
+      {
+        "name": "Magna",
+        "src": "/assets/images/brands/magna.png"
+      },
+      {
+        "name": "Valeo",
+        "src": "/assets/images/brands/valeo.png"
+      },
+      {
+        "name": "ZF",
+        "src": "/assets/images/brands/zf.png"
+      },
+      {
+        "name": "Aisin",
+        "src": "/assets/images/brands/aisin.png"
+      },
+      {
+        "name": "Hella",
+        "src": "/assets/images/brands/hella.png"
+      },
+      {
+        "name": "Yazaki",
+        "src": "/assets/images/brands/yazaki.png"
+      },
+      {
+        "name": "Brembo",
+        "src": "/assets/images/brands/nemak.png"
+      }
+    ]
+  }
+}

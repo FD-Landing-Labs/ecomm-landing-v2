@@ -14,44 +14,60 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { motion } from "framer-motion";
+import placeholderData from "@/data/place_holder.json";
+
+// Animation variants
+const easeOut: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, ease: easeOut }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut }
+  }
+};
 
 export const HeroSection = () => {
   // Start at index 1 because index 0 is the clone of the last slide
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const collectionItems = [
-    { name: "Dark", image: "/assets/images/chair-1.webp" },
-    { name: "Modern", image: "/assets/images/f.avif" },
-    { name: "Wood", image: "/assets/images/c-chair2.avif" },
-  ];
+  // Touch/Swipe state
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  const images = [
-    "/assets/images/chair-1.webp",
-    "/assets/images/chair 2.webp",
-    "/assets/images/chair 3.webp",
-  ];
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const images = placeholderData.hero.images;
 
   // Create extended array: [Last, ...Originals, First]
   const extendedImages = [images[images.length - 1], ...images, images[0]];
 
-  const cardData = [
-    {
-      title: "Crafting Comfort, Inspired by the North.",
-      description: "Simple, sleek, and built for a cozy, stylish lifestyle.",
-    },
-    {
-      title: "Natural Elegance in Every Detail",
-      description:
-        "Crafted for style and lasting durability, perfect for any space.",
-    },
-    {
-      title: "Modern Minimalism, Maximum Comfort",
-      description:
-        "Crafted from solid oak with a smooth finish, timeless and durable.",
-    },
-  ];
+  const cardData = placeholderData.hero.slides;
+  const features = placeholderData.hero.features;
 
   const nextSlide = () => {
     if (isTransitioning) return;
@@ -94,33 +110,68 @@ export const HeroSection = () => {
 
   const realIndex = getRealIndex(currentIndex);
 
+  // Autoplay effect
+  useEffect(() => {
+    if (isPaused) return;
+
+    const autoplayInterval = setInterval(() => {
+      if (!isTransitioning) {
+        setIsTransitioning(true);
+        setCurrentIndex((prev) => prev + 1);
+      }
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(autoplayInterval);
+  }, [isPaused, isTransitioning]);
+
+  // Touch event handlers for swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+
+    // Reset touch state
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
   return (
-    <div className="p-4 md:p-6 lg:p-8 space-y-4 md:space-y-4">
-      {/* Marquee Section */}
-      <div className="bg-black rounded-lg">
-        <div className="relative max-w-md mx-auto text-white text-center bg-black overflow-hidden whitespace-nowrap">
-          {/* Left fade */}
-          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 z-10 bg-gradient-to-r from-black to-transparent"></div>
-
-          {/* Right fade */}
-          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 z-10 bg-gradient-to-l from-black to-transparent"></div>
-
-          {/* Marquee */}
-          <div className="flex space-x-2 animate-marquee inline-block p-2 text-sm md:text-base">
-            <span>Save 20% on your first order -</span>
-            <span>Save 20% on your first order -</span>
-            <span>Save 20% on your first order -</span>
-
-            {/* duplicate (required for infinite loop) */}
-            <span>Save 20% on your first order -</span>
-            <span>Save 20% on your first order -</span>
-            <span>Save 20% on your first order -</span>
-          </div>
-        </div>
-      </div>
-
+    <motion.div
+      className="p-4 space-y-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       {/* Carousel Section */}
-      <div className="relative w-full h-[500px] md:h-[560px] rounded-lg overflow-hidden group">
+      <motion.div
+        ref={carouselRef}
+        className="relative w-full h-[500px] md:h-[560px] rounded-xl overflow-hidden group touch-pan-y"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
         {/* Sliding Image Track */}
         <div
           className="flex h-full"
@@ -139,192 +190,77 @@ export const HeroSection = () => {
                 alt={`Slide ${index}`}
                 fill
                 className="object-cover"
-                priority={index === 1} // Prioritize the first "real" image
+                priority={index <= 2}
+                quality={100}
+                sizes="100vw"
+                unoptimized
               />
-
-              {/* Mobile Menu Trigger */}
-              <button
-                onClick={() => setIsMobileMenuOpen(true)}
-                className="md:hidden absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-sm p-3 rounded-full text-black shadow-sm"
-              >
-                <Menu size={20} />
-              </button>
-
-              <div className="hidden md:flex gap-4 absolute -top-1 -left-1 bg-white p-2.5 text-xs font-medium text-black rounded-sm z-10 transition-opacity duration-300 group-hover/card:opacity-0">
-                <div className="flex items-center group/brand cursor-pointer">
-                  {/* Static Icon */}
-                  <div className="flex w-4 h-4 border-2 border-black rounded-full items-center justify-center">
-                    <div className="w-2 h-2 bg-black rounded-full" />
-                  </div>
-
-                  {/* Swapping Text */}
-                  <div className="relative overflow-hidden h-6 w-10 flex items-center font-semibold justify-center">
-                    <span className="absolute transition-all duration-300 group-hover/brand:-translate-y-full group-hover/brand:opacity-0">
-                      Fjord
-                    </span>
-                    <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/brand:translate-y-0 group-hover/brand:opacity-100">
-                      Home
-                    </span>
-                  </div>
-                </div>
-
-                <div className="relative overflow-hidden h-6 w-8 flex items-center justify-center group/shop cursor-pointer">
-                  <span className="absolute transition-all duration-300 group-hover/shop:-translate-y-full group-hover/shop:opacity-0">
-                    Shop
-                  </span>
-                  <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/shop:translate-y-0 group-hover/shop:opacity-100">
-                    Shop
-                  </span>
-                </div>
-                <div className="relative flex items-center gap-0.5 text-center group/collection cursor-pointer">
-                  <div className="flex items-center gap-0.5">
-                    <div className="relative overflow-hidden h-6 w-16 flex items-center justify-center">
-                      <span className="absolute transition-all duration-300 group-hover/collection:-translate-y-full group-hover/collection:opacity-0">
-                        Collaction
-                      </span>
-                      <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/collection:translate-y-0 group-hover/collection:opacity-100">
-                        Collaction
-                      </span>
-                    </div>
-                    <Plus
-                      size={13}
-                      className="transition-transform duration-300 group-hover/collection:rotate-45"
-                    />
-                  </div>
-
-                  {/* Dropdown Menu */}
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-60 opacity-0 invisible group-hover/collection:opacity-100 group-hover/collection:visible transition-all duration-300 z-50">
-                    <div className="bg-white rounded-xl shadow-xl p-2 flex flex-col gap-1 text-black text-left">
-                      {[
-                        { name: "Dark", image: "/assets/images/chair-1.webp" },
-                        { name: "Modern", image: "/assets/images/f.avif" },
-                        { name: "Wood", image: "/assets/images/c-chair2.avif" },
-                      ].map((item) => (
-                        <div
-                          key={item.name}
-                          className="flex items-center bg-gray-100 justify-between p-2 hover:bg-gray-200 rounded-lg transition-colors group/item"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="relative w-10 h-10 rounded-md overflow-hidden bg-gray-100">
-                              <Image
-                                src={item.image}
-                                alt={item.name}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                            <span className="text-sm font-medium">
-                              {item.name}
-                            </span>
-                          </div>
-                          <div className="relative overflow-hidden w-4 h-4 flex items-center justify-center">
-                            <ArrowRight
-                              size={14}
-                              className="absolute text-gray-400 transition-all duration-300 group-hover/item:-translate-y-full group-hover/item:opacity-0"
-                            />
-                            <ArrowRight
-                              size={14}
-                              className="absolute text-black transition-all duration-300 translate-y-full opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100"
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="relative flex items-center gap-0.5 text-center group/about cursor-pointer">
-                  <div className="flex items-center gap-0.5">
-                    <div className="relative overflow-hidden h-6 w-10 flex items-center justify-center">
-                      <span className="absolute transition-all duration-300 group-hover/about:-translate-y-full group-hover/about:opacity-0">
-                        About
-                      </span>
-                      <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/about:translate-y-0 group-hover/about:opacity-100">
-                        About
-                      </span>
-                    </div>
-                    <Plus
-                      size={13}
-                      className="transition-transform duration-300 group-hover/about:rotate-45"
-                    />
-                  </div>
-
-                  {/* Dropdown Menu */}
-                  <div className="absolute top-full right-0 pt-4 w-48 opacity-0 invisible group-hover/about:opacity-100 group-hover/about:visible transition-all duration-300 z-50">
-                    <div className="bg-white rounded-xl shadow-xl p-2 flex flex-col gap-1 text-black text-left">
-                      {["About", "Contact", "FAQ"].map((item) => (
-                        <div
-                          key={item}
-                          className="flex bg-gray-100 items-center justify-between p-3 hover:bg-gray-200 rounded-lg transition-colors group/item"
-                        >
-                          <span className="text-sm font-medium">{item}</span>
-                          <div className="relative overflow-hidden w-4 h-4 flex items-center justify-center">
-                            <ArrowRight
-                              size={14}
-                              className="absolute text-gray-400 transition-all duration-300 group-hover/item:-translate-y-full group-hover/item:opacity-0"
-                            />
-                            <ArrowRight
-                              size={14}
-                              className="absolute text-black transition-all duration-300 translate-y-full opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100"
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="relative overflow-hidden h-6 w-6 flex items-center justify-center group/blog cursor-pointer">
-                  <span className="absolute transition-all duration-300 group-hover/blog:-translate-y-full group-hover/blog:opacity-0">
-                    Blog
-                  </span>
-                  <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/blog:translate-y-0 group-hover/blog:opacity-100">
-                    Blog
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex gap-2 absolute -top-1 -right-1 bg-white p-2.5 text-xs font-medium text-black rounded-sm z-10 transition-opacity duration-300 group-hover/card:opacity-0">
-                <Search size={15} />
-                <div className="flex items-center gap-1 text-center">
-                  <ShoppingCart size={15} />
-                  <span>(0)</span>
-                </div>
-              </div>
             </div>
           ))}
         </div>
 
         {/* Content Card Overlay */}
-        <div
-          key={realIndex} // Key ensures animation restarts on slide change
-          className="absolute bottom-12 left-4 right-4 md:right-auto md:bottom-14 h-auto md:h-[250px] md:left-10 z-20 max-w-full md:max-w-[400px] bg-white rounded-lg p-6 md:p-10 shadow-xl block animate-in fade-in slide-in-from-bottom-10 duration-1000"
+        <motion.div
+          key={realIndex}
+          className="absolute bottom-4 left-4 right-4 md:right-auto md:bottom-10 h-auto md:h-[250px] md:left-10 z-20 max-w-full md:max-w-[400px] bg-white rounded-lg p-4 shadow-xl block"
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
         >
-          <h2 className="text-xl md:text-3xl font-medium text-black">
-            {cardData[realIndex].title}
-          </h2>
-          <p className="mt-2 md:mt-4 text-gray-500 text-sm">
-            {cardData[realIndex].description}
-          </p>
+          <div className="flex flex-col justify-between h-full items-start">
+            <div>
+              <motion.h2
+                className="text-xl md:text-3xl font-medium text-black tracking-tighter"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+              >
+                {cardData[realIndex].title}
+              </motion.h2>
+              <motion.p
+                className="hidden md:block mt-2 md:mt-4 text-gray-500 text-base tracking-tight leading-snug"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+              >
+                {cardData[realIndex].description}
+              </motion.p>
+            </div>
 
-          <button className="mt-4 md:mt-8 text-sm font-medium text-black underline hover:text-gray-700 transition-colors">
-            View Product
-          </button>
+            <motion.button
+              className="hidden md:block text-base tracking-tighter font-medium text-gray-500 border-2 border-gray-300 cursor-pointer rounded-md px-4 py-2 hover:text-gray-700 transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              View Product
+            </motion.button>
+          </div>
+        </motion.div>
+
+        <div className="absolute bottom-4 right-4 md:bottom-10 md:right-10 flex gap-2 z-30">
+          {/* Left Arrow */}
+          <motion.button
+            onClick={prevSlide}
+            className="bg-black/40 hover:bg-black/60 text-white p-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <ChevronLeft size={20} className="md:w-6 md:h-6" />
+          </motion.button>
+
+          {/* Right Arrow */}
+          <motion.button
+            onClick={nextSlide}
+            className="bg-black/40 hover:bg-black/60 text-white p-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <ChevronRight size={20} className="md:w-6 md:h-6" />
+          </motion.button>
         </div>
-
-        {/* Left Arrow */}
-        <button
-          onClick={prevSlide}
-          className="absolute top-1/2 left-4 md:left-8 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm z-30"
-        >
-          <ChevronLeft size={20} className="md:w-6 md:h-6" />
-        </button>
-
-        {/* Right Arrow */}
-        <button
-          onClick={nextSlide}
-          className="absolute top-1/2 right-4 md:right-8 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm z-30"
-        >
-          <ChevronRight size={20} className="md:w-6 md:h-6" />
-        </button>
 
         {/* Dots Navigation */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 bg-black/20 rounded-full p-2 z-30">
@@ -332,11 +268,10 @@ export const HeroSection = () => {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`transition-all duration-300 ${
-                realIndex === index
-                  ? "text-white scale-125 "
-                  : "text-white/50 hover:text-white/80 "
-              }`}
+              className={`transition-all duration-300 ${realIndex === index
+                ? "text-white scale-125 "
+                : "text-white/50 hover:text-white/80 "
+                }`}
             >
               <Circle
                 size={8}
@@ -346,109 +281,33 @@ export const HeroSection = () => {
             </button>
           ))}
         </div>
-      </div>
-      <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 bg-black text-gray-400 font-medium p-4 md:p-5 rounded-lg text-sm md:text-base">
-        <div className="flex items-center gap-2">
-          <Image
-            src="/assets/images/van.png"
-            alt="Free Shipping"
-            width={20}
-            height={20}
-            className="w-5 h-5"
-          />
-          <span className="text-xs md:text-sm">Free Shipping over 500€</span>
-        </div>
+      </motion.div>
 
-        <div className="flex items-center gap-2">
-          <Image
-            src="/assets/images/world.png"
-            alt="Worldwide Shipping"
-            width={20}
-            height={20}
-            className="w-5 h-5"
-          />
-          <span className="text-xs md:text-base">Worldwide Shipping</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Image
-            src="/assets/images/box.png"
-            alt="Free Returns"
-            width={20}
-            height={20}
-            className="w-5 h-5"
-          />
-          <span className="text-xs md:text-sm">Free Returns</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Image
-            src="/assets/images/warranty.png"
-            alt="5-Year Warranty"
-            width={20}
-            height={20}
-            className="w-5 h-5"
-          />
-          <span className="text-xs md:text-sm">5-Year Warranty</span>
-        </div>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed w-[370px] inset-0 z-50 bg-black/50 backdrop-blur-sm md:hidden animate-in fade-in duration-200">
-          <div className="absolute inset-2 bg-[#f4f4f5] rounded-3xl overflow-hidden flex flex-col shadow-2xl">
-            {/* Header */}
-            <div className="flex justify-end p-6">
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center gap-2 text-sm font-medium text-gray-900 bg-white px-4 py-2 rounded-full shadow-sm"
-              >
-                Close
-              </button>
-            </div>
-
-            {/* Scrollable Content */}
-            <div className="flex flex-col  overflow-y-auto px-4 pb-6 space-y-2">
-              {/* Collections */}
-              {collectionItems.map((item) => (
-                <div
-                  key={item.name}
-                  className="flex items-center justify-between p-3 bg-[#e4e4e7]/50 rounded-2xl group active:scale-[0.98] transition-all"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-white shadow-sm">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <span className="text-base font-medium text-gray-900">
-                      {item.name}
-                    </span>
-                  </div>
-                  <ArrowRight size={18} className="text-gray-400" />
-                </div>
-              ))}
-
-              <div className="h-2"></div>
-
-              {/* Links */}
-              {["Shop", "About", "Blog"].map((link) => (
-                <div
-                  key={link}
-                  className="flex items-center justify-between p-5 bg-[#e4e4e7]/50 rounded-2xl group active:scale-[0.98] transition-all"
-                >
-                  <span className="text-base font-medium text-gray-900">
-                    {link}
-                  </span>
-                  <ArrowRight size={18} className="text-gray-400" />
-                </div>
-              ))}
-
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      {/* Features Section */}
+      <motion.div
+        className="flex flex-wrap items-center justify-center gap-4 md:gap-16 bg-black text-gray-100 font-medium p-4 md:p-5 rounded-lg text-sm md:text-base"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+      >
+        {features.map((feature, index) => (
+          <motion.div
+            key={index}
+            className="flex items-center gap-2"
+            variants={staggerItem}
+          >
+            <Image
+              src={feature.icon}
+              alt={feature.alt}
+              width={20}
+              height={20}
+              className="w-5 h-5"
+            />
+            <span className="text-xs md:text-base tracking-tighter">{feature.text}</span>
+          </motion.div>
+        ))}
+      </motion.div>
+    </motion.div>
   );
 };

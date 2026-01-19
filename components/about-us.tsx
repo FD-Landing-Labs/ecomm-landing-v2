@@ -1,108 +1,108 @@
+"use client";
+
 import Image from "next/image";
-import { Twitter, Instagram, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import placeholderData from "@/data/place_holder.json";
+
+const aboutData = placeholderData.aboutUs;
+
+// Animation variants
+const easeOut: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.6, ease: easeOut }
+};
+
+const slideInLeft = {
+  initial: { opacity: 0, x: -40 },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: easeOut }
+};
+
+const slideInRight = {
+  initial: { opacity: 0, x: 40 },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: easeOut }
+};
 
 export const AboutUs = () => {
   return (
-    <div className="flex flex-col gap-4 p-4 ">
-      <div className="bg-[#f6f6f6] text-sm md:text-lg rounded-lg p-4 text-black/80  font-medium flex justify-center">
-        About Us
+    <motion.div
+      className="flex flex-col gap-4 p-4"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="bg-[#f6f6f6] text-lg md:text-xl tracking-tighter rounded-lg p-4 text-black/80 font-medium flex justify-center"
+        {...fadeUp}
+      >
+        {aboutData.sectionTitle}
+      </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 gap-y-4 md:gap-y-0">
+        <motion.div
+          className="bg-[#f6f6f6] rounded-lg p-6 text-black/80 font-medium flex flex-col justify-between items-center col-span-3 md:col-span-1 lg:col-span-1"
+          {...slideInLeft}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <motion.h2
+            className="text-xl md:text-3xl font-medium text-black tracking-tighter"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            {aboutData.headline}
+          </motion.h2>
+          <div>
+            <motion.p
+              className="text-gray-500 text-base text-justify leading-tight tracking-tighter max-w-md"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              {aboutData.description}
+            </motion.p>
+            <motion.button
+              className="mt-8 text-lg tracking-tighter font-medium text-black underline hover:text-gray-700 transition-colors"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              whileHover={{ x: 4 }}
+            >
+              {aboutData.ctaText}
+            </motion.button>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="w-full lg:w-auto lg:col-span-2"
+          {...slideInRight}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <motion.div
+            className="overflow-hidden rounded-lg"
+            whileHover={{ scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <Image
+              src={aboutData.image}
+              alt=""
+              width={900}
+              height={500}
+              className="rounded-lg object-cover w-full h-[300px] md:h-[500px] lg:h-[600px]"
+            />
+          </motion.div>
+        </motion.div>
       </div>
-      <div className="flex flex-col lg:flex-row justify-between gap-4 lg:gap-0">
-        <div className="bg-[#f6f6f6] rounded-lg p-6 lg:p-14 text-black/80 font-medium w-full lg:w-[450px] ">
-          <h2 className="text-xl md:text-3xl font-normal text-black">
-            Designing Spaces, Inspiring Connection
-          </h2>
-          <p className="mt-8 lg:mt-74 text-gray-500 text-sm text-justify leading-tight">
-            At Hanssen, our mission is to create furniture that brings people
-            together, inspired by the simplicity and warmth of Scandinavian
-            design.
-          </p>
-          <button className="mt-8 text-sm font-medium text-black underline hover:text-gray-700 transition-colors">
-            More About Us
-          </button>
-        </div>
-
-        <div className="w-full lg:w-auto">
-          <Image
-            src="/assets/images/aboutimage.avif"
-            alt=""
-            width={900}
-            height={500}
-            className="rounded-lg object-cover w-full h-[300px] md:h-[500px] lg:w-[850px] lg:h-[600px]"
-          />
-        </div>
-      </div>
-      <div className="flex flex-wrap gap-3 ">
-        {/* Twitter */}
-        <div className="flex justify-between items-center bg-[#f6f6f6] rounded-lg p-4 w-full md:w-[calc(50%-0.375rem)] lg:w-[320px] text-black/80 font-medium group cursor-pointer hover:bg-gray-200 transition-colors">
-          <span className="text-sm md:text-lg">Twitter</span>
-          <div className="relative w-6 h-6 flex items-center justify-center overflow-hidden">
-            <Twitter
-              size={17}
-              className="absolute md-size-24 transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0"
-            />
-            <ArrowUpRight
-              size={17}
-              className="absolute md-size-24 transition-all duration-300 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
-            />
-          </div>
-        </div>
-
-        {/* Instagram */}
-        <div className="flex justify-between items-center bg-[#f6f6f6] rounded-lg p-4 w-full md:w-[calc(50%-0.375rem)] lg:w-[310px] text-black/80 font-medium group cursor-pointer hover:bg-gray-200 transition-colors">
-          <span className="text-sm md:text-lg">Instagram</span>
-          <div className="relative w-6 h-6 flex items-center justify-center overflow-hidden">
-            <Instagram
-              size={25}
-              className="absolute  md-size-24 transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0"
-            />
-            <ArrowUpRight
-              size={17}
-              className="absolute md-size-24 transition-all duration-300 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
-            />
-          </div>
-        </div>
-
-        {/* Pinterest */}
-        <div className="flex justify-between items-center bg-[#f6f6f6] rounded-lg p-4 w-full md:w-[calc(50%-0.375rem)] lg:w-[300px] text-black/80 font-medium group cursor-pointer hover:bg-gray-200 transition-colors">
-          <span className="text-sm md:text-lg">Pinterest</span>
-          <div className="relative w-6 h-6 flex items-center justify-center overflow-hidden">
-            <div className="absolute transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0">
-              <Image
-                src="/assets/images/pinterest.png"
-                alt="pinterest"
-                width={25}
-                height={25}
-                className="md-size-28"
-              />
-            </div>
-            <ArrowUpRight
-              size={17}
-              className="absolute md-size-28 transition-all duration-300 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
-            />
-          </div>
-        </div>
-
-        {/* Behance */}
-        <div className="flex justify-between items-center bg-[#f6f6f6] rounded-lg p-4 w-full md:w-[calc(50%-0.375rem)] lg:w-[350px] text-black/80 font-medium group cursor-pointer hover:bg-gray-200 transition-colors">
-          <span className="text-sm md:text-lg">Behance</span>
-          <div className="relative w-6 h-6 flex items-center justify-center overflow-hidden">
-            <div className="absolute transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0">
-              <Image
-                src="/assets/images/be.png"
-                alt="behance"
-                width={25}
-                height={25}
-                className="md-size-28"
-              />
-            </div>
-            <ArrowUpRight
-              size={17}
-              className="absolute md-size-28  transition-all duration-300 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 };
