@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Image from "next/image";
 import Link from "next/link";
 import { Plus, Search, ShoppingCart, ArrowRight, X, MenuIcon } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import placeholderData from "@/data/place_holder.json";
 import { useCart } from "@/context/cart-context";
+import MegaMenu from "./mega-menu";
+import MobileCategoriesMenu from "./mobile-categories-menu";
 
 const navbarData = placeholderData.navbar;
 const brandData = placeholderData.brand;
@@ -17,14 +19,34 @@ interface NavbarProps {
 
 export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMobileCategoriesOpen, setIsMobileCategoriesOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+    const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+    const megaMenuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const { openCart, getCartCount } = useCart();
     const cartCount = getCartCount();
 
     const { scrollY } = useScroll();
+
+    const handleCategoriesMouseEnter = () => {
+        if (megaMenuTimeoutRef.current) {
+            clearTimeout(megaMenuTimeoutRef.current);
+        }
+        setIsMegaMenuOpen(true);
+    };
+
+    const handleCategoriesMouseLeave = () => {
+        megaMenuTimeoutRef.current = setTimeout(() => {
+            setIsMegaMenuOpen(false);
+        }, 150);
+    };
+
+    const handleMegaMenuClose = () => {
+        setIsMegaMenuOpen(false);
+    };
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0;
@@ -64,57 +86,25 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                         </span>
                     </Link>
 
-                    {/* Collections with Dropdown */}
-                    <div className="relative flex items-center gap-0.5 group/collection cursor-pointer">
-                        <div className="flex items-center gap-0.5">
+                    {/* Categories with Mega Menu */}
+                    <div
+                        className="relative flex items-center gap-0.5 cursor-pointer"
+                        onMouseEnter={handleCategoriesMouseEnter}
+                        onMouseLeave={handleCategoriesMouseLeave}
+                    >
+                        <div className="flex items-center gap-0.5 group/collection">
                             <div className="relative overflow-hidden h-6 flex items-center justify-center">
-                                <span className="transition-all duration-300 group-hover/collection:-translate-y-full group-hover/collection:opacity-0">
+                                <span className={`transition-all duration-300 ${isMegaMenuOpen ? '-translate-y-full opacity-0' : ''} group-hover/collection:-translate-y-full group-hover/collection:opacity-0`}>
                                     Categories
                                 </span>
-                                <span className="absolute transition-all duration-300 translate-y-full opacity-0 group-hover/collection:translate-y-0 group-hover/collection:opacity-100">
+                                <span className={`absolute transition-all duration-300 ${isMegaMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'} group-hover/collection:translate-y-0 group-hover/collection:opacity-100`}>
                                     Categories
                                 </span>
                             </div>
                             <Plus
                                 size={13}
-                                className="transition-transform duration-300 group-hover/collection:rotate-45"
+                                className={`transition-transform duration-300 ${isMegaMenuOpen ? 'rotate-45' : ''} group-hover/collection:rotate-45`}
                             />
-                        </div>
-
-                        {/* Dropdown Menu */}
-                        <div className="fixed top-14 left-1/2 -translate-x-1/2 pt-4 w-[90vw] max-w-[700px] opacity-0 invisible group-hover/collection:opacity-100 group-hover/collection:visible transition-all duration-300 z-50">
-                            <div className="bg-gray-100 rounded-xl shadow-xl p-3 grid grid-cols-2 lg:grid-cols-3 gap-2 text-black text-left">
-                                {navbarData.categories.map((item) => (
-                                    <div
-                                        key={item.name}
-                                        className="flex items-center bg-white justify-between p-2 hover:bg-gray-200 rounded-lg transition-colors group/item"
-                                    >
-                                        <div className="flex items-center gap-2 lg:gap-3">
-                                            <div className="relative w-10 h-10 lg:w-14 lg:h-14 rounded-md overflow-hidden bg-gray-100 shrink-0">
-                                                <Image
-                                                    src={item.image}
-                                                    alt={item.name}
-                                                    fill
-                                                    className="object-cover"
-                                                />
-                                            </div>
-                                            <span className="text-sm lg:text-base font-medium">
-                                                {item.name}
-                                            </span>
-                                        </div>
-                                        <div className="relative overflow-hidden w-4 h-4 flex items-center justify-center shrink-0">
-                                            <ArrowRight
-                                                size={14}
-                                                className="absolute text-gray-400 transition-all duration-300 group-hover/item:-translate-y-full group-hover/item:opacity-0"
-                                            />
-                                            <ArrowRight
-                                                size={14}
-                                                className="absolute text-black transition-all duration-300 translate-y-full opacity-0 group-hover/item:translate-y-0 group-hover/item:opacity-100"
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
                         </div>
                     </div>
 
@@ -256,33 +246,17 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                                 <ArrowRight size={18} className="text-gray-500 group-hover/item:translate-x-1 transition-transform" />
                             </Link>
 
-                            {/* Categories Section */}
-                            <div className="bg-gray-200 rounded-xl overflow-hidden">
-                                <div className="p-4 border-b border-gray-300">
-                                    <span className="text-sm font-medium text-black">Categories</span>
-                                </div>
-                                <div className="p-2 space-y-1">
-                                    {navbarData.categories.map((item) => (
-                                        <div
-                                            key={item.name}
-                                            className="flex items-center justify-between bg-white p-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors group/item"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <div className="relative w-10 h-10 rounded-md overflow-hidden bg-gray-100 shrink-0">
-                                                    <Image
-                                                        src={item.image}
-                                                        alt={item.name}
-                                                        fill
-                                                        className="object-cover"
-                                                    />
-                                                </div>
-                                                <span className="text-sm font-medium text-black">{item.name}</span>
-                                            </div>
-                                            <ArrowRight size={16} className="text-gray-400 group-hover/item:text-black group-hover/item:translate-x-1 transition-all" />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            {/* Categories Button */}
+                            <button
+                                onClick={() => {
+                                    setIsMobileMenuOpen(false);
+                                    setIsMobileCategoriesOpen(true);
+                                }}
+                                className="w-full flex items-center justify-between bg-gray-200 p-4 rounded-xl cursor-pointer hover:bg-gray-300 transition-colors group/item"
+                            >
+                                <span className="text-sm font-medium text-black">Categories</span>
+                                <ArrowRight size={18} className="text-gray-500 group-hover/item:translate-x-1 transition-transform" />
+                            </button>
 
                             {/* About Section */}
                             <div className="bg-gray-200 rounded-xl overflow-hidden">
@@ -305,6 +279,20 @@ export default function Navbar({ onMobileMenuOpen }: NavbarProps) {
                     </div>
                 </div>
             </div>
+
+            {/* Mega Menu */}
+            <MegaMenu
+                isOpen={isMegaMenuOpen}
+                onClose={handleMegaMenuClose}
+                onMouseEnter={handleCategoriesMouseEnter}
+                onMouseLeave={handleCategoriesMouseLeave}
+            />
+
+            {/* Mobile Categories Menu */}
+            <MobileCategoriesMenu
+                isOpen={isMobileCategoriesOpen}
+                onClose={() => setIsMobileCategoriesOpen(false)}
+            />
         </>
     )
 }
